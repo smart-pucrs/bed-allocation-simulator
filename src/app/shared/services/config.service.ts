@@ -53,9 +53,9 @@ export class ConfigService {
           type: 'Static'
         },
         sidebar: {
+		  backgroundColor: "black",
           collapsed: false,
           size: "sidebar-md",
-          backgroundColor: "man-of-steel",
           backgroundImage: true,
           backgroundImageURL: "assets/img/sidebar-bg/01.jpg"
         }

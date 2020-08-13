@@ -1,0 +1,95 @@
+<div class="row" matchHeight="card">
+	<div class="col-xl-6 col-lg-12">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Estatísticas</h4>
+			</div>
+			<div class="card-body">
+
+				<p class="font-medium-2 text-muted text-center">Procedência dos Pacientes</p>
+				
+				<!--%TODO% implement chart-->
+				
+				<!--<div id="bar-chart" class="height-250 BarChartShadow BarChart">
+					<x-chartist class="" [data]="BarChart.data" [type]="BarChart.type" [options]="BarChart.options" [responsiveOptions]="BarChart.responsiveOptions"
+					 [events]="BarChart.events">
+					</x-chartist>
+				</div>-->
+
+				<div class="card-block">
+					<div class="row">
+						<div class="col text-center">
+							<span class="gradient-pomegranate d-block rounded-circle mx-auto mb-2" style="width:10px; height:10px;"></span>
+							<span class="font-large-1 d-block mb-2">48</span>
+							<span>Emergência</span>
+						</div>
+						<!-- <div class="col text-center">
+							<span class="gradient-green-tea d-block rounded-circle mx-auto mb-2" style="width:10px; height:10px;"></span>
+							<span class="font-large-1 d-block mb-2">9</span>
+							<span>Bloqueados</span>
+						</div> -->
+						<div class="col text-center">
+							<span class="gradient-blackberry d-block rounded-circle mx-auto mb-2" style="width:10px; height:10px;"></span>
+							<span class="font-large-1 d-block mb-2">26</span>
+							<span>Eletivos</span>
+						</div>
+						<!-- <div class="col text-center">
+							<span class="gradient-ibiza-sunset d-block rounded-circle mx-auto mb-2" style="width:10px; height:10px;"></span>
+							<span class="font-large-1 d-block mb-2">17</span>
+							<span>Sujos</span>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-xl-6 col-lg-12">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Alocação dos Leitos</h4>
+			</div>
+			<div class="card-body">
+
+				<p class="font-medium-2 text-muted text-center">Disponibilidade</p>
+				<!--<div id="donut-dashboard-chart" class="height-250 donut">
+					<x-chartist class="" [data]="DonutChart.data" [type]="DonutChart.type" [options]="DonutChart.options" [responsiveOptions]="DonutChart.responsiveOptions"
+					 [events]="DonutChart.events">
+					</x-chartist>
+				</div>-->
+
+				<div class="card-block">
+					<div class="row mb-3">
+						<div class="col">
+							<span class="mb-1 text-muted d-block">23% - Sujos</span>
+							<div class="progress" style="height: 5px;">
+								<div class="progress-bar bg-success" role="progressbar" style="width: 23%;" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+						</div>
+						<div class="col">
+							<span class="mb-1 text-muted d-block">14% - Bloqueados</span>
+							<div class="progress" style="height: 5px;">
+								<div class="progress-bar bg-amber" role="progressbar" style="width: 14%;" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="col">
+							<span class="mb-1 text-muted d-block">35% - Ocupados</span>
+							<div class="progress" style="height: 5px;">
+								<div class="progress-bar bg-deep-purple bg-lighten-1" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0"
+								 aria-valuemax="100"></div>
+							</div>
+						</div>
+						<div class="col">
+							<span class="mb-1 text-muted d-block">28% - Livres</span>
+							<div class="progress" style="height: 5px;">
+								<div class="progress-bar bg-blue" role="progressbar" style="width: 28%;" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
