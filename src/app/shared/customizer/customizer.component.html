@@ -1,10 +1,21 @@
 <!-- Theme customizer Starts-->
 <div #customizer class="customizer d-none d-lg-none d-xl-block" [ngClass]="{open: isOpen}">
   <a class="customizer-close" (click)="closeCustomizer()">
-    <i class="ft-x font-medium-3"></i></a><a class="customizer-toggle bg-primary" id="customizer-toggle-icon"
+    <i class="ft-x font-medium-3"></i></a><a class="customizer-toggle bg-danger" id="customizer-toggle-icon"
     (click)="toggleCustomizer()">
-    <i class="ft-settings font-medium-1 spinner white align-middle"></i>
-  </a>
+		<i class="ft-message-square font-medium-4 white align-middle"></i>
+	</a>	
+	
+	
+	<div class="customizer-content ps-container ps-theme-dark" data-ps-id="df6a5ce4-a175-9172-4402-dabd98fc9c0a">
+		<div class="p-4">
+		<h4 class="text-uppercase mb-0 text-bold-400">Chatbot Assistente</h4>
+		<p>Solicite auxílio de nosso Assistente</p>
+		<!-- <hr> -->
+	</div>
+	<iframe class="chatbot" width="400" height="80%" src="https://console.dialogflow.com/api-client/demo/embedded/9e503fbf-1bd7-4ef6-931d-7b4ef75c5952">
+	</iframe>
+	
   <div [perfectScrollbar] class="customizer-content p-3 ps-container ps-theme-dark"
     data-ps-id="df6a5ce4-a175-9172-4402-dabd98fc9c0a">
     <h4 class="text-uppercase">Theme Customizer</h4>
