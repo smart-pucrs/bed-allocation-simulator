@@ -1,0 +1,49 @@
+<div class="col-md-12 col-lg-12">
+  <div class="card">
+    <div class="card-header">
+      <div class="container">
+        <div class="row">
+          <div class="col align-self-start">
+            <h4 class="card-title">{{ titlePage }}</h4>
+          </div>
+          <div class="col align-self-end">
+            <button type="button" *ngIf="add" class="btn btn-primary" style="float: right !important;" (click)="onAdd()">
+              <span>
+                <i class="fa fa-plus"></i>
+              </span> Adicionar</button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <!-- Campo de pesquisa -->
+        <form *ngIf="data.length > 0" class="navbar-form navbar-right mt-1" style="margin-bottom: 1rem;" role="search">
+          <div class="position-relative has-icon-right">
+            <input type="text" class="form-control round" [ngTableFiltering]="config.filtering" placeholder="Pesquisar" (tableChanged)="onChangeTable(config)">
+            <div class="form-control-position">
+              <i class="ft-search"></i>
+            </div>
+          </div>
+        </form>
+        <!-- Listagem -->
+        <div *ngIf="data?.length > 0; else noData">
+          <div class="table-responsive">
+            <app-ng-table [config]="config" [canDelete]="canDelete" [canEdit]="canEdit" (tableChanged)="onChangeTable(config)" (cellClicked)="onCellClick($event)"
+              (delete)="onDelete($event)" (edit)="onEdit($event)" (mostraDetalhe)="onMostrarDetalhe($event)" [detalhes]="detalhes"
+              [rows]="rows" [columns]="columns">
+            </app-ng-table>
+          </div>	
+          <!-- Paginação -->
+          <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length" [itemsPerPage]="itemsPerPage"
+            [maxSize]="maxSize" [boundaryLinks]="true" [firstText]="'Primeira'" [lastText]="'Última'" [nextText]="'Próxima'"
+            [previousText]="'Anterior'" [rotate]="false" (pageChanged)="onChangeTable(config, $event)" (numPages)="numPages = $event">
+          </pagination>
+        </div>
+        <!-- Informação caso não haja itens -->
+        <ng-template #noData>
+          <div class="table-responsive">
+            <p>Nenhum registro encontrado</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>-->
