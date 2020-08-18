@@ -30,7 +30,6 @@ import { TopMenuDirective } from './directives/topmenu.directive';
 import { TopMenuLinkDirective } from './directives/topmenu-link.directive';
 import { TopMenuDropdownDirective } from './directives/topmenu-dropdown.directive';
 import { TopMenuAnchorToggleDirective } from './directives/topmenu-anchor-toggle.directive';
-import { ListagemComponent } from './listagem/listagem.component';
 
 
 @NgModule({
@@ -47,7 +46,6 @@ import { ListagemComponent } from './listagem/listagem.component';
         TopMenuDirective,
         NgbModule,
         TranslateModule,
-        ListagemComponent,
     ],
     imports: [
         RouterModule,
@@ -78,7 +76,6 @@ import { ListagemComponent } from './listagem/listagem.component';
         TopMenuDropdownDirective,
         TopMenuAnchorToggleDirective,
         TopMenuDirective,
-        ListagemComponent,
     ]
 })
 export class SharedModule { }
