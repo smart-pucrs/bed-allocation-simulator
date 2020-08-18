@@ -6,12 +6,14 @@ import { FullPagesRoutingModule } from "./full-pages-routing.module";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SituacaoLeitosComponent } from './situacao-leitos/situacao-leitos.component';
 
-
+//import { SituacaoLeitosModule } from './situacao-leitos/situacao-leitos.module';
+import { ListagemModule } from '../../shared/listagem/listagem.module';
 
 @NgModule({
   imports: [
     CommonModule,
-	FullPagesRoutingModule
+	FullPagesRoutingModule,
+	ListagemModule,
   ],
   declarations: [
 	DashboardComponent,
