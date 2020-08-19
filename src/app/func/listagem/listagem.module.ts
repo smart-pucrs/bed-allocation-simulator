@@ -3,10 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { ListagemComponent } from './listagem.component';
 
+import { NgTableModule } from '../ng-table/ng-table.module';
+
 @NgModule({
   declarations: [ListagemComponent],
   imports: [
-    CommonModule
+    CommonModule,
+	NgTableModule
   ],
   exports: [ListagemComponent]
 })

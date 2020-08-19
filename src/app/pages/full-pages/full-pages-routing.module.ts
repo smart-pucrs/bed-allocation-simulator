@@ -5,7 +5,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SituacaoLeitosComponent } from './situacao-leitos/situacao-leitos.component';
 
 
-import { ListagemComponent } from '../../shared/listagem/listagem.component';
 
 const routes: Routes = [
 	//pagina inicial
@@ -27,13 +26,6 @@ const routes: Routes = [
 		  title: 'Situação dos Leitos'
 	}
   },    
-  {
-	path: 'alocacao-leitos',
-	component: ListagemComponent,
-	data: {
-		  title: 'Alocação de Leitos'
-	}
-  },
   /*
 	path: 'alocacao-leitos',
 	component: //,
