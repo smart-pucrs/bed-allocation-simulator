@@ -26,13 +26,6 @@ const routes: Routes = [
 		  title: 'Situação dos Leitos'
 	}
   },    
-  /*
-	path: 'alocacao-leitos',
-	component: //,
-	data: {
-		  title: 'Alocação de Leitos'
-	}
-  },*/
   /*{
 	path: 'pacientes-internados',
 	component: //,

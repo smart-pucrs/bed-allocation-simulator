@@ -16,9 +16,18 @@ export class SituacaoLeitosComponent implements OnInit {
   //public data: Array<any>;
   //%PLACEHOLDER%
   public data: Array<any> = [
+	{numero:"102", status: "Livre", especialidade: "Neurologia", tipoDeEncaminhamento: "Agudo"},
+	{numero:"101", status: "Ocupado", especialidade: "Neurologia", tipoDeEncaminhamento: "Eletivo"},
+	{numero:"104", status: "Ocupado", especialidade: "Neurologia", tipoDeEncaminhamento: "Eletivo"},
+	{numero:"105", status: "Livre", especialidade: "Neurologia", tipoDeEncaminhamento: "Agudo"},
 	{numero:"103", status: "Ocupado", especialidade: "Neurologia", tipoDeEncaminhamento: "Eletivo"},
 	{numero:"204", status: "Livre", especialidade: "Cardiologia", tipoDeEncaminhamento: "Agudo"},
 	{numero:"203", status: "Ocupado", especialidade: "Cardiologia", tipoDeEncaminhamento: "Eletivo"},
+	{numero:"205", status: "Ocupado", especialidade: "Cardiologia", tipoDeEncaminhamento: "Eletivo"},
+	{numero:"206", status: "Livre", especialidade: "Cardiologia", tipoDeEncaminhamento: "Agudo"},
+	{numero:"207", status: "Ocupado", especialidade: "Cardiologia", tipoDeEncaminhamento: "Eletivo"},
+	{numero:"208", status: "Ocupado", especialidade: "Cardiologia", tipoDeEncaminhamento: "Eletivo"},
+	{numero:"209", status: "Ocupado", especialidade: "Cardiologia", tipoDeEncaminhamento: "Eletivo"},
   ];
   
   public title = 'Alocação de Leitos';
