@@ -1,31 +1,28 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-listagem',
-  templateUrl: './listagem.component.html',
-  styleUrls: ['./listagem.component.scss']
+  selector: 'app-plano-de-alocacao',
+  templateUrl: './plano-de-alocacao.component.html',
+  styleUrls: ['./plano-de-alocacao.component.scss']
 })
-export class ListagemComponent implements OnInit {
+export class PlanoDeAlocacaoComponent implements OnInit {
+	//%PLACEHOLDER%
+	public add: boolean = true;
   // Input properties
   @Input() colunas: Array<any> = [];
   @Input() titlePage: string;
   @Input() public detalhes: boolean;
-  @Input() public add: boolean;
-  @Input() public canDelete: boolean;
-  @Input() public canEdit: boolean;
-  @Input() public showButton?: boolean;
   @Input() set dados(dados: Array<any>){
     this.data = dados;
     if (this.colunas && this.data) {
       this.refreshTable();
     }
   }
+  
+  @Input() public leitosSelect: Array<any> = [];
 
-  @Output() new = new EventEmitter();
-  @Output() edit = new EventEmitter();
-  @Output() delete = new EventEmitter();
   @Output() mostraDetalhe = new EventEmitter();
-  @Output() validar = new EventEmitter();
+  @Output() validarPlano = new EventEmitter();
 
   public rows: Array<any> = [];
 
@@ -117,7 +114,7 @@ export class ListagemComponent implements OnInit {
         });
       }
     });
-
+	
     if (!config.filtering) {
       return filteredData;
     }
@@ -141,7 +138,6 @@ export class ListagemComponent implements OnInit {
       }
     });
     filteredData = tempArray;
-
     return filteredData;
   }
 
@@ -161,28 +157,12 @@ export class ListagemComponent implements OnInit {
     this.length = sortedData.length;
   }
 
-  public onValidar() {    
-    this.validar.emit();
-  }
-
-  public onCellClick(data: any): any {
-    console.log(data);
-  }
-
-  public onAdd(evento) {    
-    this.new.emit(evento);
-  }
-
-  public onEdit(evento) {    
-    this.edit.emit(evento);
-  }
-
-  public onDelete(evento) {
-    this.delete.emit(evento);
-  }
-
   public onMostrarDetalhe(row: any) {
     this.mostraDetalhe.emit(row);
+  }
+
+  public onValidarPlano(evento) {
+    this.validarPlano.emit(evento)
   }
 
 }

@@ -9,6 +9,22 @@
     font-size: 0.9rem;
 }
 
+/deep/ .bg-amber{
+	background-color: #ffc107 !important;
+}
+
+/deep/ .bg-success{
+	background-color: #0CC27E !important;
+}
+
+/deep/ .bg-blue{
+	background-color: #2196f3 !important;
+}
+
+/deep/ .bg-deep-purple.bg-lighten-1{
+	background-color: #7e57c2 !important;
+}
+
 // Line with Area Chart CSS Starts
 
 :host /deep/ .lineArea .ct-series-a .ct-area {
@@ -49,7 +65,8 @@
 // Line with Area Chart 2 CSS Starts
 
 :host /deep/ .lineArea2 .ct-series-a .ct-area {
-    fill: url($dashboard1-gradient-path +  #gradient2) !important;
+//    fill: url($dashboard1-gradient-path +  #gradient2) !important;
+    fill: #000555 !important;
 }
 
 :host /deep/ .lineArea2 .ct-series-b .ct-area {

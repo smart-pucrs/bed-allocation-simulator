@@ -25,21 +25,13 @@
           </div>
         </form>
         <!-- Listagem -->
-        <div *ngIf="data?.length > 0; else noData">
+        <div *ngIf="data?.length > 0;else noData">
           <div class="table-responsive">
-            <app-ng-table [config]="config" [canDelete]="canDelete" [canEdit]="canEdit" (tableChanged)="onChangeTable(config)" (cellClicked)="onCellClick($event)"
-              (delete)="onDelete($event)" (edit)="onEdit($event)" (mostraDetalhe)="onMostrarDetalhe($event)" [detalhes]="detalhes"
-              [rows]="rows" [columns]="columns">
-            </app-ng-table>
-          </div>	
-		<!-- button -->
-		<div *ngIf="showButton">
-			<button type="submit" (click)="onValidar()" class="btn-forms btn btn-primary">Enviar para validação</button>
-		</div>
+            <app-plano-table [config]="config" (tableChanged)="onChangeTable(config)" (mostraDetalhe)="onMostrarDetalhe($event)" [detalhes]="detalhes" (validarPlano)="onValidarPlano($event)" [rows]="rows" [columns]="columns" [leitosSelect]="leitosSelect">
+            </app-plano-table>
+          </div>
           <!-- Paginação -->
-          <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length" [itemsPerPage]="itemsPerPage"
-            [maxSize]="maxSize" [boundaryLinks]="true" [firstText]="'Primeira'" [lastText]="'Última'" [nextText]="'Próxima'"
-            [previousText]="'Anterior'" [rotate]="false" (pageChanged)="onChangeTable(config, $event)" (numPages)="numPages = $event">
+          <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length" [itemsPerPage]="itemsPerPage" [maxSize]="maxSize" [boundaryLinks]="true" [firstText]="'Primeira'" [lastText]="'Última'" [nextText]="'Próxima'" [previousText]="'Anterior'" [rotate]="false" (pageChanged)="onChangeTable(config, $event)" (numPages)="numPages = $event">
           </pagination>
         </div>
         <!-- Informação caso não haja itens -->

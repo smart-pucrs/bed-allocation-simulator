@@ -3,8 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SituacaoLeitosComponent } from './situacao-leitos/situacao-leitos.component';
-
-
+import { AlocacaoLeitosComponent } from './alocacao-leitos/alocacao-leitos.component';
 
 const routes: Routes = [
 	//pagina inicial
@@ -24,6 +23,13 @@ const routes: Routes = [
 	component: SituacaoLeitosComponent,
 	data: {
 		  title: 'Situação dos Leitos'
+	}
+  },  
+  {
+	path: 'alocacao-leitos',
+	component: AlocacaoLeitosComponent,
+	data: {
+		  title: 'Alocação de Leitos'
 	}
   },    
   /*{
