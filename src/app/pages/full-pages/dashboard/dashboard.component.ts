@@ -20,13 +20,17 @@ export interface Chart {
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+	public test: any = data['donutDashboard'];
     // Donut chart configuration Starts
     DonutChart: Chart = {
         type: 'Pie',
         data: data['donutDashboard'],
         options: {
             donut: true,
+			height: 250,
             startAngle: 0,
+			responsive:true,
+			donutWidth: 50,
             labelInterpolationFnc: function (value) {
                 var total = data['donutDashboard'].series.reduce(function (prev, series) {
                     return prev + series.value;
