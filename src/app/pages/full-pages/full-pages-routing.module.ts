@@ -5,6 +5,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SituacaoLeitosComponent } from './situacao-leitos/situacao-leitos.component';
 import { AlocacaoLeitosComponent } from './alocacao-leitos/alocacao-leitos.component';
 
+import { UsuariosComponent } from './cadastros/usuarios/usuarios.component';
+import { ProntuariosComponent } from './cadastros/prontuarios/prontuarios.component';
+import { AgendamentosComponent } from './cadastros/agendamentos/agendamentos.component';
+import { ProfissionaisComponent } from './cadastros/profissionais/profissionais.component';
+import { InfraestruturaComponent } from './cadastros/infraestrutura/infraestrutura.component';
+import { ConsultasMedicasComponent } from './cadastros/consultas-medicas/consultas-medicas.component';
+import { PacientesInternadosComponent } from './pacientes-internados/pacientes-internados.component';
+
 const routes: Routes = [
 	//pagina inicial
   {	path: '',
@@ -32,55 +40,55 @@ const routes: Routes = [
 		  title: 'Alocação de Leitos'
 	}
   },    
-  /*{
+  {
 	path: 'pacientes-internados',
-	component: //,
+	component: PacientesInternadosComponent,
 	data: {
 		  title: 'Pacientes Internados'
 	}
-  },*/
-  /*{
+  },
+  {
 	path: 'cadastros/profissionais',
-	component: //,
+	component: ProfissionaisComponent,
 	data: {
 		  title: 'Cadastros Profissionais'
 	}
-  },*/
-  /*{
+  },
+  {
 	path: 'cadastros/infraestrutura',
-	component: //,
+	component: InfraestruturaComponent,
 	data: {
 		  title: 'Cadastros Infraestrutura'
 	}
-  },*/
-  /*{
+  },
+  {
 	path: 'cadastros/prontuarios',
-	component: //,
+	component: ProntuariosComponent,
 	data: {
 		  title: 'Cadastros Prontuários'
 	}
-  },*/
-  /*{
+  },
+  {
 	path: 'cadastros/agendamentos',
-	component: //,
+	component: AgendamentosComponent,
 	data: {
 		  title: 'Cadastros Agendamentos'
 	}
-  },*/
-  /*{
+  },
+  {
 	path: 'cadastros/usuarios',
-	component: //,
+	component: UsuariosComponent,
 	data: {
 		  title: 'Cadastros Usuários'
 	}
-  },*/
-  /*{
+  },
+  {
 	path: 'cadastros/consultas',
-	component: //,
+	component: ConsultasMedicasComponent,
 	data: {
 		  title: 'Cadastros Consultas'
 	}
-  },*/
+  },
 ];
 
 @NgModule({

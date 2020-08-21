@@ -47,3 +47,17 @@ p {
 	background-color: #006b6d;
     border-color: #005e60;
 }
+
+:host /deep/ .page-item.active .page-link{
+    background-color: #009DA0;
+    border-color: #009DA0;
+}
+
+
+:host /deep/ .page-link{
+    margin-right: 0;
+    margin-left: -1px;
+	color: #009DA0;
+    border-radius: 0;
+    border-width: 1px;
+}

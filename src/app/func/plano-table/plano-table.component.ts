@@ -5,7 +5,6 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 @Component({
   selector: 'app-plano-table',
   templateUrl: './plano-table.component.html',
-  styleUrls: ['./plano-table.component.scss']
 })
 export class PlanoTableComponent implements OnInit {
   // Table values

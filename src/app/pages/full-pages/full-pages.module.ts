@@ -10,6 +10,13 @@ import { ChartistModule } from 'ng-chartist';
 
 import { ListagemModule } from '../../func/listagem/listagem.module';
 import { PlanoDeAlocacaoModule } from '../../func/plano-de-alocacao/plano-de-alocacao.module';
+import { PacientesInternadosComponent } from './pacientes-internados/pacientes-internados.component';
+import { ProfissionaisComponent } from './cadastros/profissionais/profissionais.component';
+import { InfraestruturaComponent } from './cadastros/infraestrutura/infraestrutura.component';
+import { ProntuariosComponent } from './cadastros/prontuarios/prontuarios.component';
+import { AgendamentosComponent } from './cadastros/agendamentos/agendamentos.component';
+import { UsuariosComponent } from './cadastros/usuarios/usuarios.component';
+import { ConsultasMedicasComponent } from './cadastros/consultas-medicas/consultas-medicas.component';
 
 @NgModule({
   imports: [
@@ -22,7 +29,14 @@ import { PlanoDeAlocacaoModule } from '../../func/plano-de-alocacao/plano-de-alo
   declarations: [
 	DashboardComponent,
 	SituacaoLeitosComponent,
-	AlocacaoLeitosComponent
+	AlocacaoLeitosComponent,
+	PacientesInternadosComponent,
+	ProfissionaisComponent,
+	InfraestruturaComponent,
+	ProntuariosComponent,
+	AgendamentosComponent,
+	UsuariosComponent,
+	ConsultasMedicasComponent
   ]
 })
 export class FullPagesModule { }

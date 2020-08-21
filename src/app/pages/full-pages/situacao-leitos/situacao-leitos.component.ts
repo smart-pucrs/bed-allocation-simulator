@@ -3,8 +3,7 @@ import { SharedModule} from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-situacao-leitos',
-  templateUrl: './situacao-leitos.component.html',
-  styleUrls: ['./situacao-leitos.component.scss']
+  templateUrl: './situacao-leitos.component.html'
 })
 
 export class SituacaoLeitosComponent implements OnInit {  

@@ -3,8 +3,7 @@ import { Leito } from '../../../models/leito';
 
 @Component({
   selector: 'app-alocacao-leitos',
-  templateUrl: './alocacao-leitos.component.html',
-  styleUrls: ['./alocacao-leitos.component.scss']
+  templateUrl: './alocacao-leitos.component.html'
 })
 export class AlocacaoLeitosComponent implements OnInit {
   public titlePage = 'Alocação de Leitos';

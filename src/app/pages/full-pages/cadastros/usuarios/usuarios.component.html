@@ -1,0 +1,2 @@
+<!-- Listagem -->
+<app-listagem *ngIf="data" [titlePage]="titlePage" [dados]="data" [detalhes]="false" [colunas]="colunas" [add]="add" [canDelete]="canDelete" [canEdit]="canEdit" (delete)="onDelete($event)" (edit)="onEdit($event)" (new)="onAdd($event)"></app-listagem>
