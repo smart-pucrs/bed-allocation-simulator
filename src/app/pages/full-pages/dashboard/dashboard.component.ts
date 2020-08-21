@@ -20,7 +20,6 @@ export interface Chart {
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-	public test: any = data['donutDashboard'];
     // Donut chart configuration Starts
     DonutChart: Chart = {
         type: 'Pie',
@@ -58,14 +57,11 @@ export class DashboardComponent implements OnInit {
 	
     //  Bar chart configuration Starts
     BarChart: Chart = {
-        type: 'Bar', data: data['DashboardBar'], options: {
-            axisX: {
-                showGrid: true,
-            },
+        type: 'Bar', data: data['DashboardBar'], 
+		options: {
             axisY: {
-                showGrid: true,
                 showLabel: false,
-                offset: 0
+                offset: 0,
             },
             low: 0,
             high: 60, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
