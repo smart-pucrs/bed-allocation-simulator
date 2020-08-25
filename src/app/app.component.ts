@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
+import { LeitoService } from './services/leito.service';
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html'
@@ -10,8 +12,10 @@ import { filter } from 'rxjs/operators';
 export class AppComponent implements OnInit, OnDestroy {
 
     subscription: Subscription;
+	data: any;
 
-    constructor(private router: Router) {
+    constructor(private router: Router,private leitoService: LeitoService) {
+		this.data = this.leitoService.getLeitos();
     }
 
     ngOnInit() {

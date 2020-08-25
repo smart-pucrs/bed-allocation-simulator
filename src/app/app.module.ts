@@ -1,8 +1,12 @@
 import { NgModule } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
+//firebase
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AgmCoreModule } from "@agm/core";
@@ -28,17 +32,6 @@ import { AuthService } from "./shared/auth/auth.service";
 import { AuthGuard } from "./shared/auth/auth-guard.service";
 import { WINDOW_PROVIDERS } from './shared/services/window.service';
 
-var firebaseConfig = {
-  apiKey: "YOUR_API_KEY", //YOUR_API_KEY
-  authDomain: "YOUR_AUTH_DOMAIN", //YOUR_AUTH_DOMAIN
-  databaseURL: "YOUR_DATABASE_URL", //YOUR_DATABASE_URL
-  projectId: "YOUR_PROJECT_ID", //YOUR_PROJECT_ID
-  storageBucket: "YOUR_STORAGE_BUCKET", //YOUR_STORAGE_BUCKET
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID", //YOUR_MESSAGING_SENDER_ID
-  appId: "YOUR_APP_ID", //YOUR_APP_ID
-  measurementId: "YOUR_MEASUREMENT_ID" //YOUR_MEASUREMENT_ID
-};
-
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -56,8 +49,12 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+	//firebase
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    AngularFireDatabaseModule, 
+    AngularFirestoreModule,
+	
     NgbModule,
     NgxSpinnerModule,
     DeviceDetectorModule.forRoot(),

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SharedModule} from '../../../shared/shared.module';
 
+import { LeitoService } from '../../../services/leito.service';
+
 @Component({
   selector: 'app-situacao-leitos',
   templateUrl: './situacao-leitos.component.html'
@@ -12,22 +14,7 @@ export class SituacaoLeitosComponent implements OnInit {
   public canEdit: boolean = false;
   public titlePage = 'Situação dos Leitos';
   public currentId: string = null;
-  //public data: Array<any>;
-  //%PLACEHOLDER%
-  public data: Array<any> = [
-	{numero:"102", status: "Livre", especialidade: "Neurologia", tipoDeEncaminhamento: "Agudo"},
-	{numero:"101", status: "Ocupado", especialidade: "Neurologia", tipoDeEncaminhamento: "Eletivo"},
-	{numero:"104", status: "Ocupado", especialidade: "Neurologia", tipoDeEncaminhamento: "Eletivo"},
-	{numero:"105", status: "Livre", especialidade: "Neurologia", tipoDeEncaminhamento: "Agudo"},
-	{numero:"103", status: "Ocupado", especialidade: "Neurologia", tipoDeEncaminhamento: "Eletivo"},
-	{numero:"204", status: "Livre", especialidade: "Cardiologia", tipoDeEncaminhamento: "Agudo"},
-	{numero:"203", status: "Ocupado", especialidade: "Cardiologia", tipoDeEncaminhamento: "Eletivo"},
-	{numero:"205", status: "Ocupado", especialidade: "Cardiologia", tipoDeEncaminhamento: "Eletivo"},
-	{numero:"206", status: "Livre", especialidade: "Cardiologia", tipoDeEncaminhamento: "Agudo"},
-	{numero:"207", status: "Ocupado", especialidade: "Cardiologia", tipoDeEncaminhamento: "Eletivo"},
-	{numero:"208", status: "Ocupado", especialidade: "Cardiologia", tipoDeEncaminhamento: "Eletivo"},
-	{numero:"209", status: "Ocupado", especialidade: "Cardiologia", tipoDeEncaminhamento: "Eletivo"},
-  ];
+  public data: Array<any>;
   
   public title = 'Alocação de Leitos';
   public mensagem = '';
@@ -38,7 +25,11 @@ export class SituacaoLeitosComponent implements OnInit {
     { title: 'Tipo de Encaminhamento', name: 'tipoDeEncaminhamento', sort: '' }
   ];
 
-  constructor() { }
+  constructor(private leitoService: LeitoService) { 
+	this.leitoService.getLeitos().subscribe(leitos => {
+      this.data = leitos;      
+    })
+  }
 
   ngOnInit(): void {
   }
