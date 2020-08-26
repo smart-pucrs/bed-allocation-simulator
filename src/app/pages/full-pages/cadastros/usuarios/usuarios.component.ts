@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { UsuarioService } from '../../../../services/usuario.service';
+
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html'
@@ -9,16 +11,7 @@ export class UsuariosComponent implements OnInit {
   public canDelete: boolean = true;
   public canEdit: boolean = true;
   public titlePage = 'Usuários';
-  //public data: Array<any>;
-  
-  //%PLACEHOLDER%
-  public data: Array<any>=[
-	  {nome: "Debora Engelmann", email: "debo.c.e.3@gmail.com", cargo: "Administrador do Sistema", ativo: "Sim"},
-	{nome: "Erick Alan", email: "erick.alan@gramado.rs.gov.br", cargo: "Supervisor Almoxarifado", ativo: "Nao"},
-	{nome: "Marivaldo Vivan", email: "m.vivan1@gmail.com", cargo: "Administrador do Sistema", ativo: "Sim"},
-  ];
-  
-  
+  public data: Array<any>;
   public title = 'Adicionar Usuário';
   public mensagem = '';
   public currentId: string = null;
@@ -30,7 +23,11 @@ export class UsuariosComponent implements OnInit {
     { title: 'Ativo', name: 'ativo', sort: '' }
   ];
 
-  constructor() { }
+  constructor(private usuarioService: UsuarioService) {
+    this.usuarioService.getUsuarios().subscribe(usuarios => {
+      this.data = usuarios;
+    })
+  }
 
   ngOnInit(): void {
   }

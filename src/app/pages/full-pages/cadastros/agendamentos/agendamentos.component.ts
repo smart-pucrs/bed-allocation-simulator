@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment-timezone';
+
+import { AgendamentoService } from '../../../../services/agendamento.service';
+import { ProntuarioService } from '../../../../services/prontuario.service';
 
 @Component({
   selector: 'app-agendamentos',
@@ -9,13 +13,7 @@ export class AgendamentosComponent implements OnInit {
   public canDelete: boolean = true;
   public canEdit: boolean = true;
   public titlePage = 'Agendamentos';
-  //public data: Array<any>;
-  
-  //%PLACEHOLDER%
-  public data: Array<any>=[
-	{prontuario: "1", nomePaciente: "Fulano de Tal Junior", nomeMedico: "Ethel Price", especialidade: "Cardiologia", tipo: "Cirurgia", dataProcedimento: "18/06/2018"},
-  ];
-  
+  public data: Array<any>;  
   public title = 'Adicionar Agendamento';
   public mensagem = '';
   public currentId: string = null;
@@ -30,7 +28,17 @@ export class AgendamentosComponent implements OnInit {
     { title: 'Data', name: 'dataProcedimento', sort: 'desc' }
   ];
 
-  constructor() { }
+  constructor(
+    private agendamentoService: AgendamentoService, 
+    private prontuarioService: ProntuarioService,
+	) {
+    this.agendamentoService.getAgendamentos().subscribe(agendamentos => {
+      this.data = agendamentos;
+      this.data.forEach(element => {
+        element.dataProcedimento = moment(element.dataProcedimento).format('DD/MM/YYYY');
+      })
+    });
+  }
 
   ngOnInit(): void {
   }

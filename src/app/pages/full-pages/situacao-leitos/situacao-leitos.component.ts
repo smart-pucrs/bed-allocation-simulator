@@ -15,7 +15,6 @@ export class SituacaoLeitosComponent implements OnInit {
   public titlePage = 'Situação dos Leitos';
   public currentId: string = null;
   public data: Array<any>;
-  
   public title = 'Alocação de Leitos';
   public mensagem = '';
   public colunas: Array<any> = [

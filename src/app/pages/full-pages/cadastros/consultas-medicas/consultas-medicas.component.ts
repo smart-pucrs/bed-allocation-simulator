@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment-timezone';
+
+import { ProntuarioService } from '../../../../services/prontuario.service';
+import { ConsultaMedicaService } from '../../../../services/consulta-medica.service';
 
 @Component({
   selector: 'app-consultas-medicas',
@@ -9,13 +13,7 @@ export class ConsultasMedicasComponent implements OnInit {
   public canDelete: boolean = false;
   public canEdit: boolean = true;
   public titlePage = 'Consultas Médicas';
-  //public data: Array<any>;
-  
-  //%PLACEHOLDER
-  public data: Array<any>=[
-	{prontuario: "4", nomePaciente: "Joana Maria de Paula", nomeMedico: "Paulo Sergio de Borba", crmMedico: "78657465", especialidade: "Medicina Interna", dataConsulta: "16/06/2018"},{prontuario: "5", nomePaciente: "Joao da Silva", nomeMedico: "Paulo Sergio de Borba", crmMedico: "78657465", especialidade: "Medicina Interna", dataConsulta: "16/06/2018"},{prontuario: "2", nomePaciente: "Joao Sousa da Silva", nomeMedico: "Paulo Sergio de Borba", crmMedico: "78657465", especialidade: "Medicina Interna", dataConsulta: "16/06/2018"},{prontuario: "3", nomePaciente: "Helena dos Santos", nomeMedico: "Paulo Sergio de Borba", crmMedico: "78657465", especialidade: "Medicina Interna", dataConsulta: "16/06/2018"},{prontuario: "1", nomePaciente: "Fulano de Tal Junior", nomeMedico: "Manuela Medeiros", crmMedico: "545423", especialidade: "Oncologia", dataConsulta: "15/01/2019"},{prontuario: "12", nomePaciente: "Maria Carolina Albuquerque", nomeMedico: "Gabriel Melo", crmMedico: "123123", especialidade: "Neurologia", dataConsulta: "15/01/2019"},{prontuario: "4", nomePaciente: "Joana Maria de Paula", nomeMedico: "Emerson Lopes", crmMedico: "54321", especialidade: "Cardiologia", dataConsulta: "15/01/2019"},{prontuario: "12", nomePaciente: "Maria Carolina Albuquerque", nomeMedico: "Gabriel Melo", crmMedico: "123123", especialidade: "Neurologia", dataConsulta: "15/01/2019"},{prontuario: "7", nomePaciente: "Paulo dos Santos", nomeMedico: "Paulo Sergio de Borba", crmMedico: "78657465", especialidade: "Medicina Interna", dataConsulta: "15/01/2019"},{prontuario: "5", nomePaciente: "Joao da Silva", nomeMedico: "Manuela Medeiros", crmMedico: "545423", especialidade: "Oncologia", dataConsulta: "14/01/2019"},{prontuario: "1", nomePaciente: "Fulano de Tal Junior", nomeMedico: "Ethel Price", crmMedico: "54321", especialidade: "Cardiologia", dataConsulta: "11/06/2018"},{prontuario: "11", nomePaciente: "Antonio de Melo", nomeMedico: "Paulo Sergio de Borba", crmMedico: "78657465", especialidade: "Medicina Interna", dataConsulta: "09/01/2019"},{prontuario: "9", nomePaciente: "Janaina Borges de Medeiros", nomeMedico: "Gabriel Melo", crmMedico: "123123", especialidade: "Neurologia", dataConsulta: "09/01/2019"},{prontuario: "10", nomePaciente: "Marcelo Amaral", nomeMedico: "Gabriel Melo", crmMedico: "123123", especialidade: "Neurologia", dataConsulta: "09/01/2019"},{prontuario: "12", nomePaciente: "Maria Carolina Albuquerque", nomeMedico: "Manuela Medeiros", crmMedico: "545423", especialidade: "Oncologia", dataConsulta: "09/01/2019"},{prontuario: "6", nomePaciente: "Maria da Silva", nomeMedico: "Paulo Sergio de Borba", crmMedico: "78657465", especialidade: "Medicina Interna", dataConsulta: "09/01/2019"},{prontuario: "11", nomePaciente: "Antonio de Melo", nomeMedico: "Emerson Lopes", crmMedico: "54321", especialidade: "Cardiologia", dataConsulta: "09/01/2019"},{prontuario: "7", nomePaciente: "Paulo dos Santos", nomeMedico: "Paulo Sergio de Borba", crmMedico: "78657465", especialidade: "Medicina Interna", dataConsulta: "09/01/2019"},{prontuario: "8", nomePaciente: "Juliana Maria da Silva", nomeMedico: "Emerson Lopes", crmMedico: "54321", especialidade: "Cardiologia", dataConsulta: "09/01/2019"},{prontuario: "9", nomePaciente: "Janaina Borges de Medeiros", nomeMedico: "Gabriel Melo", crmMedico: "123123", especialidade: "Neurologia", dataConsulta: "07/02/2019"},{prontuario: "2", nomePaciente: "Joao Sousa da Silva", nomeMedico: "Paulo Sergio de Borba", crmMedico: "78657465", especialidade: "Medicina Interna", dataConsulta: "07/02/2019"},{prontuario: "3", nomePaciente: "Helena dos Santos", nomeMedico: "Emerson Lopes", crmMedico: "54321", especialidade: "Cardiologia", dataConsulta: "07/02/2019"},{prontuario: "6", nomePaciente: "Maria da Silva", nomeMedico: "Paulo Sergio de Borba", crmMedico: "78657465", especialidade: "Medicina Interna", dataConsulta: "01/12/2018"},{prontuario: "7", nomePaciente: "Paulo dos Santos", nomeMedico: "Paulo Sergio de Borba", crmMedico: "78657465", especialidade: "Medicina Interna", dataConsulta: "01/12/2018"},
-  ];
-  
+  public data: Array<any>;
   public title = 'Adicionar Consulta';
   public mensagem = '';
   public currentId: string = null;
@@ -29,7 +27,35 @@ export class ConsultasMedicasComponent implements OnInit {
     { title: 'Data', name: 'dataConsulta', sort: 'desc' }
   ];
 
-  constructor() { }
+  constructor(
+    private prontuarioService: ProntuarioService, 
+    private consultaMedicaService: ConsultaMedicaService
+	) {
+    this.consultaMedicaService.getConsultasMedicas().subscribe(consultasMedicas => {
+      this.data = [];
+      consultasMedicas.forEach(element => {
+        this.data.push({
+          id: element.id,
+          paciente: element.paciente,
+          nomePaciente: element.paciente.nome,
+          prontuario: element.prontuario,
+          especialidade: element.especialidade,
+          tipoDeLeito: element.tipoDeLeito ? element.tipoDeLeito : '',
+          tipoDeEncaminhamento: element.tipoDeEncaminhamento,
+          tipoDeCuidado: element.tipoDeCuidado ? element.tipoDeCuidado : '',
+          nomeMedico: element.medicoResponsavel.nome,
+          crmMedico: element.medicoResponsavel.CRM,
+          medicoResponsavel: element.medicoResponsavel,
+          diagnostico: element.diagnostico,
+          tratamento: element.tratamento,
+          exames: element.exames ? element.exames : '',
+          medicamentos: element.medicamentos ? element.medicamentos : '',
+          internar: element.internar,
+          dataConsulta: element.dataConsulta ? moment(element.dataConsulta).format('DD/MM/YYYY') : '',
+        });
+      })
+    })
+  }
 
   ngOnInit(): void {
   }

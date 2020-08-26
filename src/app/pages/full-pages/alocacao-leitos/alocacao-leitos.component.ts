@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+
+
+import { LaudoInternacaoService } from '../../../services/laudo-internacao.service';
+import { PacienteService } from '../../../services/paciente.service';
+import { LeitoService } from '../../../services/leito.service';
+
 import { Leito } from '../../../models/leito';
 
 @Component({
   selector: 'app-alocacao-leitos',
   templateUrl: './alocacao-leitos.component.html'
 })
+
 export class AlocacaoLeitosComponent implements OnInit {
   public titlePage = 'Alocação de Leitos';
   public add : boolean = true;
-  //public data: Array<any>;
-  
-  //%PLACEHOLDER%
-  public data: Array<any> = [
-	  {prontuario: '2', nomePaciente: 'João Sousa da Silva', especialidade: 'Medicina Interna', genero: 'Masculino', tipoDeLeito: 'Clínico', tipoDeEncaminhamento: 'Agudo', tipoDeEstadia: 'Longa Permanência', tipoDeCuidado: 'Intensivos'},
-	  {prontuario: '3', nomePaciente: 'Helena dos Santos', especialidade: 'Cardiologia', genero: 'Feminino', tipoDeLeito: 'Clínico', tipoDeEncaminhamento: 'Eletivo', tipoDeEstadia: 'Longa Permanência', tipoDeCuidado: 'Semi-Intensivos'},
-	  {prontuario: '9', nomePaciente: 'Janaina Borges de Medeiros', especialidade: 'Neurologia', genero: 'Feminino', tipoDeLeito: 'Cirúrgico', tipoDeEncaminhamento: 'Agudo', tipoDeEstadia: 'Longa Permanência', tipoDeCuidado: 'Intensivos'},
-  ];
-  
+  public data: Array<any>;  
   public title = 'Alocar Leito';
   public mensagem = '';
   public currentId: string = null;
@@ -32,6 +31,26 @@ export class AlocacaoLeitosComponent implements OnInit {
   ];
   public leitosSelect = [];
   leitos: Leito[] = [];
+
+  constructor(
+    private laudoInternacaoService: LaudoInternacaoService,
+    private leitoService: LeitoService,
+	) {
+    this.laudoInternacaoService.getLaudosPendentes().subscribe(laudos => {
+      console.log('Laudos: ', laudos);
+      this.data = laudos;
+    })
+    this.leitoService.getLeitosDisponiveis().subscribe(result => {
+      console.log(result);
+      this.leitos = result
+      this.leitos.forEach(element => {
+        this.leitosSelect.push({
+          value: element,
+          label: element.numero + " - " + element.tipoDeLeito + " - " + element.tipoDeCuidado + " - " + element.tipoDeEncaminhamento + " - " + element.especialidade + " - " + element.tipoDeEstadia + " - " + element.genero
+        })
+      });
+    });
+  }
 
   onMostrarDetalhe(evento) {
     const detalhes = [
@@ -53,8 +72,6 @@ export class AlocacaoLeitosComponent implements OnInit {
   }
   
   onValidarPlano(pacientes) {}
-  
-  constructor() { }
 
   ngOnInit(): void {
   }
