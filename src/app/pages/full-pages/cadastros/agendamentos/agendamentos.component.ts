@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment-timezone';
 
 import { AgendamentoService } from '../../../../services/agendamento.service';
 import { ProntuarioService } from '../../../../services/prontuario.service';
+
+import { Prontuario } from '../../../../models/prontuario';
+import { Agendamento } from '../../../../models/agendamento';
+import { FormAgendamentoComponent } from '../../../../formularios/form-agendamento/form-agendamento.component';
 
 @Component({
   selector: 'app-agendamentos',
@@ -29,9 +34,11 @@ export class AgendamentosComponent implements OnInit {
   ];
 
   constructor(
+    //private toastr: ToastrService, 
     private agendamentoService: AgendamentoService, 
     private prontuarioService: ProntuarioService,
-	) {
+    private modalService: NgbModal
+  ) {
     this.agendamentoService.getAgendamentos().subscribe(agendamentos => {
       this.data = agendamentos;
       this.data.forEach(element => {

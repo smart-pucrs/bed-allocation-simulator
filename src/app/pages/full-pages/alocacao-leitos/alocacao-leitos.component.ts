@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { LaudoInternacaoService } from '../../../services/laudo-internacao.service';
 import { PacienteService } from '../../../services/paciente.service';
 import { LeitoService } from '../../../services/leito.service';
 
 import { Leito } from '../../../models/leito';
+import { DetalhesComponent } from '../../../shared/detalhes/detalhes.component';
+import { FormAlocacaoLeitosComponent } from '../../../formularios/form-alocacao-leitos/form-alocacao-leitos.component';
 
 @Component({
   selector: 'app-alocacao-leitos',
@@ -35,6 +37,7 @@ export class AlocacaoLeitosComponent implements OnInit {
   constructor(
     private laudoInternacaoService: LaudoInternacaoService,
     private leitoService: LeitoService,
+    private modalService: NgbModal,
 	) {
     this.laudoInternacaoService.getLaudosPendentes().subscribe(laudos => {
       console.log('Laudos: ', laudos);
@@ -49,6 +52,21 @@ export class AlocacaoLeitosComponent implements OnInit {
           label: element.numero + " - " + element.tipoDeLeito + " - " + element.tipoDeCuidado + " - " + element.tipoDeEncaminhamento + " - " + element.especialidade + " - " + element.tipoDeEstadia + " - " + element.genero
         })
       });
+    });
+  }
+
+  openModal() {
+    const modalRef = this.modalService.open(FormAlocacaoLeitosComponent, { size: 'lg' });
+    modalRef.componentInstance.title = this.title;
+    modalRef.componentInstance.id = this.currentId;
+    modalRef.result.then((result) => {
+      if (result === 'dados editados') {
+        //this.toastr.success('Dados editados com sucesso!');
+      } else {
+        //this.toastr.success('Dados inseridos com sucesso!');
+      }
+    }).catch((error) => {
+      this.currentId = null;
     });
   }
 
@@ -69,6 +87,13 @@ export class AlocacaoLeitosComponent implements OnInit {
       { label: 'Data da Alta', value: evento.dataAlta ? new Date(evento.dataAlta) : '', tipo: 'date' },
       { label: 'Leito', value: evento.leito ? evento.leito.numero : '', tipo: 'string' },
     ];
+	
+    const modalRef = this.modalService.open(DetalhesComponent, { size: 'lg' });
+    modalRef.componentInstance.title = 'Detalhes do Laudo';
+    modalRef.componentInstance.detalhes = detalhes;
+    modalRef.result.then((result) => {
+		}).catch((error) => {
+    });
   }
   
   onValidarPlano(pacientes) {}

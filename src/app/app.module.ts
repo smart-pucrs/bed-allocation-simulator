@@ -1,4 +1,6 @@
 import { NgModule } from "@angular/core";
+import { FormsModule }   from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 //firebase
@@ -7,7 +9,6 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
-
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AgmCoreModule } from "@agm/core";
 import { DeviceDetectorModule } from 'ngx-device-detector';
@@ -32,7 +33,6 @@ import { AuthService } from "./shared/auth/auth.service";
 import { AuthGuard } from "./shared/auth/auth-guard.service";
 import { WINDOW_PROVIDERS } from './shared/services/window.service';
 
-
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false
@@ -55,6 +55,8 @@ export function createTranslateLoader(http: HttpClient) {
     AngularFireDatabaseModule, 
     AngularFirestoreModule,
 	
+	BrowserModule,
+	FormsModule,
     NgbModule,
     NgxSpinnerModule,
     DeviceDetectorModule.forRoot(),
@@ -64,9 +66,6 @@ export function createTranslateLoader(http: HttpClient) {
         useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
-    }),
-    AgmCoreModule.forRoot({
-      apiKey: "YOUR_GOOGLE_MAP_API_KEY"
     }),
     PerfectScrollbarModule
   ],

@@ -30,6 +30,7 @@ import { TopMenuDirective } from './directives/topmenu.directive';
 import { TopMenuLinkDirective } from './directives/topmenu-link.directive';
 import { TopMenuDropdownDirective } from './directives/topmenu-dropdown.directive';
 import { TopMenuAnchorToggleDirective } from './directives/topmenu-anchor-toggle.directive';
+import { DetalhesComponent } from './detalhes/detalhes.component';
 //import { ListagemComponent } from './listagem/listagem.component';
 
 
@@ -77,6 +78,7 @@ import { TopMenuAnchorToggleDirective } from './directives/topmenu-anchor-toggle
         TopMenuDropdownDirective,
         TopMenuAnchorToggleDirective,
         TopMenuDirective,
+        DetalhesComponent,
         //ListagemComponent,
     ]
 })

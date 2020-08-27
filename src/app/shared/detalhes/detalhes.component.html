@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ title }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card-body">
+        <div>
+          <ul class="list-group" *ngIf="detalhes">
+            <li class="list-group-item" *ngFor="let item of detalhes">
+              <p *ngIf="item.tipo === 'string'"><strong>{{ item.label }}: </strong> {{ item.value }}</p>
+              <p *ngIf="item.tipo === 'date'"><strong>{{ item.label }}: </strong> {{ item.value | date:'dd/MM/yyyy' }}</p>
+              <strong *ngIf="item.tipo === 'array'">{{ item.label }}: </strong>              
+              <ul *ngIf="item.tipo === 'array'">
+                <li *ngFor="let subitem of item.value">
+                  <p *ngIf="subitem.tipo === 'string'"><strong>{{ subitem.label }}: </strong> {{ subitem.value }}</p>
+                  <p *ngIf="subitem.tipo === 'date'"><strong>{{ subitem.label }}: </strong> {{ subitem.value | date:'dd/MM/yyyy' }}</p>
+                  <strong *ngIf="subitem.tipo === 'array'">{{ subitem.label }}: </strong>
+                  <ul *ngIf="subitem.tipo === 'array'">
+                    <li *ngFor="let subsubitem of subitem.value">
+                      <p *ngIf="subsubitem.tipo === 'string'"><strong>{{ subsubitem.label }}: </strong> {{ subsubitem.value }}</p>
+                      <p *ngIf="subsubitem.tipo === 'date'"><strong>{{ subsubitem.label }}: </strong> {{ subsubitem.value | date:'dd/MM/yyyy' }}</p>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      <button type="button" class="btn-forms btn btn-primary" (click)="activeModal.close(true)">Voltar</button>
+  </div><!--/.card-body-->
+</div>

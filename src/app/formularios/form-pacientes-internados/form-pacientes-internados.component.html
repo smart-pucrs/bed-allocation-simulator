@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="card-body">
+    <div class="col-sm-12">
+      <ul *ngIf="laudo" class="list-group">
+        <div class="row">
+          <li class="list-group-item  col-sm-12">
+            <p>
+              <strong> Paciente: </strong> {{ laudo.prontuario }} - {{ laudo.nomePaciente }}</p>
+          </li>
+          <li class="list-group-item  col-sm-12">
+            <p>
+              <strong> Médico Responsável: </strong> {{ laudo.crmMedico }} - {{ laudo.medicoResponsavel }}</p>
+          </li>
+        </div>
+        <div class="row">
+          <li class="list-group-item col-sm-6">
+            <p>
+              <strong> Data da Internação: </strong> {{ laudo.dataInternacao | date:'dd/MM/yyyy' }} </p>
+          </li>
+          <li class="list-group-item col-sm-6">
+            <p>
+              <strong> Leito: </strong> {{ laudo.leito.numero }} </p>
+          </li>
+        </div>
+        <div class="row">
+          <li class="list-group-item col-sm-12">
+            <p style="float: right !important;">
+              <strong> Para registrar a alta do paciente   </strong>
+              <button type="button" (click)="onConfirm()" class="btn btn-primary">Clique aqui</button>
+            </p>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <!--/.card-body-->
+</div>

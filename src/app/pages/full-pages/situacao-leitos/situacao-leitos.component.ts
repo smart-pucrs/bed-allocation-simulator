@@ -1,7 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SharedModule} from '../../../shared/shared.module';
+import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { LeitoService } from '../../../services/leito.service';
+
+import { DetalhesComponent } from '../../../shared/detalhes/detalhes.component';
+import { FormSituacaoLeitosComponent } from '../../../formularios/form-situacao-leitos/form-situacao-leitos.component';
 
 @Component({
   selector: 'app-situacao-leitos',
@@ -24,16 +30,33 @@ export class SituacaoLeitosComponent implements OnInit {
     { title: 'Tipo de Encaminhamento', name: 'tipoDeEncaminhamento', sort: '' }
   ];
 
-  constructor(private leitoService: LeitoService) { 
+  constructor(
+	private leitoService: LeitoService,
+	private modalService: NgbModal,
+	//private toastr: ToastrService
+	) { 
 	this.leitoService.getLeitos().subscribe(leitos => {
       this.data = leitos;      
     })
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  
+  openModal() {
+    const modalRef = this.modalService.open(FormSituacaoLeitosComponent, { size: 'lg' });
+    modalRef.componentInstance.title = this.title;
+    modalRef.componentInstance.id = this.currentId;
+    modalRef.result.then((result) => {
+      if (result === 'dados editados'){
+        //this.toastr.success('Dados editados com sucesso!');
+      } else {
+        //this.toastr.success('Dados inseridos com sucesso!');
+      }
+    }).catch((error) => {
+      this.currentId = null;
+    });
   }
   
-  public test : any;
   onMostrarDetalhe(evento) {
     let paciente: any;
     if (evento.paciente){
@@ -56,11 +79,19 @@ export class SituacaoLeitosComponent implements OnInit {
       { label: 'Tipo de Estadia', value: evento.tipoDeEstadia ? evento.tipoDeEstadia : '', tipo: 'string'},
       { label: 'Paciente', value: evento.paciente ? paciente : '', tipo: 'array'},
     ];
-	this.test = detalhes;
+	
+    const modalRef = this.modalService.open(DetalhesComponent,{ size: 'lg'});
+    modalRef.componentInstance.title = 'Detalhes do Leito';
+    modalRef.componentInstance.detalhes = detalhes;
+    modalRef.result.then((result) => {
+		}).catch((error) => {
+    });
+  }
+
+  onEdit(evento) {
+    this.currentId = evento.id;
+    this.title = 'Alocação de Leitos';
+    this.openModal();
   }
   
-  onEdit(evento) {}
-  onDelete(evento) {}
-  onAdd(evento) {}
-
 }
