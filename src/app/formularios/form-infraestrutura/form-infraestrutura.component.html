@@ -1,0 +1,126 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="card-body">
+    <form class="form-horizontal" [formGroup]="quartoForm" (ngSubmit)="save()">
+      <!-- Número do Quarto -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group" [ngClass]="aplicaCssErro('nome', quartoForm)">
+            <label for="nome" class="control-label">Número do Quarto</label>
+            <input type="text" class="form-control" id="nome" formControlName="nome" placeholder="Identificação do quarto">
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome', quartoForm)" [msgErro]="getMsgError('nome', quartoForm)">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- Especialidade -->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('especialidade', quartoForm)">
+            <label for="especialidade" class="control-label">Especialidade</label>
+            <ng-select class="form-control" id="especialidade" formControlName="especialidade" [allowClear]="true" bindValue="value"  [items]="tiposEspecialidades"
+              *ngIf="tiposEspecialidades.length > 0">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('especialidade', quartoForm)" [msgErro]="getMsgError('especialidade', quartoForm)">
+            </app-campo-control-erro>
+          </div>
+        </div>
+        <!-- Age -->
+        <div class="col-md-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('age', quartoForm)">
+            <label for="age" class="control-label">Idade</label>
+            <ng-select class="form-control" id="age" formControlName="age" [allowClear]="true" bindValue="value"  [items]="tiposDeIdade"
+              *ngIf="tiposDeIdade.length > 0">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('age', quartoForm)" [msgErro]="getMsgError('age', quartoForm)">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- Tipo de Leito -->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('tipoDeLeito', quartoForm)">
+            <label for="tipoDeLeito" class="control-label">Tipo de Leito</label>
+            <ng-select class="form-control" id="tipoDeLeito" formControlName="tipoDeLeito" [allowClear]="true" bindValue="value"  [items]="tiposLeitos"
+              *ngIf="tiposLeitos.length > 0">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('tipoDeLeito', quartoForm)" [msgErro]="getMsgError('tipoDeLeito', quartoForm)">
+            </app-campo-control-erro>
+          </div>
+        </div>
+        <!-- Tipo de Estadia -->
+        <div class="col-md-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('tipoDeEstadia', quartoForm)">
+            <label for="tipoDeEstadia" class="control-label">Tipo de Estadia</label>
+            <ng-select class="form-control" id="tipoDeEstadia" formControlName="tipoDeEstadia" [allowClear]="true" bindValue="value"  [items]="tiposDeEstadia"
+              *ngIf="tiposDeEstadia.length > 0">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('tipoDeEstadia', quartoForm)" [msgErro]="getMsgError('tipoDeEstadia', quartoForm)">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- Tipo de Encaminhamento -->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('tipoDeEncaminhamento', quartoForm)">
+            <label for="tipoDeEncaminhamento" class="control-label">Tipo de Encaminhamento</label>
+            <ng-select class="form-control" id="tipoDeEncaminhamento" formControlName="tipoDeEncaminhamento" [allowClear]="true" bindValue="value"  [items]="tiposEncaminhamentos"
+              *ngIf="tiposEncaminhamentos.length > 0">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('tipoDeEncaminhamento', quartoForm)" [msgErro]="getMsgError('tipoDeEncaminhamento', quartoForm)">
+            </app-campo-control-erro>
+          </div>
+        </div>
+        <!-- Tipo de Cuidado -->
+        <div class="col-md-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('tipoDeCuidado', quartoForm)">
+            <label for="tipoDeCuidado" class="control-label">Tipo de Cuidado</label>
+            <ng-select class="form-control" id="tipoDeCuidado" formControlName="tipoDeCuidado" [allowClear]="true" bindValue="value"  [items]="tiposCuidados"
+              *ngIf="tiposCuidados.length > 0">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('tipoDeCuidado', quartoForm)" [msgErro]="getMsgError('tipoDeCuidado', quartoForm)">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- Gênero -->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('genero', quartoForm)">
+            <label for="genero" class="control-label">Gênero</label>
+            <ng-select class="form-control" id="genero" formControlName="genero" [allowClear]="true" bindValue="value"  [items]="generos" *ngIf="generos.length > 0">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('genero', quartoForm)" [msgErro]="getMsgError('genero', quartoForm)">
+            </app-campo-control-erro>
+          </div>
+        </div>
+        <!-- Número de Leitos -->
+        <div class="col-md-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('numLeitos', quartoForm)">
+            <label for="numLeitos" class="control-label">Número de Leitos</label>
+            <ng-select class="form-control" id="numLeitos" formControlName="numLeitos" [allowClear]="true" bindValue="value"  [items]="numLeitos" *ngIf="numLeitos.length > 0">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('numLeitos', quartoForm)" [msgErro]="getMsgError('numLeitos', quartoForm)">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <button type="submit" [disabled]='naoEditar' class="btn-forms btn btn-primary">Salvar</button>
+
+      <!-- <app-form-debug [form]="quartoForm"></app-form-debug> -->
+    </form>
+  </div>
+  <!--/.card-body-->
+</div>

@@ -1,0 +1,459 @@
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+
+import { UtilitariosService } from '../../formularios/utilitarios.service';
+import { InfraestruturaService } from '../../services/infraestrutura.service';
+import { LeitoService } from '../../services/leito.service';
+
+import { TIPOSDEESPECIALIDADES } from '../../models/tipos-especialidades';
+import { TIPOSDEENCAMINHAMENTO} from '../../models/tipos-encaminhamento';
+import { TIPOSDECUIDADOS } from '../../models/tipos-cuidados';
+import { TIPOSDEESTADIA } from '../../models/tipos-estadia';
+import { TIPOSDEQUARTOS } from '../../models/tipos-quartos';
+import { TIPOSDEIDADE } from '../../models/tipos-idade';
+import { Quarto } from '../../models/quarto';
+import { Leito } from '../../models/leito';
+
+@Component({
+  selector: 'app-form-infraestrutura',
+  templateUrl: './form-infraestrutura.component.html',
+})
+export class FormInfraestruturaComponent implements OnInit, OnDestroy {
+  @Input() title;
+  @Input() id: string;
+  quartoForm: FormGroup;
+  leitos: Leito[] = [];
+  quarto: Quarto;
+  public naoEditar = false;
+  numLeitosAtual: string;
+  tiposLeitos: any = TIPOSDEQUARTOS;
+  tiposDeEstadia: any = TIPOSDEESTADIA;
+  tiposEncaminhamentos: any = TIPOSDEENCAMINHAMENTO;
+  tiposCuidados: any = TIPOSDECUIDADOS;
+  tiposEspecialidades: any = TIPOSDEESPECIALIDADES;
+  tiposDeIdade: any = TIPOSDEIDADE;
+  leitosDoQuarto: any = [];
+  generos: any = [
+    {
+      value: 'Masculino',
+      label: 'Masculino'
+    },
+    {
+      value: 'Feminino',
+      label: 'Feminino'
+    },
+    {
+      value: 'Indefinido',
+      label: 'Indefinido'
+    },
+  ];
+  numLeitos: any = [
+    {
+      value: '1',
+      label: '1'
+    },
+    {
+      value: '2',
+      label: '2'
+    },
+    {
+      value: '3',
+      label: '3'
+    },
+    {
+      value: '4',
+      label: '4'
+    },
+    {
+      value: '5',
+      label: '5'
+    }
+  ]
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private infraestruturaService: InfraestruturaService,
+    private leitoService: LeitoService,
+    private utilitariosService: UtilitariosService,
+    private toastr: ToastrService,
+    public activeModal: NgbActiveModal
+  ) { }
+
+  ngOnInit() {
+    // Form
+    this.quartoForm = this.formBuilder.group({
+      nome: [null, [Validators.required, Validators.maxLength(50)]],
+      especialidade: [null, [Validators.required, Validators.maxLength(50)]],
+      age: [null, Validators.required],
+      tipoDeLeito: [null, Validators.required],
+      tipoDeEstadia: [null, Validators.required],
+      tipoDeEncaminhamento: [null, Validators.required],
+      tipoDeCuidado: [null, Validators.required],
+      genero: [null, Validators.required],
+      numLeitos: [null, Validators.required],
+    });
+
+    // Edit
+    if (this.id !== null) {
+      this.infraestruturaService.getQuartoById(this.id).subscribe(data => {
+        console.log("Editar: ", data);
+        this.numLeitosAtual = data.numLeitos;
+        this.leitosDoQuarto = data.leitos;
+        this.quartoForm.setValue({
+          nome: data.nome,
+          especialidade: data.especialidade,
+          age: data.age ? data.age : '',
+          tipoDeLeito: data.tipoDeLeito,
+          tipoDeEstadia: data.tipoDeEstadia ? data.tipoDeEstadia : '',
+          tipoDeEncaminhamento: data.tipoDeEncaminhamento,
+          tipoDeCuidado: data.tipoDeCuidado,
+          genero: data.genero,
+          numLeitos: data.numLeitos,
+        });
+        let controls = this.quartoForm.controls;
+        controls.numLeitos.disable();
+        data.leitos.forEach(element => {
+          if (element.status !== 'Livre') {
+            this.naoEditar = true;
+          }
+        });
+        if (this.naoEditar) {
+          controls.nome.disable();
+          controls.especialidade.disable();
+          controls.age.disable();
+          controls.tipoDeLeito.disable();
+          controls.tipoDeEstadia.disable();
+          controls.tipoDeEncaminhamento.disable();
+          controls.tipoDeCuidado.disable();
+          controls.genero.disable();
+          this.toastr.info('Quarto não está livre, não é possível editar!');
+        }
+        console.log("form: ", this.quartoForm);
+      })
+    }
+  }
+
+  closeModal() {
+    this.activeModal.close(true);
+  }
+  
+  save() {
+    if (this.quartoForm.valid) {
+      if (this.id !== null) {
+          let promises = this.leitosDoQuarto.map(element => {
+            let leito: Leito = {
+              quarto: this.quartoForm.value['nome'],
+              numero: element.numero,
+              status: element.status,
+              paciente: element.paciente ? element.paciente : null,
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+              genero: this.quartoForm.value['genero'],
+            }
+            return this.leitoService.update(leito, element.id)
+              .then(docRef => {
+                console.log("Leito editado: ", docRef);
+                this.leitos.push({
+                  id: element.id,
+                  quarto: leito.quarto,
+                  numero: leito.numero,
+                  status: leito.status,
+                  paciente: leito.paciente,
+                  especialidade: leito.especialidade,
+                  age: leito.age,
+                  genero: leito.genero,
+                  tipoDeLeito: leito.tipoDeLeito,
+                  tipoDeEstadia: leito.tipoDeEstadia,
+                  tipoDeEncaminhamento: leito.tipoDeEncaminhamento,
+                  tipoDeCuidado: leito.tipoDeCuidado,
+                })
+              });
+          })
+          Promise.all(promises).then(() => {
+            this.quartoForm.controls.numLeitos.enable();
+            console.log("Alterar leitos do quarto: ", this.leitos);
+            this.quarto = {
+              nome: this.quartoForm.value['nome'],
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+              genero: this.quartoForm.value['genero'],
+              numLeitos: this.quartoForm.value['numLeitos'],
+              leitos: this.leitos,
+            }
+          console.log("Salvar Edição quarto", this.quarto);
+          this.infraestruturaService.update(this.quarto, this.id);
+          this.activeModal.close('dados editados');
+          this.quartoForm.reset();
+        }).catch((err) => {
+          console.log("erro: ", err);
+        });
+      } else {
+        switch (this.quartoForm.value['numLeitos']) {
+          case '1':
+            this.leitosDoQuarto.push({
+              quarto: this.quartoForm.value['nome'],
+              numero: this.quartoForm.value['nome'] + 'a',
+              status: 'Livre',
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              genero: this.quartoForm.value['genero'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            });
+            break;
+          case '2':
+            this.leitosDoQuarto.push({
+              quarto: this.quartoForm.value['nome'],
+              numero: this.quartoForm.value['nome'] + 'a',
+              status: 'Livre',
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              genero: this.quartoForm.value['genero'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            });
+            this.leitosDoQuarto.push({
+              quarto: this.quartoForm.value['nome'],
+              numero: this.quartoForm.value['nome'] + 'b',
+              status: 'Livre',
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              genero: this.quartoForm.value['genero'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            });
+            break;
+          case '3':
+            this.leitosDoQuarto.push({
+              quarto: this.quartoForm.value['nome'],
+              numero: this.quartoForm.value['nome'] + 'a',
+              status: 'Livre',
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              genero: this.quartoForm.value['genero'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            });
+            this.leitosDoQuarto.push({
+              quarto: this.quartoForm.value['nome'],
+              numero: this.quartoForm.value['nome'] + 'b',
+              status: 'Livre',
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              genero: this.quartoForm.value['genero'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            });
+            this.leitosDoQuarto.push({
+              quarto: this.quartoForm.value['nome'],
+              numero: this.quartoForm.value['nome'] + 'c',
+              status: 'Livre',
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              genero: this.quartoForm.value['genero'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            });
+            break;
+          case '4':
+            this.leitosDoQuarto.push({
+              quarto: this.quartoForm.value['nome'],
+              numero: this.quartoForm.value['nome'] + 'a',
+              status: 'Livre',
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              genero: this.quartoForm.value['genero'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            });
+            this.leitosDoQuarto.push({
+              quarto: this.quartoForm.value['nome'],
+              numero: this.quartoForm.value['nome'] + 'b',
+              status: 'Livre',
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              genero: this.quartoForm.value['genero'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            });
+            this.leitosDoQuarto.push({
+              quarto: this.quartoForm.value['nome'],
+              numero: this.quartoForm.value['nome'] + 'c',
+              status: 'Livre',
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              genero: this.quartoForm.value['genero'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            });
+            this.leitosDoQuarto.push({
+              quarto: this.quartoForm.value['nome'],
+              numero: this.quartoForm.value['nome'] + 'd',
+              status: 'Livre',
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              genero: this.quartoForm.value['genero'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            });
+            break;
+          case '5':
+            this.leitosDoQuarto.push({
+              quarto: this.quartoForm.value['nome'],
+              numero: this.quartoForm.value['nome'] + 'a',
+              status: 'Livre',
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              genero: this.quartoForm.value['genero'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            });
+            this.leitosDoQuarto.push({
+              quarto: this.quartoForm.value['nome'],
+              numero: this.quartoForm.value['nome'] + 'b',
+              status: 'Livre',
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              genero: this.quartoForm.value['genero'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            });
+            this.leitosDoQuarto.push({
+              quarto: this.quartoForm.value['nome'],
+              numero: this.quartoForm.value['nome'] + 'c',
+              status: 'Livre',
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              genero: this.quartoForm.value['genero'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            });
+            this.leitosDoQuarto.push({
+              quarto: this.quartoForm.value['nome'],
+              numero: this.quartoForm.value['nome'] + 'd',
+              status: 'Livre',
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              genero: this.quartoForm.value['genero'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            });
+            this.leitosDoQuarto.push({
+              quarto: this.quartoForm.value['nome'],
+              numero: this.quartoForm.value['nome'] + 'e',
+              status: 'Livre',
+              especialidade: this.quartoForm.value['especialidade'],
+              age: this.quartoForm.value['age'],
+              genero: this.quartoForm.value['genero'],
+              tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+              tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+              tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+              tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            });
+            break;
+          default:
+            break;
+        }
+        let promises = this.leitosDoQuarto.map(element => {
+          return this.leitoService.add(element)
+            .then(docRef => {
+              console.log("Leito inserido: ", docRef);
+              this.leitos.push({
+                id: docRef.id,
+                quarto: element.quarto,
+                numero: element.numero,
+                status: element.status,
+                especialidade: element.especialidade,
+                age: element.age,
+                genero: element.genero,
+                tipoDeLeito: element.tipoDeLeito,
+                tipoDeEstadia: element.tipoDeEstadia,
+                tipoDeEncaminhamento: element.tipoDeEncaminhamento,
+                tipoDeCuidado: element.tipoDeCuidado,
+              })
+            });
+        })
+        Promise.all(promises).then(() => {
+          console.log(this.leitos);
+          this.quarto = {
+            nome: this.quartoForm.value['nome'],
+            especialidade: this.quartoForm.value['especialidade'],
+            age: this.quartoForm.value['age'],
+            tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
+            tipoDeEstadia: this.quartoForm.value['tipoDeEstadia'],
+            tipoDeEncaminhamento: this.quartoForm.value['tipoDeEncaminhamento'],
+            tipoDeCuidado: this.quartoForm.value['tipoDeCuidado'],
+            genero: this.quartoForm.value['genero'],
+            numLeitos: this.quartoForm.value['numLeitos'],
+            leitos: this.leitos,
+          }
+          console.log("Salvar quarto", this.quarto);
+
+          this.infraestruturaService.add(this.quarto);
+          this.activeModal.close('dados adicionados');
+          this.quartoForm.reset();
+        }).catch((err) => {
+          console.log("erro: ", err);
+        });
+      }
+    } else {
+      this.utilitariosService.verificaValidacoesForm(this.quartoForm);
+    }
+  }
+
+  verificaValidTouched(campo: string, form: any) {
+    return this.utilitariosService.verificaValidTouched(campo, form);
+  }
+
+  aplicaCssErro(campo: string, form: any) {
+    return this.utilitariosService.aplicaCssErro(campo, form)
+  }
+
+  getMsgError(campo: string, form: any) {
+    return this.utilitariosService.getMsgError(campo, form)
+  }
+
+  ngOnDestroy() {
+    // reseta o form
+    this.quartoForm.reset();
+  }
+
+}

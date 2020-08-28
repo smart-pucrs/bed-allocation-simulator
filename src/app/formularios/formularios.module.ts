@@ -14,6 +14,7 @@ import { FormPacientesInternadosComponent } from './form-pacientes-internados/fo
 import { FormSituacaoLeitosComponent } from './form-situacao-leitos/form-situacao-leitos.component';
 import { FormEscolhaLeitoComponent } from './form-escolha-leito/form-escolha-leito.component';
 import { FormProfissionaisComponent } from './form-profissionais/form-profissionais.component';
+import { FormInfraestruturaComponent } from './form-infraestrutura/form-infraestrutura.component';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { FormProfissionaisComponent } from './form-profissionais/form-profission
   ],
   declarations: [
     FormAgendamentoComponent,
+	FormInfraestruturaComponent,
 	FormAlocacaoLeitosComponent,
 	FormPacientesInternadosComponent,
 	FormSituacaoLeitosComponent,
@@ -38,6 +40,7 @@ import { FormProfissionaisComponent } from './form-profissionais/form-profission
     FormAgendamentoComponent,
 	FormAlocacaoLeitosComponent,
 	FormPacientesInternadosComponent,
+	FormInfraestruturaComponent,
 	FormSituacaoLeitosComponent,
 	FormEscolhaLeitoComponent
   ],
@@ -46,6 +49,7 @@ import { FormProfissionaisComponent } from './form-profissionais/form-profission
 	FormAlocacaoLeitosComponent,
 	FormPacientesInternadosComponent,
 	FormSituacaoLeitosComponent,
+	FormInfraestruturaComponent,
 	FormEscolhaLeitoComponent
   ]
 })
