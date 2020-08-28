@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 
 import { LaudoInternacaoService } from '../../../services/laudo-internacao.service';
 import { PacienteService } from '../../../services/paciente.service';
@@ -11,7 +12,8 @@ import { FormAlocacaoLeitosComponent } from '../../../formularios/form-alocacao-
 
 @Component({
   selector: 'app-alocacao-leitos',
-  templateUrl: './alocacao-leitos.component.html'
+  templateUrl: './alocacao-leitos.component.html',
+  styleUrls: ['./alocacao-leitos.component.scss']
 })
 
 export class AlocacaoLeitosComponent implements OnInit {
@@ -38,13 +40,12 @@ export class AlocacaoLeitosComponent implements OnInit {
     private laudoInternacaoService: LaudoInternacaoService,
     private leitoService: LeitoService,
     private modalService: NgbModal,
+    private toastr: ToastrService,
 	) {
     this.laudoInternacaoService.getLaudosPendentes().subscribe(laudos => {
-      console.log('Laudos: ', laudos);
       this.data = laudos;
     })
     this.leitoService.getLeitosDisponiveis().subscribe(result => {
-      console.log(result);
       this.leitos = result
       this.leitos.forEach(element => {
         this.leitosSelect.push({
@@ -61,9 +62,9 @@ export class AlocacaoLeitosComponent implements OnInit {
     modalRef.componentInstance.id = this.currentId;
     modalRef.result.then((result) => {
       if (result === 'dados editados') {
-        //this.toastr.success('Dados editados com sucesso!');
+        this.toastr.success('Dados editados com sucesso!');
       } else {
-        //this.toastr.success('Dados inseridos com sucesso!');
+        this.toastr.success('Dados inseridos com sucesso!');
       }
     }).catch((error) => {
       this.currentId = null;
@@ -100,7 +101,5 @@ export class AlocacaoLeitosComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
-  validar(){}
 
 }

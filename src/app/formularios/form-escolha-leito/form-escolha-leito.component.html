@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="card-body">
+    <!--<ng-select [allowClear]="true" [items]="leitosSelect" (selected)="onSelected($event)">-->
+    -<ng-select [items]="leitosSelect" (change)="onSelected($event)">-->
+    </ng-select>    	
+  </div><!--/.card-body-->
+</div>

@@ -4,6 +4,14 @@ p {
     text-align: center;
 }
 
+:host /deep/ .light {
+	color: #000000 !important;
+}
+
+/deep/ body {
+	font-family: "Rubik", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
 :host /deep/ .page-item{
     &:first-child{
         .page-link{

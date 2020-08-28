@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { FormEscolhaLeitoComponent } from '../../formularios/form-escolha-leito/form-escolha-leito.component';
 
 @Component({
   selector: 'app-plano-table',
@@ -56,8 +58,10 @@ export class PlanoTableComponent implements OnInit {
   private _columns: Array<any> = [];
   private _config: any = {};
 
-  public constructor(private sanitizer: DomSanitizer) {
-  }
+  public constructor(
+	private sanitizer: DomSanitizer,
+	private modalService: NgbModal
+  ) {}
 
   public sanitize(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);
@@ -100,9 +104,50 @@ export class PlanoTableComponent implements OnInit {
     this.mostraDetalhe.emit(row);
   }
 
-  public clearLeito(row) {}
-  public onSelected(event, row) {}
+  public clearLeito(row) {
+    let indexLeito = this.leitosSelected.findIndex(x => x.value === row.leito);
+    this.leitosSelect.push(this.leitosSelected[indexLeito]);
+    this.leitosSelected.splice(indexLeito, 1);
+    let index = this.rows.findIndex(x => x.id === row.id);
+    this.rows[index].leito = '';
+  }
+
+  public onSelected(event, row) {
+    if (event.value.genero === "Indefinido") {
+      this.leitosSelect.forEach(element => {
+        if (element.value.quarto === event.value.quarto) {
+          element.value.genero = row.genero;
+          element.label = element.value.numero + " - " + element.value.tipoDeLeito + " - " + element.value.tipoDeCuidado + " - " + element.value.tipoDeEncaminhamento + " - " + element.value.especialidade + " - " + element.value.tipoDeEstadia + " - " + row.genero
+        }
+      });
+    }
+    if (event.value.age === "Indefinido") {
+      this.leitosSelect.forEach(element => {
+        if (element.value.quarto === event.value.quarto) {
+          element.value.age = row.age;
+        }
+      });
+    }
+    let index = this.rows.findIndex(x => x.id === row.id);
+    this.rows[index].leito = event.value;
+    this.leitosSelected.push(event);
+    let indexLeito = this.leitosSelect.findIndex(x => x.value === event.value);
+    this.leitosSelect.splice(indexLeito, 1);
+  }
+  
   public validar() {}
+
+  openModal(row) {
+    const modalRef = this.modalService.open(FormEscolhaLeitoComponent, { size: 'lg' });
+    modalRef.componentInstance.leitosSelect = this.leitosSelect;
+    modalRef.componentInstance.title = row.nomePaciente;
+    modalRef.componentInstance.id = row.id;
+    modalRef.result.then((result) => {
+      this.onSelected(result, row);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 
   ngOnInit(): void {
   }

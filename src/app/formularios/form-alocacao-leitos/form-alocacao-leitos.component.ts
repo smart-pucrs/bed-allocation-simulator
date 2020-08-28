@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 
 import { LaudoInternacaoService } from '../../services/laudo-internacao.service';
 import { InfraestruturaService } from '../../services/infraestrutura.service';
@@ -35,13 +36,14 @@ export class FormAlocacaoLeitosComponent implements OnInit, OnDestroy{
     private leitoService: LeitoService,
     private prontuarioService: ProntuarioService,
     private infraestruturaService: InfraestruturaService,
-    //private toastr: ToastrService,
+    private toastr: ToastrService,
     private utilitariosService: UtilitariosService,
     public activeModal: NgbActiveModal
 	) {
     this.alocacaoForm = this.formBuilder.group({
       leito: [null, Validators.required]
     });
+	console.log("test");
   }
 
   ngOnInit() {
@@ -54,6 +56,8 @@ export class FormAlocacaoLeitosComponent implements OnInit, OnDestroy{
         })
       });
     });
+	console.log(this.leitos);
+	console.log("TEST");
     this.laudoInternacaoService.getLaudoById(this.id).subscribe(data => {
       this.laudo = data;
       this.prontuarioService.getProntuarioByNumero(this.laudo.prontuario).subscribe(result => {
@@ -76,7 +80,7 @@ export class FormAlocacaoLeitosComponent implements OnInit, OnDestroy{
   save() {
     if (this.alocacaoForm.valid) {
       if (this.leito.genero !== this.laudo.genero && this.leito.genero !== 'Indefinido') {
-        //this.toastr.error('Gênero do leito diferente do gênero do paciente. Alocação não permitida.')
+        this.toastr.error('Gênero do leito diferente do gênero do paciente. Alocação não permitida.')
       } else {
         this.preparaVariaveis().then(() => {
           this.saveDb()

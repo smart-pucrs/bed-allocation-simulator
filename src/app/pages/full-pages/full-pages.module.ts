@@ -8,7 +8,8 @@ import { SituacaoLeitosComponent } from './situacao-leitos/situacao-leitos.compo
 import { AlocacaoLeitosComponent } from './alocacao-leitos/alocacao-leitos.component';
 import { ChartistModule } from 'ng-chartist';
 
-import { CampoControlErroModule } from '../../func/campo-control-erro/campo-control-erro.module';
+import { FormulariosModule } from '../../formularios/formularios.module';
+
 import { ListagemModule } from '../../func/listagem/listagem.module';
 import { PlanoDeAlocacaoModule } from '../../func/plano-de-alocacao/plano-de-alocacao.module';
 import { PacientesInternadosComponent } from './pacientes-internados/pacientes-internados.component';
@@ -23,9 +24,9 @@ import { ConsultasMedicasComponent } from './cadastros/consultas-medicas/consult
   imports: [
     CommonModule,
 	FullPagesRoutingModule,
-        ChartistModule,
+	ChartistModule,
 	ListagemModule,
-	CampoControlErroModule,
+	FormulariosModule,
 	PlanoDeAlocacaoModule,
   ],
   declarations: [

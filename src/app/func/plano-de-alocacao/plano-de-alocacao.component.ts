@@ -6,9 +6,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./plano-de-alocacao.component.scss']
 })
 export class PlanoDeAlocacaoComponent implements OnInit {
-	//%PLACEHOLDER%
-	public add: boolean = true;
   // Input properties
+  @Input() add;
   @Input() colunas: Array<any> = [];
   @Input() titlePage: string;
   @Input() public detalhes: boolean;
