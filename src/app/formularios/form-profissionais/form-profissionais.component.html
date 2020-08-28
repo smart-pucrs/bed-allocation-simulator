@@ -1,0 +1,65 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="card-body">
+    <form class="form-horizontal" [formGroup]="profissionalForm" (ngSubmit)="save()">
+      <!-- Nome -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group" [ngClass]="aplicaCssErro('nome')">
+            <label for="nome" class="control-label">Nome</label>
+            <input type="text" class="form-control" id="nome" formControlName="nome" placeholder="Nome completo">
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" [msgErro]="getMsgError('nome')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- Especialidade -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group" [ngClass]="aplicaCssErro('especialidade')">
+            <label for="especialidade" class="control-label">Especialidade</label>
+            <ng-select class="form-control" id="especialidade" formControlName="especialidade" bindValue="value" [allowClear]="true" [items]="tiposEspecialidades"
+              *ngIf="tiposEspecialidades.length > 0">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('especialidade')" [msgErro]="getMsgError('especialidade')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- CPF -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group" [ngClass]="aplicaCssErro('cpf')">
+            <label for="cpf" class="control-label">CPF</label>
+            <input type="text" class="form-control" id="cpf" formControlName="cpf" placeholder="000.000.000-00" dbMask="999.999.999-99">
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('cpf')" [msgErro]="getMsgError('cpf')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- CRM -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group" [ngClass]="aplicaCssErro('CRM')">
+            <label for="CRM" class="control-label">CRM</label>
+            <input type="text" class="form-control" id="CRM" formControlName="CRM" placeholder="CRM">
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('CRM')" [msgErro]="getMsgError('CRM')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <button type="submit" class="btn-forms btn btn-primary">Salvar</button>
+
+      <!-- <app-form-debug [form]="profissional"></app-form-debug> -->
+    </form>
+  </div><!--/.card-body-->
+</div>
