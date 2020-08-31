@@ -1,0 +1,186 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="card-body">
+    <form class="form-horizontal" [formGroup]="consultaMedicaForm" (ngSubmit)="save()">
+      <!-- Prontuário -->
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group" [ngClass]="aplicaCssErro('numProntuario')">
+            <label for="numProntuario" class="control-label">Prontuário</label>
+            <ng-select class="form-control" id="numProntuario" formControlName="numProntuario" [clearable]="true"
+              bindValue="value"  [items]="prontuarios" *ngIf="prontuarios.length > 0" (change)="onSelected($event, 'prontuario')">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('numProntuario')" [msgErro]="getMsgError('numProntuario')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+        <!-- Nome do Paciente -->
+        <div class="col-sm-8">
+          <div class="form-group" [ngClass]="aplicaCssErro('nomePaciente')">
+            <label for="nomePaciente" class="control-label">Nome do Paciente</label>
+            <ng-select class="form-control" id="nomePaciente" formControlName="nomePaciente" [clearable]="true"
+              bindValue="value"  [items]="pacientes" *ngIf="pacientes.length > 0" (change)="onSelected($event, 'paciente')">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('nomePaciente')" [msgErro]="getMsgError('nomePaciente')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- CRM -->
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group" [ngClass]="aplicaCssErro('crmMedico')">
+            <label for="crmMedico" class="control-label">CRM</label>
+            <ng-select class="form-control" id="crmMedico" formControlName="crmMedico" [clearable]="true" bindValue="value"  [items]="crms"
+              *ngIf="crms.length > 0" (change)="onSelected($event, 'crm')">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('crmMedico')" [msgErro]="getMsgError('crmMedico')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+        <!-- Nome do Médico -->
+        <div class="col-sm-8">
+          <div class="form-group" [ngClass]="aplicaCssErro('nomeMedico')">
+            <label for="nomeMedico" class="control-label">Nome do Médico</label>
+            <ng-select class="form-control" id="nomeMedico" formControlName="nomeMedico" [clearable]="true" bindValue="value"  [items]="medicos"
+              *ngIf="medicos.length > 0" (change)="onSelected($event, 'medico')">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('nomeMedico')" [msgErro]="getMsgError('nomeMedico')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- Especialidade -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group" [ngClass]="aplicaCssErro('especialidade')">
+            <label for="especialidade" class="control-label">Especialidade</label>
+            <input type="text" class="form-control" id="especialidade" formControlName="especialidade">
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- Tipo de Encaminhamento -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group" [ngClass]="aplicaCssErro('tipoDeEncaminhamento')">
+            <label for="tipoDeEncaminhamento" class="control-label">Tipo de Encaminhamento</label>
+            <ng-select class="form-control" id="tipoDeEncaminhamento" formControlName="tipoDeEncaminhamento"
+              [clearable]="true" bindValue="value"  [items]="tiposDeEncaminhamento" *ngIf="tiposDeEncaminhamento.length > 0">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('tipoDeEncaminhamento')" [msgErro]="getMsgError('tipoDeEncaminhamento')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- Diagnóstico -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group" [ngClass]="aplicaCssErro('diagnostico')">
+            <label for="diagnostico" class="control-label">Diagnóstico</label>
+            <input type="text" class="form-control" id="diagnostico" formControlName="diagnostico" placeholder="Diagnóstico">
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('diagnostico')" [msgErro]="getMsgError('diagnostico')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- Tratamento -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group" [ngClass]="aplicaCssErro('tratamento')">
+            <label for="tratamento" class="control-label">Tratamento</label>
+            <input type="text" class="form-control" id="tratamento" formControlName="tratamento" placeholder="Tratamento">
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('tratamento')" [msgErro]="getMsgError('tratamento')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- Exames -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group" [ngClass]="aplicaCssErro('exames')">
+            <label for="exames" class="control-label">Exames</label>
+            <input type="text" class="form-control" id="exames" formControlName="exames" placeholder="Exames">
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('exames')" [msgErro]="getMsgError('exames')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- Medicamentos -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group" [ngClass]="aplicaCssErro('medicamentos')">
+            <label for="medicamentos" class="control-label">Medicamentos</label>
+            <input type="text" class="form-control" id="medicamentos" formControlName="medicamentos" placeholder="Medicamentos">
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('medicamentos')" [msgErro]="getMsgError('medicamentos')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- Precisa internar? -->
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('internar')">
+            <label for="internar" class="control-label">Precisa internar?</label>
+            <ng-select class="form-control" id="internar" formControlName="internar" [clearable]="true" bindValue="value"  [items]="confirmacao"
+              *ngIf="confirmacao.length > 0">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('internar')" [msgErro]="getMsgError('internar')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+        <!-- Tipo de Leito -->
+        <div class="col-sm-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('tipoDeLeito')">
+            <label for="tipoDeLeito" class="control-label">Tipo de Leito</label>
+            <ng-select class="form-control" id="tipoDeLeito" formControlName="tipoDeLeito" [clearable]="true"
+              bindValue="value"  [items]="tiposDeLeito" *ngIf="tiposDeLeito.length > 0">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('tipoDeLeito')" [msgErro]="getMsgError('tipoDeLeito')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- Tipo de Cuidado -->
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('tipoDeCuidado')">
+            <label for="tipoDeCuidado" class="control-label">Tipo de Cuidado</label>
+            <ng-select class="form-control" id="tipoDeCuidado" formControlName="tipoDeCuidado" [clearable]="true"
+              bindValue="value"  [items]="tiposDeCuidado" *ngIf="tiposDeCuidado.length > 0">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('tipoDeCuidado')" [msgErro]="getMsgError('tipoDeCuidado')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+        <!-- Tipo de Estadia -->
+        <div class="col-sm-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('tipoDeEstadia')">
+            <label for="tipoDeEstadia" class="control-label">Tipo de Estadia</label>
+            <ng-select class="form-control" id="tipoDeEstadia" formControlName="tipoDeEstadia" [clearable]="true"
+              bindValue="value"  [items]="tiposDeEstadia" *ngIf="tiposDeEstadia.length > 0">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('tipoDeEstadia')" [msgErro]="getMsgError('tipoDeEstadia')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <button type="submit" class="btn-forms btn btn-primary">Salvar</button>
+    </form>
+  </div>
+  <!--/.card-body-->
+</div>

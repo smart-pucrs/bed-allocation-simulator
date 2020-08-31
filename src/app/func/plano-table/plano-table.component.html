@@ -14,8 +14,7 @@
   <tbody>
     <tr *ngIf="showFilterRow">
       <td *ngFor="let column of columns" style="padding: 0.25rem">
-        <input *ngIf="column.filtering" placeholder="{{column.filtering.placeholder}}" [planoTableFiltering]="column.filtering"
-          class="form-control" style="width: auto;" (tableChanged)="onChangeTable(config)" />
+        <input *ngIf="column.filtering" placeholder="{{column.filtering.placeholder}}" [planoTableFiltering]="column.filtering" class="form-control" style="width: auto;" (tableChanged)="onChangeTable(config)" />
       </td>
     </tr>
     <tr *ngFor="let row of rows">

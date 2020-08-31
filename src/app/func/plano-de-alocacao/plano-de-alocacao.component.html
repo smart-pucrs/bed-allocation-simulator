@@ -31,7 +31,9 @@
             </app-plano-table>
           </div>
           <!-- Paginação -->
-          <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length" [itemsPerPage]="itemsPerPage" [maxSize]="maxSize" [boundaryLinks]="true" [firstText]="'Primeira'" [lastText]="'Última'" [nextText]="'Próxima'" [previousText]="'Anterior'" [rotate]="false" (pageChanged)="onChangeTable(config, $event)" (numPages)="numPages = $event">
+          <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length" [itemsPerPage]="itemsPerPage"
+            [maxSize]="maxSize" [boundaryLinks]="true" [firstText]="'Primeira'" [lastText]="'Última'" [nextText]="'Próxima'"
+            [previousText]="'Anterior'" [rotate]="false" (pageChanged)="onChangeTable(config, $event)" (numPages)="numPages = $event">
           </pagination>
         </div>
         <!-- Informação caso não haja itens -->

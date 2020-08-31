@@ -69,3 +69,15 @@ p {
     border-radius: 0;
     border-width: 1px;
 }
+
+:host /deep/ .ng-dropdown-panel {
+   position: relative;
+}
+
+:host /deep/ .form-control:focus {
+	border-color: #009DA0 !important;
+}
+
+/deep/ .ft-search{
+	color: #75787d !important;
+}

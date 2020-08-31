@@ -1,0 +1,406 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="card-body">
+    <form class="form-horizontal" [formGroup]="prontuarioForm">
+      <!-- Prontuário -->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('prontuario', prontuarioForm)">
+            <label for="prontuario" class="control-label">Prontuário</label>
+            <input type="text" class="form-control" id="prontuario" formControlName="prontuario" placeholder="Prontuário">
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('prontuario', prontuarioForm)" [msgErro]="getMsgError('prontuario', prontuarioForm)">
+            </app-campo-control-erro>
+          </div>
+        </div>
+        <!-- Data de Criação -->
+        <div class="col-md-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('dataCriacao', prontuarioForm)">
+            <label for="dataCriacao" class="control-label">Data de Criação</label>
+            <input type="text" [bsConfig]="bsconfig" class="form-control" id="dataCriacao" name="dataCriacao" formControlName="dataCriacao"
+              #dp="bsDatepicker" bsDatepicker>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('dataCriacao', prontuarioForm)" [msgErro]="getMsgError('dataCriacao', prontuarioForm)">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- Data de Abertura -->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('dataAbertura', prontuarioForm)">
+            <label for="dataAbertura" class="control-label">Data de Abertura</label>
+            <input type="text" [bsConfig]="bsconfig" class="form-control" id="dataAbertura" name="dataAbertura" formControlName="dataAbertura"
+              #dp="bsDatepicker" bsDatepicker>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('dataAbertura', prontuarioForm)" [msgErro]="getMsgError('dataAbertura', prontuarioForm)">
+            </app-campo-control-erro>
+          </div>
+        </div>
+        <!-- Prontuário anterior -->
+        <div class="col-md-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('prontuarioAnterior', prontuarioForm)">
+            <label for="prontuarioAnterior" class="control-label">Prontuário anterior</label>
+            <input type="text" class="form-control" id="prontuarioAnterior" formControlName="prontuarioAnterior" placeholder="Prontuário anterior">
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('prontuarioAnterior', prontuarioForm)" [msgErro]="getMsgError('prontuarioAnterior', prontuarioForm)">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+    </form>
+    <!-- Tabs -->
+    <ngb-tabset [justify]="currentJustify" #tab="ngbTabset" (tabChange)="beforeChange($event)">
+      <ngb-tab id="infPTab">
+        <ng-template ngbTabTitle>
+          <span class="round-tabs one">
+            <i class="ft-user"></i>
+          </span>
+        </ng-template>
+        <!-- Informações Pessoais -->
+        <ng-template ngbTabContent>
+          <form class="form-horizontal" [formGroup]="infPessoalForm">
+            <!-- Nome -->
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group" [ngClass]="aplicaCssErro('nome', infPessoalForm)">
+                  <label for="nome" class="control-label">Nome</label>
+                  <input type="text" class="form-control" id="nome" formControlName="nome" placeholder="Nome completo">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome', infPessoalForm)" [msgErro]="getMsgError('nome', infPessoalForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+              <!-- Falecido? -->
+              <div class="col-md-4">
+                <div class="form-group" [ngClass]="aplicaCssErro('falecido', infPessoalForm)">
+                  <label for="falecido" class="control-label">Falecido?</label>
+                  <div class="ui-switch">
+                    <ui-switch color="#009DA0" (change)="onChange()" id="falecido" formControlName="falecido"></ui-switch>
+                    <p> {{ falecido? 'Sim' : 'Não' }}</p>
+                  </div>
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('falecido', infPessoalForm)" [msgErro]="getMsgError('falecido', infPessoalForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <!-- Data de Nascimento -->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [ngClass]="aplicaCssErro('nascimento', infPessoalForm)">
+                  <label for="nascimento" class="control-label">Data de Nascimento</label>
+                  <input type="text" [bsConfig]="bsconfig" class="form-control" id="nascimento" name="nascimento" formControlName="nascimento"
+                    #dp="bsDatepicker" bsDatepicker>
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('nascimento', infPessoalForm)" [msgErro]="getMsgError('nascimento', infPessoalForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+              <!-- Gênero -->
+              <div class="col-md-6">
+                <div class="form-group" [ngClass]="aplicaCssErro('genero', infPessoalForm)">
+                  <label for="genero" class="control-label">Gênero</label>
+                  <ng-select class="form-control" id="genero" formControlName="genero" [clearable]="true" bindValue="value"  [items]="generos" *ngIf="generos.length > 0">
+                  </ng-select>
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('genero', infPessoalForm)" [msgErro]="getMsgError('genero', infPessoalForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <!-- Estado Civil -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group" [ngClass]="aplicaCssErro('estadoCivil', infPessoalForm)">
+                  <label for="estadoCivil" class="control-label">Estado Civil</label>
+                  <ng-select class="form-control" id="estadoCivil" formControlName="estadoCivil" [clearable]="true" bindValue="value"  [items]="estadosCivis"
+                    *ngIf="estadosCivis.length > 0">
+                  </ng-select>
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('estadoCivil', infPessoalForm)" [msgErro]="getMsgError('estadoCivil', infPessoalForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <!-- Nome da Mãe -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group" [ngClass]="aplicaCssErro('nomeDaMae', infPessoalForm)">
+                  <label for="nomeDaMae" class="control-label">Nome da Mãe</label>
+                  <input type="text" class="form-control" id="nomeDaMae" formControlName="nomeDaMae" placeholder="Nome da Mãe">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('nomeDaMae', infPessoalForm)" [msgErro]="getMsgError('nomeDaMae', infPessoalForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <!-- Nome do Pai -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group" [ngClass]="aplicaCssErro('nomeDoPai', infPessoalForm)">
+                  <label for="nomeDoPai" class="control-label">Nome do Pai</label>
+                  <input type="text" class="form-control" id="nomeDoPai" formControlName="nomeDoPai" placeholder="Nome do Pai">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('nomeDoPai', infPessoalForm)" [msgErro]="getMsgError('nomeDoPai', infPessoalForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <!-- Raça/Cor -->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [ngClass]="aplicaCssErro('raca', infPessoalForm)">
+                  <label for="raca" class="control-label">Raça/Cor</label>
+                  <ng-select class="form-control" id="raca" formControlName="raca" [clearable]="true" bindValue="value"  [items]="racas" *ngIf="racas.length > 0">
+                  </ng-select>
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('raca', infPessoalForm)" [msgErro]="getMsgError('raca', infPessoalForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+              <!-- Religião -->
+              <div class="col-md-6">
+                <div class="form-group" [ngClass]="aplicaCssErro('religiao', infPessoalForm)">
+                  <label for="religiao" class="control-label">Religião</label>
+                  <ng-select class="form-control" id="religiao" formControlName="religiao" [clearable]="true" bindValue="value"  [items]="religioes" *ngIf="religioes.length > 0">
+                  </ng-select>
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('religiao', infPessoalForm)" [msgErro]="getMsgError('religiao', infPessoalForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <!-- Naturalidade -->
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group" [ngClass]="aplicaCssErro('naturalidade', infPessoalForm)">
+                  <label for="naturalidade" class="control-label">Naturalidade</label>
+                  <input type="text" class="form-control" id="naturalidade" formControlName="naturalidade" placeholder="Cidade - UF">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('naturalidade', infPessoalForm)" [msgErro]="getMsgError('naturalidade', infPessoalForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+              <!-- Nacionalidade -->
+              <div class="col-sm-6">
+                <div class="form-group" [ngClass]="aplicaCssErro('nacionalidade', infPessoalForm)">
+                  <label for="nacionalidade" class="control-label">Nacionalidade</label>
+                  <input type="text" class="form-control" id="nacionalidade" formControlName="nacionalidade" placeholder="Nacionalidade">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('nacionalidade', infPessoalForm)" [msgErro]="getMsgError('nacionalidade', infPessoalForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <!-- Escolaridade -->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [ngClass]="aplicaCssErro('escolaridade', infPessoalForm)">
+                  <label for="escolaridade" class="control-label">Escolaridade</label>
+                  <ng-select class="form-control" id="escolaridade" formControlName="escolaridade" [clearable]="true" bindValue="value"  [items]="escolaridades"
+                    *ngIf="escolaridades.length > 0">
+                  </ng-select>
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('escolaridade', infPessoalForm)" [msgErro]="getMsgError('escolaridade', infPessoalForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+              <!-- E-mail -->
+              <div class="col-sm-6">
+                <div class="form-group" [ngClass]="aplicaCssErro('email', infPessoalForm)">
+                  <label for="email" class="control-label">E-mail</label>
+                  <input type="email" class="form-control" id="email" formControlName="email" placeholder="E-mail">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('email', infPessoalForm)" [msgErro]="getMsgError('email', infPessoalForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <!-- Telefone -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group" [ngClass]="aplicaCssErro('telefone', infPessoalForm)">
+                  <label for="telefone" class="control-label">Telefone</label>
+                  <input type="text" class="form-control" id="telefone" formControlName="telefone" placeholder="(XX) 00000-0000" dbMask="(99) 99999-9999">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('telefone', infPessoalForm)" [msgErro]="getMsgError('telefone', infPessoalForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+            </div>
+            <button class="btn-forms btn btn-primary" (click)="tab.select('docsTab')">Próximo</button>
+          </form>
+        </ng-template>
+      </ngb-tab>
+      <!-- Documentos -->
+      <ngb-tab id="docsTab">
+        <ng-template ngbTabTitle>
+          <span class="round-tabs one">
+            <i class="ft-file-text"></i>
+          </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <form class="form-horizontal" [formGroup]="docsForm">
+            <!-- Cartão do Sus -->
+            <div class="row">
+              <div class="col-sm-8">
+                <div class="form-group" [ngClass]="aplicaCssErro('cartaoSus', docsForm)">
+                  <label for="cartaoSus" class="control-label">Cartão do Sus</label>
+                  <input type="text" class="form-control" id="cartaoSus" formControlName="cartaoSus">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('cartaoSus', docsForm)" [msgErro]="getMsgError('cartaoSus', docsForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+              <!-- Data de Emissão -->
+              <div class="col-sm-4">
+                <div class="form-group" [ngClass]="aplicaCssErro('emissaoRG', docsForm)">
+                  <label for="emissaoRG" class="control-label">Data de Emissão do RG</label>
+                  <input type="text" class="form-control" [bsConfig]="bsconfig" id="emissaoRG" name="emissaoRG" formControlName="emissaoRG"
+                    #dp="bsDatepicker" bsDatepicker>
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('emissaoRG', docsForm)" [msgErro]="getMsgError('emissaoRG', docsForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <!-- RG -->
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group" [ngClass]="aplicaCssErro('rg', docsForm)">
+                  <label for="rg" class="control-label">RG</label>
+                  <input type="text" class="form-control" id="rg" formControlName="rg">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('rg', docsForm)" [msgErro]="getMsgError('rg', docsForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+              <!-- Estado do RG -->
+              <div class="col-sm-4">
+                <div class="form-group" [ngClass]="aplicaCssErro('ufRg', docsForm)">
+                  <label for="ufRg" class="control-label">Estado do RG</label>
+                  <input type="text" class="form-control" id="ufRg" formControlName="ufRg">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('ufRg', docsForm)" [msgErro]="getMsgError('ufRg', docsForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+              <!-- Órgão Emissor -->
+              <div class="col-sm-4">
+                <div class="form-group" [ngClass]="aplicaCssErro('orgaoEmissorRg', docsForm)">
+                  <label for="orgaoEmissorRg" class="control-label">Órgão Emissor</label>
+                  <input type="text" class="form-control" id="orgaoEmissorRg" formControlName="orgaoEmissorRg">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('orgaoEmissorRg', docsForm)" [msgErro]="getMsgError('orgaoEmissorRg', docsForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+            </div>
+
+            <!-- CPF -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group" [ngClass]="aplicaCssErro('cpf', docsForm)">
+                  <label for="cpf" class="control-label">CPF</label>
+                  <input type="text" class="form-control" id="cpf" formControlName="cpf" placeholder="000.000.000-00" dbMask="999.999.999-99">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('cpf', docsForm)" [msgErro]="getMsgError('cpf', docsForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <button class="btn-forms btn btn-primary" (click)="tab.select('enderecoTab')">Próximo</button>
+            <button class="btn-forms btn btn-outline-primary" (click)="tab.select('infPTab')">Anterior</button>
+          </form>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="enderecoTab">
+        <ng-template ngbTabTitle>
+          <span class="round-tabs one">
+            <i class="ft-map-pin"></i>
+          </span>
+        </ng-template>
+        <!-- Endereço -->
+        <ng-template ngbTabContent>
+          <form class="form-horizontal" [formGroup]="enderecoForm">
+
+            <!-- CEP -->
+            <div class="row">
+              <div class="col-sm-5">
+                <div class="form-group" [ngClass]="aplicaCssErro('cep', enderecoForm)">
+                  <label for="cep" class="control-label">CEP</label>
+                  <div class="position-relative has-icon-right">
+                    <input type="text" (keyup)="getAddress($event)" class="form-control" id="cep" formControlName="cep" placeholder="00000-000"
+                      dbMask="99999-999">
+                    <div class="form-control-position">
+                      <i class="ft-search"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Cidade -->
+              <div class="col-sm-5">
+                <div class="form-group" [ngClass]="aplicaCssErro('cidade', enderecoForm)">
+                  <label for="cidade" class="control-label">Cidade</label>
+                  <input type="text" class="form-control" id="cidade" formControlName="cidade">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('cidade', enderecoForm)" [msgErro]="getMsgError('cidade', enderecoForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+              <!-- Estado -->
+              <div class="col-sm-2">
+                <div class="form-group" [ngClass]="aplicaCssErro('uf', enderecoForm)">
+                  <label for="uf" class="control-label">Estado</label>
+                  <input type="text" class="form-control" id="uf" formControlName="uf">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('uf', enderecoForm)" [msgErro]="getMsgError('uf', enderecoForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <!-- Logradouro -->
+            <div class="row">
+              <div class="col-sm-10">
+                <div class="form-group" [ngClass]="aplicaCssErro('logradouro', enderecoForm)">
+                  <label for="logradouro" class="control-label">Logradouro</label>
+                  <input type="text" class="form-control" id="logradouro" formControlName="logradouro">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('logradouro', enderecoForm)" [msgErro]="getMsgError('logradouro', enderecoForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+              <!-- Número -->
+              <div class="col-sm-2">
+                <div class="form-group" [ngClass]="aplicaCssErro('numero', enderecoForm)">
+                  <label for="numero" class="control-label">Número</label>
+                  <input type="text" class="form-control" id="numero" formControlName="numero">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('numero', enderecoForm)" [msgErro]="getMsgError('numero', enderecoForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <!-- Bairro -->
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group" [ngClass]="aplicaCssErro('bairro', enderecoForm)">
+                  <label for="bairro" class="control-label">Bairro</label>
+                  <input type="text" class="form-control" id="bairro" formControlName="bairro">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('bairro', enderecoForm)" [msgErro]="getMsgError('bairro', enderecoForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+              <!-- Complemento -->
+              <div class="col-sm-6">
+                <div class="form-group" [ngClass]="aplicaCssErro('complemento', enderecoForm)">
+                  <label for="complemento" class="control-label">Complemento</label>
+                  <input type="text" class="form-control" id="complemento" formControlName="complemento">
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('complemento', enderecoForm)" [msgErro]="getMsgError('complemento', enderecoForm)">
+                  </app-campo-control-erro>
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+
+            <button class="btn-forms btn btn-primary" (click)="save()">Salvar</button>
+            <button class="btn-forms btn btn-outline-primary" (click)="tab.select('docsTab')">Anterior</button>
+          </form>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+  <!--/.card-body-->
+</div>

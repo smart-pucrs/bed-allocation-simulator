@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { UsuarioService } from '../../../../services/usuario.service';
+
+import { FormUsuariosComponent } from '../../../../formularios/form-usuarios/form-usuarios.component';
+import { AppAlertComponent } from '../../../../shared/app-alert/app-alert.component';
 
 @Component({
   selector: 'app-usuarios',
@@ -23,13 +28,63 @@ export class UsuariosComponent implements OnInit {
     { title: 'Ativo', name: 'ativo', sort: '' }
   ];
 
-  constructor(private usuarioService: UsuarioService) {
+  constructor(
+	private modalService: NgbModal,
+	private toastr: ToastrService, 
+	private usuarioService: UsuarioService, 
+    ) {
     this.usuarioService.getUsuarios().subscribe(usuarios => {
       this.data = usuarios;
     })
   }
 
   ngOnInit(): void {
+  }
+
+  openModal() {
+    const modalRef = this.modalService.open(FormUsuariosComponent,{ size: 'lg' });
+    modalRef.componentInstance.title = this.title;
+    modalRef.componentInstance.id = this.currentId;
+    modalRef.result.then((result) => {
+      if (result === 'dados editados'){
+        this.toastr.success('Dados editados com sucesso!');
+      } else {
+        this.toastr.success('Dados inseridos com sucesso!');
+      }
+    }).catch((error) => {
+      this.currentId = null;
+    });
+  }
+
+  openAlert() {
+    const modalRef = this.modalService.open(AppAlertComponent,{ size: 'sm' });
+    modalRef.componentInstance.mensagem = this.mensagem;
+    modalRef.result.then((result) => {
+      this.usuarioService.delete(this.idToDelete);
+      const mensagem = 'Registro deletado com sucesso!';
+      this.toastr.success(mensagem);
+      this.idToDelete = null;
+    }).catch((error) => {
+      this.idToDelete = null;
+    });
+  }
+
+  onDelete(evento) {
+    this.idToDelete = evento.id;
+    this.mensagem = 'Deseja realmente excluir o registro?';
+    this.openAlert();
+  }
+
+  onAdd(evento) {
+    this.currentId = null;
+    this.title = 'Adicionar Usuário';
+    this.openModal();
+  }
+
+  onEdit(evento) {
+    this.currentId = evento.id;
+    this.title = 'Editar Usuário';
+    this.openModal();
   }
 
 }

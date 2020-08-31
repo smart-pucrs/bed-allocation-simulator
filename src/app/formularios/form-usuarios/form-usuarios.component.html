@@ -1,0 +1,59 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="card-body">
+    <form class="form-horizontal" [formGroup]="usuarioForm" (ngSubmit)="save()">
+      <!-- Nome -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group" [ngClass]="aplicaCssErro('nome')">
+            <label for="nome" class="control-label">Nome</label>
+            <input type="text" class="form-control" id="nome" formControlName="nome" placeholder="Nome completo">
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" [msgErro]="getMsgError('nome')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- E-mail -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group" [ngClass]="aplicaCssErro('email')">
+            <label for="email" class="control-label">E-mail</label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="E-mail">
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('email')" [msgErro]="getMsgError('email')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- Cargo -->
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('cargo')">
+            <label for="cargo" class="control-label">Cargo</label>
+            <input type="text" class="form-control" id="cargo" formControlName="cargo" placeholder="Cargo">
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('cargo')" [msgErro]="getMsgError('cargo')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+        <!-- Perfil -->
+        <div class="col-sm-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('perfil')">
+            <label for="perfil" class="control-label">Perfil</label>
+            <ng-select class="form-control" id="perfil" formControlName="perfil" [clearable]="true" bindValue="value" [items]="tiposPerfil" *ngIf="tiposPerfil.length > 0">
+            </ng-select>
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('perfil')" [msgErro]="getMsgError('perfil')">
+            </app-campo-control-erro>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <button type="submit" class="btn-forms btn btn-primary">Salvar</button>
+    </form>
+  </div><!--/.card-body-->
+</div>

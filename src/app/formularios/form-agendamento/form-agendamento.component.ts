@@ -2,12 +2,11 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-//import { BsLocaleService, ptBrLocale } from 'ngx-bootstrap/locale';
 import { defineLocale, listLocales } from 'ngx-bootstrap/chronos';
 import { ToastrService } from 'ngx-toastr';
 //import { CampoControlErroComponent } from '../../func/campo-control-erro/campo-control-erro.component';
 
-import { UtilitariosService } from '../../formularios/utilitarios.service';
+import { UtilitariosService } from '../utilitarios.service';
 import { PacienteService } from '../../services/paciente.service';
 import { ProntuarioService } from '../../services/prontuario.service';
 import { AgendamentoService } from '../../services/agendamento.service';
@@ -59,16 +58,12 @@ export class FormAgendamentoComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private agendamentoService: AgendamentoService,
     private utilitariosService: UtilitariosService,
-    //private localeService: BsLocaleService,
     private pacienteService: PacienteService,
     private prontuarioService: ProntuarioService,
     private profissionalService: ProfissionalService,
-    //private toastr: ToastrService,
+    private toastr: ToastrService,
     public activeModal: NgbActiveModal,
 	) {
-    // conf BsDatepicker
-    //defineLocale('pt-br', ptBrLocale); 
-    //this.localeService.use('pt-br');
     // popular selects
     this.pacienteService.getPacientesNaoFalecidos().subscribe(data => {
       this.listaProntuarios = data;
@@ -137,7 +132,7 @@ export class FormAgendamentoComponent implements OnInit, OnDestroy {
           controls.dataProcedimento.disable();
           controls.tipo.disable();
           controls.descricao.disable();
-          //this.toastr.warning('Agendamento cancelado não é possível editar.')
+          this.toastr.warning('Agendamento cancelado não é possível editar.')
         }
       })
     }
