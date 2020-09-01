@@ -159,6 +159,7 @@ export class PlanoDeAlocacaoComponent implements OnInit {
   }
 
   public onMostrarDetalhe(row: any) {
+	this.onChangeTable(this.config, true)
     this.mostraDetalhe.emit(row);
   }
 

@@ -1,7 +1,113 @@
+/**************************************************************************************
+*	ng-select
+**************************************************************************************/
 /deep/ .ng-dropdown-panel-items{
     border: 1px solid #ccc !important;
 }
 
-/deep/ .form-control {
+/deep/ .ng-select {
 	border: 0;
+}
+
+/deep/ .ng-dropdown-panel {
+	border: 0;
+}
+
+/deep/ body {
+	font-family: "Rubik", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+
+/*************************************************************************************
+*	Button
+**************************************************************************************/
+/deep/ .btn-forms {
+    float: right !important;
+    margin-left: 0.5rem;
+}
+
+/deep/ .btn-primary {
+	background-color: #009DA0;
+    border-color: #009DA0;
+}
+
+/deep/ .btn-primary:hover{
+	background-color: #006b6d;
+    border-color: #005e60;
+}
+
+/deep/ .btn-primary:focus{
+	background-color: #006b6d;
+    border-color: #005e60;
+}
+
+/deep/ .btn-primary:not(:disabled):not(.disabled):active{
+	background-color: #006b6d;
+    border-color: #005e60;
+}
+
+/deep/ .btn-outline-primary {
+    border: 1px solid;
+    border-color: #009DA0;
+    background-color: transparent;
+    color: #009DA0;
+}
+
+/deep/ .btn-outline-primary:focus {
+    background-color: transparent !important;
+    color: #009DA0 !important;
+}
+
+/deep/ .btn-outline-primary:hover {
+    background-color: #008e91 !important;
+    color: #FFF !important;
+}
+
+
+/**************************************************************************************
+*	Tab
+**************************************************************************************/
+/deep/ .nav-tabs .nav-link.active{
+	border-bottom-color: white;
+	background-color: transparent;
+}
+
+/deep/ .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: #495057;
+    background-color: #f5f7fa;
+    border-color: #dee2e6 #dee2e6 #f5f7fa;
+}
+
+/deep/ .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+    border-color: #e9ecef #e9ecef #dee2e6;
+}
+
+/deep/ .nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+
+/**************************************************************************************
+*	Nav icon
+**************************************************************************************/
+/deep/ .nav-link{
+    color: #009DA0;
+}
+
+/deep/ .nav-link:hover{
+    color: #008487;
+}
+
+/deep/ .info{
+    color: #1CBCD8 !important;
+}
+
+
+/**************************************************************************************
+*	Input
+**************************************************************************************/
+/deep/ .form-control:focus {
+    border-color: #009DA0 !important;
 }
