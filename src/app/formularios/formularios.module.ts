@@ -5,7 +5,7 @@ import { UiSwitchModule } from 'ngx-ui-switch';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { SharedModule } from 'app/shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { CampoControlErroModule } from '../func/campo-control-erro/campo-control-erro.module';
 
 import { FormAgendamentoComponent } from './form-agendamento/form-agendamento.component';
@@ -56,7 +56,9 @@ import { FormConsultaMedicaComponent } from './form-consulta-medica/form-consult
 	FormPacientesInternadosComponent,
 	FormSituacaoLeitosComponent,
 	FormInfraestruturaComponent,
-	FormEscolhaLeitoComponent
+	FormEscolhaLeitoComponent,
+	FormProntuariosComponent,
+	FormProfissionaisComponent,
   ]
 })
 export class FormulariosModule { }

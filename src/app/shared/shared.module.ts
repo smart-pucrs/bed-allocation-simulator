@@ -31,8 +31,7 @@ import { TopMenuLinkDirective } from './directives/topmenu-link.directive';
 import { TopMenuDropdownDirective } from './directives/topmenu-dropdown.directive';
 import { TopMenuAnchorToggleDirective } from './directives/topmenu-anchor-toggle.directive';
 import { DetalhesComponent } from './detalhes/detalhes.component';
-//import { ListagemComponent } from './listagem/listagem.component';
-
+import { DbMaskDirective } from './db-mask.directive';
 
 @NgModule({
     exports: [
@@ -48,6 +47,7 @@ import { DetalhesComponent } from './detalhes/detalhes.component';
         TopMenuDirective,
         NgbModule,
         TranslateModule,
+        DbMaskDirective,
     ],
     imports: [
         RouterModule,
@@ -79,7 +79,7 @@ import { DetalhesComponent } from './detalhes/detalhes.component';
         TopMenuAnchorToggleDirective,
         TopMenuDirective,
         DetalhesComponent,
-        //ListagemComponent,
+        DbMaskDirective,
     ]
 })
 export class SharedModule { }

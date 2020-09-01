@@ -12,8 +12,7 @@
         <div class="col-md-6">
           <div class="form-group" [ngClass]="aplicaCssErro('dataProcedimento')">
             <label for="dataProcedimento" class="control-label">Data do Procedimento</label>
-            <input type="text" [bsConfig]="bsconfig" class="form-control" id="dataProcedimento" name="dataProcedimento" formControlName="dataProcedimento"
-              #dp="bsDatepicker" bsDatepicker>
+            <input type="text" [bsConfig]="bsconfig" class="form-control" id="dataProcedimento" name="dataProcedimento" formControlName="dataProcedimento" bsDatepicker>
             <app-campo-control-erro [mostrarErro]="verificaValidTouched('dataProcedimento')" [msgErro]="getMsgError('dataProcedimento')">
             </app-campo-control-erro>
           </div>

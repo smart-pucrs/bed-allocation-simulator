@@ -10,6 +10,7 @@ import { ChartistModule } from 'ng-chartist';
 
 import { FormulariosModule } from '../../formularios/formularios.module';
 
+import { SharedModule } from '../../shared/shared.module';
 import { ListagemModule } from '../../func/listagem/listagem.module';
 import { PlanoDeAlocacaoModule } from '../../func/plano-de-alocacao/plano-de-alocacao.module';
 import { PacientesInternadosComponent } from './pacientes-internados/pacientes-internados.component';
@@ -28,6 +29,7 @@ import { ConsultasMedicasComponent } from './cadastros/consultas-medicas/consult
 	ListagemModule,
 	FormulariosModule,
 	PlanoDeAlocacaoModule,
+	SharedModule,
   ],
   declarations: [
 	DashboardComponent,

@@ -21,8 +21,7 @@
         <div class="col-md-6">
           <div class="form-group" [ngClass]="aplicaCssErro('dataCriacao', prontuarioForm)">
             <label for="dataCriacao" class="control-label">Data de Criação</label>
-            <input type="text" [bsConfig]="bsconfig" class="form-control" id="dataCriacao" name="dataCriacao" formControlName="dataCriacao"
-              #dp="bsDatepicker" bsDatepicker>
+            <input type="text" [bsConfig]="bsconfig" class="form-control" id="dataCriacao" name="dataCriacao" formControlName="dataCriacao" bsDatepicker>
             <app-campo-control-erro [mostrarErro]="verificaValidTouched('dataCriacao', prontuarioForm)" [msgErro]="getMsgError('dataCriacao', prontuarioForm)">
             </app-campo-control-erro>
           </div>
@@ -34,8 +33,7 @@
         <div class="col-md-6">
           <div class="form-group" [ngClass]="aplicaCssErro('dataAbertura', prontuarioForm)">
             <label for="dataAbertura" class="control-label">Data de Abertura</label>
-            <input type="text" [bsConfig]="bsconfig" class="form-control" id="dataAbertura" name="dataAbertura" formControlName="dataAbertura"
-              #dp="bsDatepicker" bsDatepicker>
+            <input type="text" [bsConfig]="bsconfig" class="form-control" id="dataAbertura" name="dataAbertura" formControlName="dataAbertura" bsDatepicker>
             <app-campo-control-erro [mostrarErro]="verificaValidTouched('dataAbertura', prontuarioForm)" [msgErro]="getMsgError('dataAbertura', prontuarioForm)">
             </app-campo-control-erro>
           </div>
@@ -92,8 +90,7 @@
               <div class="col-md-6">
                 <div class="form-group" [ngClass]="aplicaCssErro('nascimento', infPessoalForm)">
                   <label for="nascimento" class="control-label">Data de Nascimento</label>
-                  <input type="text" [bsConfig]="bsconfig" class="form-control" id="nascimento" name="nascimento" formControlName="nascimento"
-                    #dp="bsDatepicker" bsDatepicker>
+                  <input type="text" [bsConfig]="bsconfig" class="form-control" id="nascimento" name="nascimento" formControlName="nascimento" bsDatepicker>
                   <app-campo-control-erro [mostrarErro]="verificaValidTouched('nascimento', infPessoalForm)" [msgErro]="getMsgError('nascimento', infPessoalForm)">
                   </app-campo-control-erro>
                 </div>
@@ -253,8 +250,7 @@
               <div class="col-sm-4">
                 <div class="form-group" [ngClass]="aplicaCssErro('emissaoRG', docsForm)">
                   <label for="emissaoRG" class="control-label">Data de Emissão do RG</label>
-                  <input type="text" class="form-control" [bsConfig]="bsconfig" id="emissaoRG" name="emissaoRG" formControlName="emissaoRG"
-                    #dp="bsDatepicker" bsDatepicker>
+                  <input type="text" class="form-control" [bsConfig]="bsconfig" id="emissaoRG" name="emissaoRG" formControlName="emissaoRG" bsDatepicker>
                   <app-campo-control-erro [mostrarErro]="verificaValidTouched('emissaoRG', docsForm)" [msgErro]="getMsgError('emissaoRG', docsForm)">
                   </app-campo-control-erro>
                 </div>
