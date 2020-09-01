@@ -24,7 +24,7 @@
         <div class="col-sm-12">
           <div class="form-group" [ngClass]="aplicaCssErro('especialidade')">
             <label for="especialidade" class="control-label">Especialidade</label>
-            <ng-select class="form-control" id="especialidade" formControlName="especialidade" bindValue="value" [clearable]="true" [items]="tiposEspecialidades"
+            <ng-select appendTo="body" class="form-control" id="especialidade" formControlName="especialidade" bindValue="value" [clearable]="true" [items]="tiposEspecialidades"
               *ngIf="tiposEspecialidades.length > 0">
             </ng-select>
             <app-campo-control-erro [mostrarErro]="verificaValidTouched('especialidade')" [msgErro]="getMsgError('especialidade')">

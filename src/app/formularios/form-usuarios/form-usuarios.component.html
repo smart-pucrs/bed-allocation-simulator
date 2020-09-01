@@ -45,7 +45,7 @@
         <div class="col-sm-6">
           <div class="form-group" [ngClass]="aplicaCssErro('perfil')">
             <label for="perfil" class="control-label">Perfil</label>
-            <ng-select class="form-control" id="perfil" formControlName="perfil" [clearable]="true" bindValue="value" [items]="tiposPerfil" *ngIf="tiposPerfil.length > 0">
+            <ng-select appendTo="body" class="form-control" id="perfil" formControlName="perfil" [clearable]="true" bindValue="value" [items]="tiposPerfil" *ngIf="tiposPerfil.length > 0">
             </ng-select>
             <app-campo-control-erro [mostrarErro]="verificaValidTouched('perfil')" [msgErro]="getMsgError('perfil')">
             </app-campo-control-erro>

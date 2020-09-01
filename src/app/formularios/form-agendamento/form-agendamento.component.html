@@ -22,7 +22,7 @@
         <div class="col-sm-6">
           <div class="form-group" [ngClass]="aplicaCssErro('tipo')">
             <label for="tipo" class="control-label">Tipo de Procedimento</label>
-            <ng-select class="form-control" id="tipo" formControlName="tipo" [clearable]="true" bindValue="value" [items]="tipos" *ngIf="tipos.length > 0">
+            <ng-select appendTo="body" class="form-control" id="tipo" formControlName="tipo" [clearable]="true" bindValue="value" [items]="tipos" *ngIf="tipos.length > 0">
             </ng-select>
             <app-campo-control-erro [mostrarErro]="verificaValidTouched('tipo')" [msgErro]="getMsgError('tipo')">
             </app-campo-control-erro>
@@ -35,7 +35,7 @@
         <div class="col-md-4">
           <div class="form-group" [ngClass]="aplicaCssErro('numProntuario')">
             <label for="numProntuario" class="control-label">Prontuário</label>
-            <ng-select class="form-control" id="numProntuario" formControlName="numProntuario" [clearable]="true" bindValue="value" [items]="prontuarios" *ngIf="prontuarios.length > 0" (change)="onSelected($event, 'prontuario')">
+            <ng-select appendTo="body" class="form-control" id="numProntuario" formControlName="numProntuario" [clearable]="true" bindValue="value" [items]="prontuarios" *ngIf="prontuarios.length > 0" (change)="onSelected($event, 'prontuario')">
             </ng-select>
             <app-campo-control-erro [mostrarErro]="verificaValidTouched('numProntuario')" [msgErro]="getMsgError('numProntuario')">
             </app-campo-control-erro>
@@ -45,7 +45,7 @@
         <div class="col-sm-8">
           <div class="form-group" [ngClass]="aplicaCssErro('nomePaciente')">
             <label for="nomePaciente" class="control-label">Nome do Paciente</label>
-            <ng-select class="form-control" id="nomePaciente" formControlName="nomePaciente" [clearable]="true" bindValue="value" [items]="pacientes" *ngIf="pacientes.length > 0" (change)="onSelected($event, 'paciente')">
+            <ng-select appendTo="body" class="form-control" id="nomePaciente" formControlName="nomePaciente" [clearable]="true" bindValue="value" [items]="pacientes" *ngIf="pacientes.length > 0" (change)="onSelected($event, 'paciente')">
             </ng-select>
             <app-campo-control-erro [mostrarErro]="verificaValidTouched('nomePaciente')" [msgErro]="getMsgError('nomePaciente')">
             </app-campo-control-erro>
@@ -58,7 +58,7 @@
         <div class="col-sm-4">
           <div class="form-group" [ngClass]="aplicaCssErro('crmMedico')">
             <label for="crmMedico" class="control-label">CRM</label>
-            <ng-select class="form-control" id="crmMedico" formControlName="crmMedico" [clearable]="true" bindValue="value" [items]="crms" *ngIf="crms.length > 0" (change)="onSelected($event, 'crm')">
+            <ng-select appendTo="body" class="form-control" id="crmMedico" formControlName="crmMedico" [clearable]="true" bindValue="value" [items]="crms" *ngIf="crms.length > 0" (change)="onSelected($event, 'crm')">
             </ng-select>
             <app-campo-control-erro [mostrarErro]="verificaValidTouched('crmMedico')" [msgErro]="getMsgError('crmMedico')">
             </app-campo-control-erro>
@@ -68,7 +68,7 @@
         <div class="col-sm-8">
           <div class="form-group" [ngClass]="aplicaCssErro('nomeMedico')">
             <label for="nomeMedico" class="control-label">Nome do Médico</label>
-            <ng-select class="form-control" id="nomeMedico" formControlName="nomeMedico" [clearable]="true" bindValue="value" [items]="medicos" *ngIf="medicos.length > 0" (change)="onSelected($event, 'medico')">
+            <ng-select appendTo="body" class="form-control" id="nomeMedico" formControlName="nomeMedico" [clearable]="true" bindValue="value" [items]="medicos" *ngIf="medicos.length > 0" (change)="onSelected($event, 'medico')">
             </ng-select>
             <app-campo-control-erro [mostrarErro]="verificaValidTouched('nomeMedico')" [msgErro]="getMsgError('nomeMedico')">
             </app-campo-control-erro>

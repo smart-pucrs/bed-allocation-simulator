@@ -43,7 +43,6 @@ export class FormAlocacaoLeitosComponent implements OnInit, OnDestroy{
     this.alocacaoForm = this.formBuilder.group({
       leito: [null, Validators.required]
     });
-	console.log("test");
   }
 
   ngOnInit() {
@@ -56,8 +55,6 @@ export class FormAlocacaoLeitosComponent implements OnInit, OnDestroy{
         })
       });
     });
-	console.log(this.leitos);
-	console.log("TEST");
     this.laudoInternacaoService.getLaudoById(this.id).subscribe(data => {
       this.laudo = data;
       this.prontuarioService.getProntuarioByNumero(this.laudo.prontuario).subscribe(result => {

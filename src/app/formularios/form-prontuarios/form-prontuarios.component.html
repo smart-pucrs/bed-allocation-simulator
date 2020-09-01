@@ -102,7 +102,7 @@
               <div class="col-md-6">
                 <div class="form-group" [ngClass]="aplicaCssErro('genero', infPessoalForm)">
                   <label for="genero" class="control-label">Gênero</label>
-                  <ng-select class="form-control" id="genero" formControlName="genero" [clearable]="true" bindValue="value"  [items]="generos" *ngIf="generos.length > 0">
+                  <ng-select appendTo="body" class="form-control" id="genero" formControlName="genero" [clearable]="true" bindValue="value"  [items]="generos" *ngIf="generos.length > 0">
                   </ng-select>
                   <app-campo-control-erro [mostrarErro]="verificaValidTouched('genero', infPessoalForm)" [msgErro]="getMsgError('genero', infPessoalForm)">
                   </app-campo-control-erro>
@@ -115,7 +115,7 @@
               <div class="col-md-12">
                 <div class="form-group" [ngClass]="aplicaCssErro('estadoCivil', infPessoalForm)">
                   <label for="estadoCivil" class="control-label">Estado Civil</label>
-                  <ng-select class="form-control" id="estadoCivil" formControlName="estadoCivil" [clearable]="true" bindValue="value"  [items]="estadosCivis"
+                  <ng-select appendTo="body" class="form-control" id="estadoCivil" formControlName="estadoCivil" [clearable]="true" bindValue="value"  [items]="estadosCivis"
                     *ngIf="estadosCivis.length > 0">
                   </ng-select>
                   <app-campo-control-erro [mostrarErro]="verificaValidTouched('estadoCivil', infPessoalForm)" [msgErro]="getMsgError('estadoCivil', infPessoalForm)">
@@ -153,7 +153,7 @@
               <div class="col-md-6">
                 <div class="form-group" [ngClass]="aplicaCssErro('raca', infPessoalForm)">
                   <label for="raca" class="control-label">Raça/Cor</label>
-                  <ng-select class="form-control" id="raca" formControlName="raca" [clearable]="true" bindValue="value"  [items]="racas" *ngIf="racas.length > 0">
+                  <ng-select appendTo="body" class="form-control" id="raca" formControlName="raca" [clearable]="true" bindValue="value"  [items]="racas" *ngIf="racas.length > 0">
                   </ng-select>
                   <app-campo-control-erro [mostrarErro]="verificaValidTouched('raca', infPessoalForm)" [msgErro]="getMsgError('raca', infPessoalForm)">
                   </app-campo-control-erro>
@@ -163,7 +163,7 @@
               <div class="col-md-6">
                 <div class="form-group" [ngClass]="aplicaCssErro('religiao', infPessoalForm)">
                   <label for="religiao" class="control-label">Religião</label>
-                  <ng-select class="form-control" id="religiao" formControlName="religiao" [clearable]="true" bindValue="value"  [items]="religioes" *ngIf="religioes.length > 0">
+                  <ng-select appendTo="body" class="form-control" id="religiao" formControlName="religiao" [clearable]="true" bindValue="value"  [items]="religioes" *ngIf="religioes.length > 0">
                   </ng-select>
                   <app-campo-control-erro [mostrarErro]="verificaValidTouched('religiao', infPessoalForm)" [msgErro]="getMsgError('religiao', infPessoalForm)">
                   </app-campo-control-erro>
@@ -197,7 +197,7 @@
               <div class="col-md-6">
                 <div class="form-group" [ngClass]="aplicaCssErro('escolaridade', infPessoalForm)">
                   <label for="escolaridade" class="control-label">Escolaridade</label>
-                  <ng-select class="form-control" id="escolaridade" formControlName="escolaridade" [clearable]="true" bindValue="value"  [items]="escolaridades"
+                  <ng-select appendTo="body" class="form-control" id="escolaridade" formControlName="escolaridade" [clearable]="true" bindValue="value"  [items]="escolaridades"
                     *ngIf="escolaridades.length > 0">
                   </ng-select>
                   <app-campo-control-erro [mostrarErro]="verificaValidTouched('escolaridade', infPessoalForm)" [msgErro]="getMsgError('escolaridade', infPessoalForm)">
