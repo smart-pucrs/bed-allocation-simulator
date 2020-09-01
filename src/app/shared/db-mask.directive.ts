@@ -2,7 +2,7 @@ import { Directive, HostListener, Input, ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Directive({
-  selector: '[appDbMask]',
+  selector: '[dbMask]',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: DbMaskDirective,
