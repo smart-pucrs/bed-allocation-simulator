@@ -60,12 +60,13 @@ export class DashboardComponent implements OnInit {
         type: 'Bar', data: data['DashboardBar'], 
 		options: {
             axisY: {
+                showGrid: false,
                 showLabel: false,
-                offset: 0,
             },
             axisX: {
-                showLabel: false,
-                offset: 0,
+                showGrid: false,
+                showLabel: true,
+                offset: 20,
             },
             low: 0,
             high: 60, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
@@ -73,29 +74,11 @@ export class DashboardComponent implements OnInit {
         responsiveOptions: [
             ['screen and (max-width: 640px)', {
                 seriesBarDistance: 5,
-                axisX: {
-                    labelInterpolationFnc: function (value) {
-                        return value[0];
-                    }
-                }
             }]
         ],
         events: {
             created(data: any): void {
                 var defs = data.svg.elem('defs');
-                defs.elem('linearGradient', {
-                    id: 'gradient4',
-                    x1: 0,
-                    y1: 1,
-                    x2: 0,
-                    y2: 0
-                }).elem('stop', {
-                    offset: 0,
-                    'stop-color': 'rgba(238, 9, 121,1)'
-                }).parent().elem('stop', {
-                    offset: 1,
-                    'stop-color': 'rgba(255, 106, 0, 1)'
-                });
                 defs.elem('linearGradient', {
                     id: 'gradient5',
                     x1: 0,
@@ -110,19 +93,6 @@ export class DashboardComponent implements OnInit {
                     'stop-color': 'rgba(120, 204, 55, 1)'
                 });
 
-                defs.elem('linearGradient', {
-                    id: 'gradient6',
-                    x1: 0,
-                    y1: 1,
-                    x2: 0,
-                    y2: 0
-                }).elem('stop', {
-                    offset: 0,
-                    'stop-color': 'rgba(132, 60, 247,1)'
-                }).parent().elem('stop', {
-                    offset: 1,
-                    'stop-color': 'rgba(56, 184, 242, 1)'
-                });
                 defs.elem('linearGradient', {
                     id: 'gradient7',
                     x1: 0,
@@ -143,16 +113,11 @@ export class DashboardComponent implements OnInit {
                 if (data.type === 'bar') {
 
                     data.element.attr({
-                        y1: 120,
+                        y1: 195,
                         x1: data.x1 + 0.001
                     });
 
-                } else {
-					if (data.type === 'label') {
-						console.log(data);
-						data.x = data.x+200;
-					}
-				}
+                }
 			},
 		}
     };
