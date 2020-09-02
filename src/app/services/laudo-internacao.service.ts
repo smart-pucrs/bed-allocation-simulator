@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators'
@@ -80,7 +79,6 @@ export class LaudoInternacaoService {
   }
 
   update(laudo: LaudoInternacao, id: string) {
-    console.log("laudo update: ", laudo, " id: ", id);
     this.laudoDoc = this.afs.doc(`laudosInternacao/${id}`);
     this.laudoDoc.update(laudo);
   }

@@ -18,7 +18,6 @@ export class NgTablePagingDirective {
 
   @HostListener('pagechanged', ['$event'])
   public onChangePage(event: any): void {
-    // Object.assign(this.config, event);
     if (this.ngTablePaging) {
       this.tableChanged.emit({paging: event});
     }

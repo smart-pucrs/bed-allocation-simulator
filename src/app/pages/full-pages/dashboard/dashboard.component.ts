@@ -63,6 +63,10 @@ export class DashboardComponent implements OnInit {
                 showLabel: false,
                 offset: 0,
             },
+            axisX: {
+                showLabel: false,
+                offset: 0,
+            },
             low: 0,
             high: 60, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
         },
@@ -139,14 +143,18 @@ export class DashboardComponent implements OnInit {
                 if (data.type === 'bar') {
 
                     data.element.attr({
-                        y1: 195,
+                        y1: 120,
                         x1: data.x1 + 0.001
                     });
 
-                }
-            }
-        },
-
+                } else {
+					if (data.type === 'label') {
+						console.log(data);
+						data.x = data.x+200;
+					}
+				}
+			},
+		}
     };
     // Bar chart configuration Ends
 

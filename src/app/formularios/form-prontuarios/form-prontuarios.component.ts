@@ -1,18 +1,18 @@
 import { Component, OnInit, Input, OnDestroy, ChangeDetectionStrategy, ViewChild } from '@angular/core';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap/tabset/tabset';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 import { UtilitariosService } from '../utilitarios.service';
-import { ProntuarioService } from '../../services/prontuario.service';
-import { PacienteService } from '../../services/paciente.service';
 import { PlacesService } from '../../services/places.service';
+import { PacienteService } from '../../services/paciente.service';
+import { ProntuarioService } from '../../services/prontuario.service';
 
-import { Prontuario } from '../../models/prontuario';
 import { Paciente } from '../../models/paciente';
+import { Prontuario } from '../../models/prontuario';
 
 @Component({
   selector: 'app-form-prontuarios',
@@ -281,7 +281,6 @@ export class FormProntuariosComponent implements OnInit {
   }
 
   getAddress() {
-    console.log(this.enderecoForm.value['cep']);
     if (this.enderecoForm.value['cep'].length == 8) {
       this.placesService.getByPostalCode(this.enderecoForm.value['cep']).subscribe(
         data => {
@@ -291,7 +290,6 @@ export class FormProntuariosComponent implements OnInit {
             this.disableForm();
           } else {
             this.enableForm();
-            console.log("result", data);
             
             this.popularEnderecoForm(data);
           }

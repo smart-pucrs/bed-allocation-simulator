@@ -4,17 +4,17 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 import { UtilitariosService } from '../../formularios/utilitarios.service';
-import { InfraestruturaService } from '../../services/infraestrutura.service';
 import { LeitoService } from '../../services/leito.service';
+import { InfraestruturaService } from '../../services/infraestrutura.service';
 
-import { TIPOSDEESPECIALIDADES } from '../../models/tipos-especialidades';
-import { TIPOSDEENCAMINHAMENTO} from '../../models/tipos-encaminhamento';
-import { TIPOSDECUIDADOS } from '../../models/tipos-cuidados';
+import { Leito } from '../../models/leito';
+import { Quarto } from '../../models/quarto';
+import { TIPOSDEIDADE } from '../../models/tipos-idade';
 import { TIPOSDEESTADIA } from '../../models/tipos-estadia';
 import { TIPOSDEQUARTOS } from '../../models/tipos-quartos';
-import { TIPOSDEIDADE } from '../../models/tipos-idade';
-import { Quarto } from '../../models/quarto';
-import { Leito } from '../../models/leito';
+import { TIPOSDECUIDADOS } from '../../models/tipos-cuidados';
+import { TIPOSDEENCAMINHAMENTO} from '../../models/tipos-encaminhamento';
+import { TIPOSDEESPECIALIDADES } from '../../models/tipos-especialidades';
 
 @Component({
   selector: 'app-form-infraestrutura',
@@ -98,7 +98,6 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
     // Edit
     if (this.id !== null) {
       this.infraestruturaService.getQuartoById(this.id).subscribe(data => {
-        console.log("Editar: ", data);
         this.numLeitosAtual = data.numLeitos;
         this.leitosDoQuarto = data.leitos;
         this.quartoForm.setValue({
@@ -130,7 +129,6 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
           controls.genero.disable();
           this.toastr.info('Quarto não está livre, não é possível editar!');
         }
-        console.log("form: ", this.quartoForm);
       })
     }
   }
@@ -158,7 +156,6 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
             }
             return this.leitoService.update(leito, element.id)
               .then(docRef => {
-                console.log("Leito editado: ", docRef);
                 this.leitos.push({
                   id: element.id,
                   quarto: leito.quarto,
@@ -177,7 +174,6 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
           })
           Promise.all(promises).then(() => {
             this.quartoForm.controls.numLeitos.enable();
-            console.log("Alterar leitos do quarto: ", this.leitos);
             this.quarto = {
               nome: this.quartoForm.value['nome'],
               especialidade: this.quartoForm.value['especialidade'],
@@ -190,7 +186,6 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
               numLeitos: this.quartoForm.value['numLeitos'],
               leitos: this.leitos,
             }
-          console.log("Salvar Edição quarto", this.quarto);
           this.infraestruturaService.update(this.quarto, this.id);
           this.activeModal.close('dados editados');
           this.quartoForm.reset();
@@ -395,7 +390,6 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
         let promises = this.leitosDoQuarto.map(element => {
           return this.leitoService.add(element)
             .then(docRef => {
-              console.log("Leito inserido: ", docRef);
               this.leitos.push({
                 id: docRef.id,
                 quarto: element.quarto,
@@ -412,7 +406,6 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
             });
         })
         Promise.all(promises).then(() => {
-          console.log(this.leitos);
           this.quarto = {
             nome: this.quartoForm.value['nome'],
             especialidade: this.quartoForm.value['especialidade'],
@@ -425,7 +418,6 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
             numLeitos: this.quartoForm.value['numLeitos'],
             leitos: this.leitos,
           }
-          console.log("Salvar quarto", this.quarto);
 
           this.infraestruturaService.add(this.quarto);
           this.activeModal.close('dados adicionados');

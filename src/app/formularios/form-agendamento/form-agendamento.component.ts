@@ -4,7 +4,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { defineLocale, listLocales } from 'ngx-bootstrap/chronos';
 import { ToastrService } from 'ngx-toastr';
-//import { CampoControlErroComponent } from '../../func/campo-control-erro/campo-control-erro.component';
 
 import { UtilitariosService } from '../utilitarios.service';
 import { PacienteService } from '../../services/paciente.service';
@@ -108,7 +107,6 @@ export class FormAgendamentoComponent implements OnInit, OnDestroy {
     // Edit
     if (this.id !== null) {
       this.agendamentoService.getAgendamentoById(this.id).subscribe(data => {
-        console.log(data);
         this.paciente = data.paciente;
         this.medico = data.medico;
         this.agendamentoForm.setValue({
@@ -143,13 +141,10 @@ export class FormAgendamentoComponent implements OnInit, OnDestroy {
 
   onSelected(evento, tipo) {
     let controls = this.agendamentoForm.controls;
-    console.log("tipo ", tipo, " evento ", evento);
     switch (tipo) {
       case 'prontuario':
-        console.log("lista ",this.listaProntuarios);
         
         this.paciente = this.listaProntuarios.find(x => x.prontuario === evento.value);
-        console.log("this.paciente", this.paciente);
         
         controls.numProntuario.setValue(this.paciente.prontuario);
         controls.nomePaciente.setValue(this.paciente.nome);
@@ -182,10 +177,7 @@ export class FormAgendamentoComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    console.log(this.agendamentoForm.value);    
     if (this.agendamentoForm.valid) {
-      console.log(this.agendamentoForm.value);
-      console.log("timestamp", (this.agendamentoForm.value['dataProcedimento']).getTime());
       
       this.agendamento = {
         prontuario: this.paciente.prontuario,
@@ -202,7 +194,6 @@ export class FormAgendamentoComponent implements OnInit, OnDestroy {
       let prontuario: Prontuario;
       new Promise((resolve, reject) => {
         this.prontuarioService.getProntuarioByNumero(this.paciente.prontuario).subscribe(result => {
-          console.log("prontuario: ", result[0]);
           prontuario = result[0];
           resolve(prontuario);
         });

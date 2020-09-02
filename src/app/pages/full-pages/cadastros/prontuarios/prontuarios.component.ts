@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ProntuarioService } from '../../../../services/prontuario.service';
-import { FormProntuariosComponent } from '../../../../formularios/form-prontuarios/form-prontuarios.component'
-import { AppAlertComponent } from '../../../../shared/app-alert/app-alert.component';
 import { DetalhesComponent } from '../../../../shared/detalhes/detalhes.component';
+import { AppAlertComponent } from '../../../../shared/app-alert/app-alert.component';
+import { FormProntuariosComponent } from '../../../../formularios/form-prontuarios/form-prontuarios.component'
+
+import { ProntuarioService } from '../../../../services/prontuario.service';
 
 import * as moment from 'moment-timezone';
 

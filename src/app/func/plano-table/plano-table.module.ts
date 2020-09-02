@@ -5,10 +5,14 @@ import { PlanoTableComponent } from './plano-table.component';
 
 
 @NgModule({
-  declarations: [PlanoTableComponent,],
+  declarations: [
+	PlanoTableComponent,
+  ],
   imports: [
     CommonModule,
   ],
-  exports: [PlanoTableComponent,],
+  exports: [
+	PlanoTableComponent,
+  ],
 })
 export class PlanoTableModule { }

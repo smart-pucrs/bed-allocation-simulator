@@ -1,6 +1,6 @@
-import { ConsultaMedica } from "./consulta-medica";
 import { Paciente } from "./paciente";
 import { Agendamento } from "./agendamento";
+import { ConsultaMedica } from "./consulta-medica";
 import { LaudoInternacao } from "./laudo-internacao";
 
 export interface Prontuario {

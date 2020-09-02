@@ -9,20 +9,20 @@ import {
   ChangeDetectorRef,
   HostListener
 } from "@angular/core";
-import { ConfigService } from "app/shared/services/config.service";
 import { DOCUMENT } from "@angular/common";
-import { Subscription } from "rxjs";
-import { CustomizerService } from 'app/shared/services/customizer.service';
-import { DeviceDetectorService } from 'ngx-device-detector';
-import { LayoutService } from 'app/shared/services/layout.service';
-import { WINDOW } from 'app/shared/services/window.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { Subscription } from "rxjs";
 import { filter } from 'rxjs/operators';
+
+import { WINDOW } from '../../shared/services/window.service';
+import { ConfigService } from "../../shared/services/config.service";
+import { LayoutService } from '../../shared/services/layout.service';
+import { CustomizerService } from '../../shared/services/customizer.service';
 
 @Component({
   selector: "app-full-layout",
   templateUrl: "./full-layout.component.html",
-  styleUrls: ["./full-layout.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FullLayoutComponent implements OnInit, AfterViewInit, OnDestroy {

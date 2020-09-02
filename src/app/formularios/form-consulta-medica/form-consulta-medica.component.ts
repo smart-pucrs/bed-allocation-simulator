@@ -205,7 +205,6 @@ export class FormConsultaMedicaComponent implements OnInit {
       let prontuario: Prontuario;
       new Promise((resolve, reject) => {
         this.prontuarioService.getProntuarioByNumero(this.paciente.prontuario).subscribe(result => {
-          console.log("prontuario: ", result[0]);
           prontuario = result[0];
           resolve(prontuario);
         });
@@ -229,12 +228,7 @@ export class FormConsultaMedicaComponent implements OnInit {
             if (mes_atual < mes_aniversario || mes_atual == mes_aniversario && dia_atual < dia_aniversario) {
               idade--;
             }
-
-            console.log('data_aniversario ', data_aniversario);
-
-            console.log('ano_atual: ', ano_atual, ' mes_atual ', mes_atual, ' dia_atual ', dia_atual);
-            console.log('ano_aniversario: ', ano_aniversario, ' mes_aniversario ', mes_aniversario, ' dia_aniversario ', dia_aniversario);
-            console.log('idade ', idade);
+			
             if (idade > 18) {
               age = 'Adulto'
             } else if (idade > 12) {
@@ -258,24 +252,16 @@ export class FormConsultaMedicaComponent implements OnInit {
               tipoDeEstadia: this.consultaMedica.tipoDeEstadia,
               internado: false
             };
-            console.log('laudoInternacao ', laudoInternacao);
             if (this.internacaoJaAutorizada) {
-              // this.laudoInternacaoService.update(laudoInternacao, )
-              console.log("Falta id do laudo para fazer update no laudo");
               this.saveDb(prontuario);
             } else {
             this.laudoInternacaoService.add(laudoInternacao).then(result => {
-              console.log('result laudo add ', result);
-
               laudoInternacao.id = result.id
               prontuario.internacoes.push(laudoInternacao);
               this.saveDb(prontuario);
             })
           }
         } else {
-          if (this.internacaoJaAutorizada && this.consultaMedica.internar == 'Não') {
-            console.log("Precisa marcar internacao como ativa == false");
-          }
           this.saveDb(prontuario);
         }
       });

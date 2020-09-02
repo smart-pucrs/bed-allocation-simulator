@@ -10,7 +10,7 @@ import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 import { ClickOutsideModule } from 'ng-click-outside';
 
 import { AutocompleteModule } from './components/autocomplete/autocomplete.module';
-import { PipeModule } from 'app/shared/pipes/pipe.module';
+import { PipeModule } from './pipes/pipe.module';
 
 //COMPONENTS
 import { FooterComponent } from "./footer/footer.component";
@@ -18,7 +18,6 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { HorizontalMenuComponent } from './horizontal-menu/horizontal-menu.component';
 import { VerticalMenuComponent } from "./vertical-menu/vertical-menu.component";
 import { CustomizerComponent } from './customizer/customizer.component';
-import { NotificationSidebarComponent } from './notification-sidebar/notification-sidebar.component';
 
 //DIRECTIVES
 import { ToggleFullscreenDirective } from "./directives/toggle-fullscreen.directive";
@@ -41,7 +40,6 @@ import { DbMaskDirective } from './db-mask.directive';
         VerticalMenuComponent,
         HorizontalMenuComponent,
         CustomizerComponent,
-        NotificationSidebarComponent,
         ToggleFullscreenDirective,
         SidebarDirective,
         TopMenuDirective,
@@ -67,8 +65,7 @@ import { DbMaskDirective } from './db-mask.directive';
         NavbarComponent,
         VerticalMenuComponent,
         HorizontalMenuComponent,
-        CustomizerComponent,
-        NotificationSidebarComponent,
+        CustomizerComponent,	
         ToggleFullscreenDirective,
         SidebarLinkDirective,
         SidebarDropdownDirective,

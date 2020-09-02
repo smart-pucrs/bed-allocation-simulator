@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators'
@@ -52,9 +51,7 @@ export class InfraestruturaService {
     return this.quartoDoc.valueChanges();    
   }
 
-  update(quarto: Quarto, id: string) {
-    console.log("Quarto que será atualizado Infraestrutura service: ", quarto);
-    
+  update(quarto: Quarto, id: string) {    
     this.quartoDoc = this.afs.doc(`infraestrutura/${id}`);
     this.quartoDoc.update(quarto);
   }

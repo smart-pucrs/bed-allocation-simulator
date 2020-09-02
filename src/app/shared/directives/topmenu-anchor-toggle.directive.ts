@@ -14,20 +14,9 @@ export class TopMenuAnchorToggleDirective {
     this.navlink = navlink;
   }
 
-  // @HostListener("click", ["$event"])
-  // onClick() {
-  //   this.navlink.toggle();
-  // }
-
   @HostListener("mouseenter", ["$event"])
   onMouseOver(e: any) {
     this.navlink.openDropdown();
 
   }
-
-  // @HostListener("mouseleave", ["$event"])
-  // onMouseOut(e: any) {
-  //   this.navlink.toggle();
-  // }
-
 }

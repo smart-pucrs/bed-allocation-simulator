@@ -2,22 +2,24 @@
     background-color: limegreen;
     border-radius: 32px;
     color: black;
-  }
-  .partially button span {
+}
+.partially button span {
     background-color: orange;
     border-radius: 32px;
     color: black;
-  }
-  .bs-datepicker-container { z-index: 3000; }
+}
+.bs-datepicker-container { 
+	z-index: 3000; 
+}
 
-  .ui-switch {
-      display: inline-flex;
-    	width: 100%;
-			padding: 0.375rem 0.75rem;
-	}
+.ui-switch {
+	display: inline-flex;
+	width: 100%;
+	padding: 0.375rem 0.75rem;
+}
 
-	.ui-switch p {
-		margin-left: 1rem;
+.ui-switch p {
+	margin-left: 1rem;
     margin-top: 0.3rem;
-	}
+}
 

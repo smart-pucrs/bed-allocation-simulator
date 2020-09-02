@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment-timezone';
-
-import { LaudoInternacaoService } from '../../../services/laudo-internacao.service';
+import { ToastrService } from 'ngx-toastr';
 
 import { DetalhesComponent } from '../../../shared/detalhes/detalhes.component';
 import { FormPacientesInternadosComponent } from '../../../formularios/form-pacientes-internados/form-pacientes-internados.component';
+
+import { LaudoInternacaoService } from '../../../services/laudo-internacao.service';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class PacientesInternadosComponent implements OnInit {
 
   constructor(
 	private laudoInternacaoService: LaudoInternacaoService,
-    //private toastr: ToastrService,
+    private toastr: ToastrService,
     private modalService: NgbModal
 	) {
     this.laudoInternacaoService.getpacientesInternados().subscribe(laudos => {
@@ -53,7 +54,7 @@ export class PacientesInternadosComponent implements OnInit {
     modalRef.componentInstance.id = this.currentId;
     modalRef.result.then((result) => {
       if (result === 'alta registrada'){
-        //this.toastr.success('Alta registrada com sucesso!');
+        this.toastr.success('Alta registrada com sucesso!');
       }
     }).catch((error) => {
       this.currentId = null;

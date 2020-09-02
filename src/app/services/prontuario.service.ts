@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators'
@@ -124,7 +123,6 @@ export class ProntuarioService {
     this.prontuarioDoc.delete();
   }
 
-	//%PLACEHOLDER%(?)
   incrementaProntuario() {
     let id = 'GNIZcMCxJ8zajwf575dT';
     this.proximoProntuarioDoc = this.afs.doc(`incrementaProntuario/${id}`);

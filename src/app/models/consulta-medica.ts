@@ -1,6 +1,6 @@
-import { Profissional } from "./profissional";
 import { Leito } from "./leito";
 import { Paciente } from "./paciente";
+import { Profissional } from "./profissional";
 
 export interface ConsultaMedica {
 	id?: string;

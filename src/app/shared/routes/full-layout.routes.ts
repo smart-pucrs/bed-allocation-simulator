@@ -5,7 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 export const Full_ROUTES: Routes = [
   {
     path: 'page',
-    //loadChildren: () => import('../../page/page.module').then(m => m.PageModule)
 	loadChildren: () => import('../../pages/full-pages/full-pages.module').then(m => m.FullPagesModule)
   }
 ];

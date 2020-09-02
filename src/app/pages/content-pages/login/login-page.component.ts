@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
-import { AuthService } from 'app/shared/auth/auth.service';
 import { NgxSpinnerService } from "ngx-spinner";
 
+import { AuthService } from '../../../shared/auth/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -56,7 +56,6 @@ export class LoginPageComponent {
       .catch((err) => {
         this.isLoginFailed = true;
         this.spinner.hide();
-        console.log('error: ' + err)
       }
       );
   }

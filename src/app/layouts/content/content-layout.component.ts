@@ -1,13 +1,13 @@
 import { Component, OnInit, ElementRef, Inject, Renderer2, ViewChild, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { ConfigService } from 'app/shared/services/config.service';
 import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { CustomizerService } from 'app/shared/services/customizer.service';
+
+import { ConfigService } from '../../shared/services/config.service';
+import { CustomizerService } from '../../shared/services/customizer.service';
 
 @Component({
   selector: 'app-content-layout',
   templateUrl: './content-layout.component.html',
-  styleUrls: ['./content-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 

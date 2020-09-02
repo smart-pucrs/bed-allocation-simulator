@@ -4,8 +4,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { DetalhesComponent } from '../../../../shared/detalhes/detalhes.component';
 import { AppAlertComponent } from '../../../../shared/app-alert/app-alert.component';
-import { InfraestruturaService } from '../../../../services/infraestrutura.service';
 import { FormInfraestruturaComponent } from '../../../../formularios/form-infraestrutura/form-infraestrutura.component';
+
+import { InfraestruturaService } from '../../../../services/infraestrutura.service';
 
 @Component({
   selector: 'app-infraestrutura',

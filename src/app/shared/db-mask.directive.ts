@@ -15,7 +15,7 @@ export class DbMaskDirective {
 
   @Input('dbMask') dbMask: string;
 
-  constructor(private el: ElementRef) {console.log("test");}
+  constructor(private el: ElementRef) {}
 
   writeValue(value: any): void {
     if (value) {

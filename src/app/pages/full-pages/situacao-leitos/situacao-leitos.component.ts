@@ -1,13 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
-
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { LeitoService } from '../../../services/leito.service';
+import { ToastrService } from 'ngx-toastr';
 
 import { DetalhesComponent } from '../../../shared/detalhes/detalhes.component';
 import { FormSituacaoLeitosComponent } from '../../../formularios/form-situacao-leitos/form-situacao-leitos.component';
+
+import { LeitoService } from '../../../services/leito.service';
 
 @Component({
   selector: 'app-situacao-leitos',
@@ -33,7 +32,7 @@ export class SituacaoLeitosComponent implements OnInit {
   constructor(
 	private leitoService: LeitoService,
 	private modalService: NgbModal,
-	//private toastr: ToastrService
+	private toastr: ToastrService
 	) { 
 	this.leitoService.getLeitos().subscribe(leitos => {
       this.data = leitos;      
@@ -48,9 +47,9 @@ export class SituacaoLeitosComponent implements OnInit {
     modalRef.componentInstance.id = this.currentId;
     modalRef.result.then((result) => {
       if (result === 'dados editados'){
-        //this.toastr.success('Dados editados com sucesso!');
+        this.toastr.success('Dados editados com sucesso!');
       } else {
-        //this.toastr.success('Dados inseridos com sucesso!');
+        this.toastr.success('Dados inseridos com sucesso!');
       }
     }).catch((error) => {
       this.currentId = null;

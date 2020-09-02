@@ -3,8 +3,8 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppAlertComponent } from '../../../../shared/app-alert/app-alert.component';
-
 import { FormProfissionaisComponent } from '../../../../formularios/form-profissionais/form-profissionais.component';
+
 import { ProfissionalService } from '../../../../services/profissional.service';
 
 @Component({

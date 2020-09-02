@@ -3,16 +3,16 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
-import { LaudoInternacaoService } from '../../services/laudo-internacao.service';
-import { InfraestruturaService } from '../../services/infraestrutura.service';
-import { ProntuarioService } from '../../services/prontuario.service';
 import { UtilitariosService } from '../../formularios/utilitarios.service';
 import { LeitoService } from '../../services/leito.service';
+import { ProntuarioService } from '../../services/prontuario.service';
+import { InfraestruturaService } from '../../services/infraestrutura.service';
+import { LaudoInternacaoService } from '../../services/laudo-internacao.service';
 
-import { LaudoInternacao } from '../../models/laudo-internacao';
-import { Prontuario } from '../../models/prontuario';
-import { Quarto } from '../../models/quarto';
 import { Leito } from '../../models/leito';
+import { Quarto } from '../../models/quarto';
+import { Prontuario } from '../../models/prontuario';
+import { LaudoInternacao } from '../../models/laudo-internacao';
 
 @Component({
   selector: 'app-form-alocacao-leitos',

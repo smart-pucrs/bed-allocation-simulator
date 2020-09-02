@@ -218,10 +218,6 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
 
-  toggleNotificationSidebar() {
-    this.layoutService.toggleNotificationSidebar(true);
-  }
-
   toggleSidebar() {
     this.layoutService.toggleSidebarSmallScreen(this.hideSidebar);
   }

@@ -3,15 +3,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment-timezone';
 
-import { AgendamentoService } from '../../../../services/agendamento.service';
+import { DetalhesComponent } from '../../../../shared/detalhes/detalhes.component';
+import { AppAlertComponent } from '../../../../shared/app-alert/app-alert.component';
+import { FormAgendamentoComponent } from '../../../../formularios/form-agendamento/form-agendamento.component';
+
 import { ProntuarioService } from '../../../../services/prontuario.service';
+import { AgendamentoService } from '../../../../services/agendamento.service';
 
 import { Prontuario } from '../../../../models/prontuario';
 import { Agendamento } from '../../../../models/agendamento';
-
-import { FormAgendamentoComponent } from '../../../../formularios/form-agendamento/form-agendamento.component';
-import { AppAlertComponent } from '../../../../shared/app-alert/app-alert.component';
-import { DetalhesComponent } from '../../../../shared/detalhes/detalhes.component';
 
 @Component({
   selector: 'app-agendamentos',
@@ -78,7 +78,6 @@ export class AgendamentosComponent implements OnInit {
       
       new Promise((resolve, reject) => {
         this.prontuarioService.getProntuarioByNumero(this.numProntuario).subscribe(result => {
-          console.log("prontuario: ", result[0]);
           prontuario = result[0];
           resolve(prontuario);
         });

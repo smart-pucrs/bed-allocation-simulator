@@ -3,12 +3,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment-timezone';
 
+import { DetalhesComponent } from '../../../../shared/detalhes/detalhes.component';
+import { AppAlertComponent } from '../../../../shared/app-alert/app-alert.component';
+import { FormConsultaMedicaComponent } from '../../../../formularios/form-consulta-medica/form-consulta-medica.component';
+
 import { ProntuarioService } from '../../../../services/prontuario.service';
 import { ConsultaMedicaService } from '../../../../services/consulta-medica.service';
-
-import { FormConsultaMedicaComponent } from '../../../../formularios/form-consulta-medica/form-consulta-medica.component';
-import { AppAlertComponent } from '../../../../shared/app-alert/app-alert.component';
-import { DetalhesComponent } from '../../../../shared/detalhes/detalhes.component';
 
 @Component({
   selector: 'app-consultas-medicas',

@@ -1,15 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { LaudoInternacaoService } from '../../services/laudo-internacao.service';
-import { InfraestruturaService } from '../../services/infraestrutura.service';
-import { ProntuarioService } from '../../services/prontuario.service';
-import { LeitoService } from '../../services/leito.service';
+import { AppAlertComponent } from '../../shared/app-alert/app-alert.component';
 
-import { LaudoInternacao } from '../../models/laudo-internacao';
-import { Prontuario } from '../../models/prontuario';
-import { Quarto } from '../../models/quarto';
+import { LeitoService } from '../../services/leito.service';
+import { ProntuarioService } from '../../services/prontuario.service';
+import { InfraestruturaService } from '../../services/infraestrutura.service';
+import { LaudoInternacaoService } from '../../services/laudo-internacao.service';
+
 import { Leito } from '../../models/leito';
+import { Quarto } from '../../models/quarto';
+import { Prontuario } from '../../models/prontuario';
+import { LaudoInternacao } from '../../models/laudo-internacao';
 
 @Component({
   selector: 'app-form-pacientes-internados',
@@ -60,12 +62,12 @@ export class FormPacientesInternadosComponent implements OnInit {
   }
 
   openAlert() {
-    /*const modalRef = this.modalService.open(AppAlertComponent,{ size: 'sm' });
+    const modalRef = this.modalService.open(AppAlertComponent,{ size: 'sm' });
     modalRef.componentInstance.mensagem = this.mensagem;
     modalRef.result.then((result) => {
       this.save();
     }).catch((error) => {
-    });*/
+    });
   }
 
   onConfirm() {
@@ -74,7 +76,6 @@ export class FormPacientesInternadosComponent implements OnInit {
   }
 
   save() {
-    console.log("registrar alta");
     this.preparaVariaveis().then(() => {
       this.saveDb()
       this.activeModal.close('alta registrada');

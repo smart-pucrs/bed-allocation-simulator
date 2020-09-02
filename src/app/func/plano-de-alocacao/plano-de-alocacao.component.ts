@@ -141,7 +141,6 @@ export class PlanoDeAlocacaoComponent implements OnInit {
   }
 
   public onChangeTable(config: any, page: any = {page: this.page, itemsPerPage: this.itemsPerPage}): any {
-    console.log(config.filtering)
     if (config.filtering) {
       Object.assign(this.config.filtering, config.filtering);
     }
@@ -154,8 +153,6 @@ export class PlanoDeAlocacaoComponent implements OnInit {
     const sortedData = this.changeSort(filteredData, this.config);
     this.rows = page && config.paging ? this.changePage(page, sortedData) : sortedData;
     this.length = sortedData.length;
-	
-    console.log(config)
   }
 
   public onMostrarDetalhe(row: any) {

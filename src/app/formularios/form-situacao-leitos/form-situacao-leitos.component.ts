@@ -11,8 +11,7 @@ import { ConsultaMedica } from '../../models/consulta-medica';
 
 @Component({
   selector: 'app-form-situacao-leitos',
-  templateUrl: './form-situacao-leitos.component.html',
-  styleUrls: ['./form-situacao-leitos.component.scss']
+  templateUrl: './form-situacao-leitos.component.html'
 })
 export class FormSituacaoLeitosComponent implements OnInit, OnDestroy {
   @Input() title;
@@ -32,7 +31,6 @@ export class FormSituacaoLeitosComponent implements OnInit, OnDestroy {
     public activeModal: NgbActiveModal,
 	) {
     this.pacienteService.getPacientesAutorizados().subscribe(data => {
-      console.log("Autorizados ", data);
       this.listaProntuarios = data;
       this.listaProntuarios.forEach(element => {
         this.prontuarios.push({
@@ -45,10 +43,6 @@ export class FormSituacaoLeitosComponent implements OnInit, OnDestroy {
         });
       })   
     })
-    this.pacienteService.getPacientesInternados().subscribe(data => {
-      console.log("Internados ", data);
-      
-    })
    }
 
   ngOnInit() {
@@ -59,8 +53,7 @@ export class FormSituacaoLeitosComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // reseta o form
-    // this.alocacaoForm.reset();
+    this.alocacaoForm.reset();
   }
 
 

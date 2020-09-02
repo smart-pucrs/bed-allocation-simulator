@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
-import { LaudoInternacaoService } from '../../../services/laudo-internacao.service';
-import { PacienteService } from '../../../services/paciente.service';
 import { LeitoService } from '../../../services/leito.service';
+import { PacienteService } from '../../../services/paciente.service';
+import { LaudoInternacaoService } from '../../../services/laudo-internacao.service';
 
 import { Leito } from '../../../models/leito';
 import { DetalhesComponent } from '../../../shared/detalhes/detalhes.component';

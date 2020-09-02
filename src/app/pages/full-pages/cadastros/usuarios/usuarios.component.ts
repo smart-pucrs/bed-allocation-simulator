@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { UsuarioService } from '../../../../services/usuario.service';
-
-import { FormUsuariosComponent } from '../../../../formularios/form-usuarios/form-usuarios.component';
 import { AppAlertComponent } from '../../../../shared/app-alert/app-alert.component';
+import { FormUsuariosComponent } from '../../../../formularios/form-usuarios/form-usuarios.component';
+
+import { UsuarioService } from '../../../../services/usuario.service';
 
 @Component({
   selector: 'app-usuarios',

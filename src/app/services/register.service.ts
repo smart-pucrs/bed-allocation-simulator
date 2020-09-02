@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { AngularFireAuthModule } from "@angular/fire/auth";
 
 @Injectable({
@@ -10,7 +9,6 @@ export class RegisterService {
   constructor(private angularFireAuth: AngularFireAuth) { }
 
   createUser(usuario: any) {
-    console.log("Usuário: ", usuario);
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(usuario.email, usuario.password);        
   }
 

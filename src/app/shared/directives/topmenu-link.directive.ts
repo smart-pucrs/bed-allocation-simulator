@@ -44,10 +44,6 @@ export class TopMenuLinkDirective implements OnInit, OnDestroy {
   public ngOnDestroy(): any {
   }
 
-  // public toggle(): any {
-  //   this.show = !this.show;
-  // }
-
   public openDropdown(): any {
     this.show = true;
   }

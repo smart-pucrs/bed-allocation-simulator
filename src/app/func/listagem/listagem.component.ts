@@ -165,9 +165,7 @@ export class ListagemComponent implements OnInit {
     this.validar.emit();
   }
 
-  public onCellClick(data: any): any {
-    console.log(data);
-  }
+  public onCellClick(data: any): any {}
 
   public onAdd(evento) {    
     this.new.emit(evento);

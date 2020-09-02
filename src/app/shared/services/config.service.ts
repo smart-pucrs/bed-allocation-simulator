@@ -63,55 +63,6 @@ export class ConfigService {
     };
   }
 
-  // Default configurations for Dark layout. Please check *customizer.service.ts* for different colors and bg images options
-
-  // setConfigValue() {
-  //   this.templateConf = {
-  //     layout: {
-  //       variant: "Dark",
-  //       menuPosition: "Side",
-  //       customizer: {
-  //         hidden: true
-  //       },
-  //       navbar: {
-  //         type: 'Static'
-  //       },
-  //       sidebar: {
-  //         collapsed: false,
-  //         size: "sidebar-md",
-  //         backgroundColor: "black",
-  //         backgroundImage: true,
-  //         backgroundImageURL: "assets/img/sidebar-bg/01.jpg"
-  //       }
-  //     }
-  //   };
-  // }
-
-  // Default configurations for Transparent layout. Please check *customizer.service.ts* for different colors and bg images options
-
-  // setConfigValue() {
-  //   this.templateConf = {
-  //     layout: {
-  //       variant: "Transparent",
-  //       menuPosition: "Side",
-  //       customizer: {
-  //         hidden: true
-  //       },
-  //       navbar: {
-  //         type: 'Static'
-  //       },
-  //       sidebar: {
-  //         collapsed: false,
-  //         size: "sidebar-md",
-  //         backgroundColor: "bg-glass-1",
-  //         backgroundImage: true,
-  //         backgroundImageURL: ""
-  //       }
-  //     }
-  //   };
-  // }
-
-
   applyTemplateConfigChange(tempConfig: ITemplateConfig) {
     this.templateConf = Object.assign(this.templateConf, tempConfig);
     this.templateConfSubject.next(this.templateConf);

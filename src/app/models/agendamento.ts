@@ -1,5 +1,5 @@
-import { Profissional } from "./profissional";
 import { Paciente } from "./paciente";
+import { Profissional } from "./profissional";
 
 export interface Agendamento {
     id?: string;
