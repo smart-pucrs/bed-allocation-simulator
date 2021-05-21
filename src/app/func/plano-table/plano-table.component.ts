@@ -16,6 +16,19 @@ export class PlanoTableComponent implements OnInit {
   leitosSelected: Array<any> = [];
 
   @Input()
+  public set optSet(data: Array<any>){
+	console.log(data)
+	  for(var d in data){
+		let paciente = data[d]
+		if('leito' in paciente){ 
+			let rowIndex = this.rows.findIndex(x => x.cpf === paciente.cpf);
+			this.rows[rowIndex].leito = {'numero' : paciente.leito}	
+		}
+	  }
+  }
+  
+	
+  @Input()
   public set config(conf: any) {
     if (!conf.className) {
       conf.className = 'table-striped';
@@ -138,15 +151,22 @@ export class PlanoTableComponent implements OnInit {
   public validar() {}
 
   openModal(row) {
+	console.log(row)
     const modalRef = this.modalService.open(FormEscolhaLeitoComponent, { size: 'lg' });
     modalRef.componentInstance.leitosSelect = this.leitosSelect;
     modalRef.componentInstance.title = row.nomePaciente;
     modalRef.componentInstance.id = row.id;
+	//%FIX%
+	console.log(1)
+	console.log(modalRef)
+	console.log(modalRef.result)
     modalRef.result.then((result) => {
       this.onSelected(result, row);
     }).catch((error) => {
       console.log(error);
+	console.log(2)
     });
+	console.log(3)
   }
 
   ngOnInit(): void {

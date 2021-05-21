@@ -22,7 +22,9 @@ export class LaudoInternacaoService {
 
   constructor(public afs: AngularFirestore) {
     this.laudosCollection = this.afs.collection('laudosInternacao');
-    this.laudosPendentesCollection = this.afs.collection('laudosInternacao', ref => ref.where('ativo', '==' , true).where('internado', '==' , false));
+	//%PLACEHOLDER%
+    //this.laudosPendentesCollection = this.afs.collection('laudosInternacao', ref => ref.where('ativo', '==' , true).where('internado', '==' , false));
+    this.laudosPendentesCollection = this.afs.collection('tempAloc', ref => ref);
     this.pacientesInternadosCollection = this.afs.collection('laudosInternacao', ref => ref.where('ativo', '==' , true).where('internado', '==' , true));
 	
     this.getLaudosDb();

@@ -24,14 +24,14 @@ export class AlocacaoLeitosComponent implements OnInit {
   public mensagem = '';
   public currentId: string = null;
   public colunas: Array<any> = [
-    { title: 'Prontuário', name: 'prontuario', sort: 'asc' },
+    //{ title: 'Prontuário', name: 'prontuario', sort: 'asc' },
     { title: 'Nome', name: 'nomePaciente', sort: '' },
-    { title: 'Especialidade', name: 'especialidade', sort: '' },
+    //{ title: 'Especialidade', name: 'especialidade', sort: '' },
     { title: 'Gênero', name: 'genero', sort: '' },
-    { title: 'Tipo', name: 'tipoDeLeito', sort: '' },
-    { title: 'Encaminhamento', name: 'tipoDeEncaminhamento', sort: '' },
-    { title: 'Estadia', name: 'tipoDeEstadia', sort: '' },
-    { title: 'Cuidados', name: 'tipoDeCuidado', sort: '' }
+    //{ title: 'Tipo', name: 'tipoDeLeito', sort: '' },
+    //{ title: 'Encaminhamento', name: 'tipoDeEncaminhamento', sort: '' },
+    //{ title: 'Estadia', name: 'tipoDeEstadia', sort: '' },
+    //{ title: 'Cuidados', name: 'tipoDeCuidado', sort: '' }
   ];
   public leitosSelect = [];
   leitos: Leito[] = [];
@@ -50,10 +50,11 @@ export class AlocacaoLeitosComponent implements OnInit {
       this.leitos.forEach(element => {
         this.leitosSelect.push({
           value: element,
-          label: element.numero + " - " + element.tipoDeLeito + " - " + element.tipoDeCuidado + " - " + element.tipoDeEncaminhamento + " - " + element.especialidade + " - " + element.tipoDeEstadia + " - " + element.genero
-        })
+          label: element.numero /*+ " - " + element.tipoDeLeito + " - " + element.tipoDeCuidado + " - " + element.tipoDeEncaminhamento + " - " + element.especialidade + " - " + element.tipoDeEstadia + " - " + element.genero*/
+        }); 
       });
     });
+	console.log("DONE")
   }
 
   openModal() {

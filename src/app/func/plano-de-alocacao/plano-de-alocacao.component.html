@@ -27,7 +27,7 @@
         <!-- Listagem -->
         <div *ngIf="data?.length > 0;else noData">
           <div class="table-responsive">
-            <app-plano-table [config]="config" (tableChanged)="onChangeTable(config)" (mostraDetalhe)="onMostrarDetalhe($event)" [detalhes]="detalhes" (validarPlano)="onValidarPlano($event)" [rows]="rows" [columns]="columns" [leitosSelect]="leitosSelect">
+            <app-plano-table [config]="config" (tableChanged)="onChangeTable(config)" (mostraDetalhe)="onMostrarDetalhe($event)" [detalhes]="detalhes" (validarPlano)="onValidarPlano($event)" [rows]="rows" [columns]="columns" [leitosSelect]="leitosSelect" [optSet]="data">
             </app-plano-table>
           </div>
           <!-- Paginação -->
