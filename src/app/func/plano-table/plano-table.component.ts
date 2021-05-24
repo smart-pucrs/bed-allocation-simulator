@@ -21,8 +21,10 @@ export class PlanoTableComponent implements OnInit {
 	  for(var d in data){
 		let paciente = data[d]
 		if('leito' in paciente){ 
+			let leitoIndex = this.leitosSelect.findIndex(x => x.label === paciente.leito)
 			let rowIndex = this.rows.findIndex(x => x.cpf === paciente.cpf);
-			this.rows[rowIndex].leito = {'numero' : paciente.leito}	
+			this.onSelected(this.leitosSelect[leitoIndex], this.rows[rowIndex])
+			
 		}
 	  }
   }
@@ -126,6 +128,7 @@ export class PlanoTableComponent implements OnInit {
   }
 
   public onSelected(event, row) {
+	  console.log(8)
     if (event.value.genero === "Indefinido") {
       this.leitosSelect.forEach(element => {
         if (element.value.quarto === event.value.quarto) {
@@ -152,6 +155,7 @@ export class PlanoTableComponent implements OnInit {
 
   openModal(row) {
 	console.log(row)
+	this.leitosSelect = this.leitosSelect.filter(x => x != null)
     const modalRef = this.modalService.open(FormEscolhaLeitoComponent, { size: 'lg' });
     modalRef.componentInstance.leitosSelect = this.leitosSelect;
     modalRef.componentInstance.title = row.nomePaciente;
@@ -159,14 +163,14 @@ export class PlanoTableComponent implements OnInit {
 	//%FIX%
 	console.log(1)
 	console.log(modalRef)
+	console.log(7)
 	console.log(modalRef.result)
+	console.log(6)
     modalRef.result.then((result) => {
       this.onSelected(result, row);
     }).catch((error) => {
       console.log(error);
-	console.log(2)
     });
-	console.log(3)
   }
 
   ngOnInit(): void {
