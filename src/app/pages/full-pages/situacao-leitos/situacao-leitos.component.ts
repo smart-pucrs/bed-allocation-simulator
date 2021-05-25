@@ -24,9 +24,9 @@ export class SituacaoLeitosComponent implements OnInit {
   public mensagem = '';
   public colunas: Array<any> = [
     { title: 'Leito', name: 'numero', sort: 'asc' },
-    { title: 'Status', name: 'status', sort: '' },
-    { title: 'Especialidade', name: 'especialidade', sort: '' },
-    { title: 'Tipo de Encaminhamento', name: 'tipoDeEncaminhamento', sort: '' }
+    { title: 'Status', name: 'status', sort: '' }
+    //{ title: 'Especialidade', name: 'especialidade', sort: '' },
+    //{ title: 'Tipo de Encaminhamento', name: 'tipoDeEncaminhamento', sort: '' }
   ];
 
   constructor(

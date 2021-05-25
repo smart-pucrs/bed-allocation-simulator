@@ -29,7 +29,7 @@ export class LeitoService {
     this.leitos = this.leitosCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Leito;
-        data.id = a.payload.doc.id;        
+        data.id = a.payload.doc.id;       
         return data;
       });
     }));
