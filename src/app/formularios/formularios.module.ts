@@ -8,6 +8,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedModule } from '../shared/shared.module';
 import { CampoControlErroModule } from '../func/campo-control-erro/campo-control-erro.module';
 
+import { FormExcecao } from './form-excecao/form-excecao.component';
 import { FormUsuariosComponent } from './form-usuarios/form-usuarios.component';
 import { FormAgendamentoComponent } from './form-agendamento/form-agendamento.component';
 import { FormProntuariosComponent } from './form-prontuarios/form-prontuarios.component';
@@ -31,6 +32,7 @@ import { FormPacientesInternadosComponent } from './form-pacientes-internados/fo
 	CampoControlErroModule,
   ],
   declarations: [
+	FormExcecao,
 	FormUsuariosComponent,
     FormAgendamentoComponent,
 	FormProntuariosComponent,
@@ -43,6 +45,7 @@ import { FormPacientesInternadosComponent } from './form-pacientes-internados/fo
 	FormPacientesInternadosComponent,
   ],
   exports: [
+	FormExcecao,
 	FormUsuariosComponent,
     FormAgendamentoComponent,
 	FormProntuariosComponent,
@@ -55,6 +58,7 @@ import { FormPacientesInternadosComponent } from './form-pacientes-internados/fo
 	FormPacientesInternadosComponent,
   ],
   entryComponents: [
+	FormExcecao,
 	FormUsuariosComponent,
     FormAgendamentoComponent,
 	FormProntuariosComponent,

@@ -3,6 +3,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormEscolhaLeitoComponent } from '../../formularios/form-escolha-leito/form-escolha-leito.component';
+import { FormExcecao } from '../../formularios/form-excecao/form-excecao.component';
 
 @Component({
   selector: 'app-plano-table',
@@ -22,9 +23,10 @@ export class PlanoTableComponent implements OnInit {
 		let paciente = data[d]
 		if('leito' in paciente){ 
 			let leitoIndex = this.leitosSelect.findIndex(x => x.label === paciente.leito)
+			this.leitosSelect[leitoIndex].value["except"] = true;
 			let rowIndex = this.rows.findIndex(x => x.cpf === paciente.cpf);
 			this.onSelected(this.leitosSelect[leitoIndex], this.rows[rowIndex])
-			
+			console.log(this.rows)
 		}
 	  }
   }
@@ -127,8 +129,15 @@ export class PlanoTableComponent implements OnInit {
     this.rows[index].leito = '';
   }
 
+  public clearExcecao(row) {
+    /*let indexLeito = this.leitosSelected.findIndex(x => x.value === row.leito);
+    this.leitosSelect.push(this.leitosSelected[indexLeito]);
+    this.leitosSelected.splice(indexLeito, 1);*/
+    let index = this.rows.findIndex(x => x.id === row.id);
+    this.rows[index].leito.except = '';
+  }
+
   public onSelected(event, row) {
-	  console.log(8)
     if (event.value.genero === "Indefinido") {
       this.leitosSelect.forEach(element => {
         if (element.value.quarto === event.value.quarto) {
@@ -153,24 +162,29 @@ export class PlanoTableComponent implements OnInit {
   
   public validar() {}
 
-  openModal(row) {
-	console.log(row)
-	this.leitosSelect = this.leitosSelect.filter(x => x != null)
-    const modalRef = this.modalService.open(FormEscolhaLeitoComponent, { size: 'lg' });
-    modalRef.componentInstance.leitosSelect = this.leitosSelect;
-    modalRef.componentInstance.title = row.nomePaciente;
-    modalRef.componentInstance.id = row.id;
-	//%FIX%
-	console.log(1)
-	console.log(modalRef)
-	console.log(7)
-	console.log(modalRef.result)
-	console.log(6)
-    modalRef.result.then((result) => {
-      this.onSelected(result, row);
-    }).catch((error) => {
-      console.log(error);
-    });
+  openModal(row, leito) {
+	if(leito){
+		this.leitosSelect = this.leitosSelect.filter(x => x != null)
+		const modalRef = this.modalService.open(FormEscolhaLeitoComponent, { size: 'lg' });
+		modalRef.componentInstance.leitosSelect = this.leitosSelect;
+		modalRef.componentInstance.title = row.nomePaciente;
+		modalRef.componentInstance.id = row.id;
+		modalRef.result.then((result) => {
+		  this.onSelected(result, row);
+		}).catch((error) => {
+		  console.log(error);
+		});
+	}else{
+		const modalRef = this.modalService.open(FormExcecao, { size: 'lg' });
+		modalRef.componentInstance.quarto = row.leito.quarto; 
+		modalRef.componentInstance.title = row.nomePaciente;
+		/*modalRef.result.then((result) => { 
+		  this.onSelected(result, row);
+		}).catch((error) => {
+		  console.log(error);
+		});*/
+		
+	}
   }
 
   ngOnInit(): void {

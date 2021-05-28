@@ -21,7 +21,6 @@ export class AlocacaoLeitosComponent implements OnInit {
   public add : boolean = true;
   public data: Array<any>;  
   public title = 'Alocar Leito';
-  public canEdit: boolean = true;
   public mensagem = '';
   public currentId: string = null;
   public colunas: Array<any> = [

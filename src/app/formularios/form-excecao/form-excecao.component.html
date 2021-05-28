@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="card-body">
+    <form class="form-horizontal" [formGroup]="excecaoForm" (ngSubmit)="save()">
+      <!-- Quarto -->
+      <div class="row">
+        <div class="col-md-12">
+          <!--<div class="form-group" [ngClass]="aplicaCssErro('quarto')">-->
+          <div class="form-group">
+            <label for="quarto" class="control-label">Quarto</label>
+            <input type="text" readonly="readonly" class="form-control" id="quarto" formControlName="quarto" placeholder="quarto">
+            <!--<app-campo-control-erro [mostrarErro]="verificaValidTouched('quarto')" [msgErro]="getMsgError('quarto')">
+            </app-campo-control-erro>-->
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+      <!-- E-mail -->
+      <div class="row">
+        <div class="col-sm-12">
+          <!--<div class="form-group" [ngClass]="aplicaCssErro('email')">-->
+          <div class="form-group" >
+            <label for="desc" class="control-label">desc</label>
+            <input type="text" class="form-control" id="desc" formControlName="desc" placeholder="desc">
+            <!--<app-campo-control-erro [mostrarErro]="verificaValidTouched('email')" [msgErro]="getMsgError('email')">
+            </app-campo-control-erro>-->
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+	
+      <button type="submit" class="btn-forms btn btn-primary">Salvar</button>
+    </form>
+  </div><!--/.card-body-->
+</div>
