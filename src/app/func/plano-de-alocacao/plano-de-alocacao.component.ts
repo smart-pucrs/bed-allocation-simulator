@@ -129,7 +129,7 @@ export class PlanoDeAlocacaoComponent implements OnInit {
       this.colunas.forEach((column: any) => {
         if (item[column.name] !== null && item[column.name].toString().toLowerCase()
         .match(this.config.filtering.filterString.toLowerCase())) {
-          flag = true;
+          flag = true; 
         }
       });
       if (flag) {

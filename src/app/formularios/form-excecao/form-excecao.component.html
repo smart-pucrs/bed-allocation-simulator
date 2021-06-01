@@ -23,12 +23,11 @@
       <!-- E-mail -->
       <div class="row">
         <div class="col-sm-12">
-          <!--<div class="form-group" [ngClass]="aplicaCssErro('email')">-->
-          <div class="form-group" >
+          <div class="form-group" [ngClass]="aplicaCssErro('desc')">
             <label for="desc" class="control-label">desc</label>
             <input type="text" class="form-control" id="desc" formControlName="desc" placeholder="desc">
-            <!--<app-campo-control-erro [mostrarErro]="verificaValidTouched('email')" [msgErro]="getMsgError('email')">
-            </app-campo-control-erro>-->
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('desc')" [msgErro]="getMsgError('desc')">
+            </app-campo-control-erro>
           </div>
         </div>
       </div>
