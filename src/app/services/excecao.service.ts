@@ -40,13 +40,12 @@ export class ExcecaoService {
     return this.excecaoDoc.valueChanges();  
   }
 
-//%FIX%
-/*  update(leito: Leito, id: string) {
-    this.leitoDoc = this.afs.doc(`leitos/${id}`);
-    return this.leitoDoc.update(leito);
+  write(excecao: Excecao, quarto: string) {
+    this.excecaoDoc = this.afs.doc(`excecoes/${quarto}`);
+    return this.excecaoDoc.set(excecao);
   }
 
-  add(leito: Leito) {
+/*  add(leito: Leito) {
     return this.leitosCollection.add(leito);
   }
 

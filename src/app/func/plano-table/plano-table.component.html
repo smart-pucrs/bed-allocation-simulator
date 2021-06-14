@@ -36,7 +36,7 @@
 		<a *ngIf="!row.leito.except" class="ng2-smart-action ng2-smart-action-edit-edit" (click)="openModal(row, false)">
 		    <i class="fa fa-pencil info font-medium-1 mr-2"></i>
         </a>		
-		<span title="Duplo click para editar" (dblclick)="clearExcecao(row)" *ngIf="row.leito.except">
+		<span title="Duplo click para editar" (dblclick)="openModal(row, false)" *ngIf="row.leito.except">
 		  ✔
 		</span>
 	  </td>
