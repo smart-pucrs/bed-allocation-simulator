@@ -3,12 +3,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 import { LeitoService } from '../../../services/leito.service';
-import { PacienteService } from '../../../services/paciente.service';
 import { LaudoInternacaoService } from '../../../services/laudo-internacao.service';
 
 import { Leito } from '../../../models/leito';
 import { DetalhesComponent } from '../../../shared/detalhes/detalhes.component';
 import { FormAlocacaoLeitosComponent } from '../../../formularios/form-alocacao-leitos/form-alocacao-leitos.component';
+import { Allocation } from 'app/models/allocation';
+import { TempAlocService } from 'app/services/temp-aloc.service';
+import { TempAloc } from 'app/models/temp-aloc';
 
 @Component({
   selector: 'app-alocacao-leitos',
@@ -41,6 +43,7 @@ export class AlocacaoLeitosComponent implements OnInit {
     private leitoService: LeitoService,
     private modalService: NgbModal,
     private toastr: ToastrService,
+    private tempAlocService: TempAlocService,
 	) {
     this.laudoInternacaoService.getLaudosPendentes().subscribe(laudos => {
       this.data = laudos;
@@ -98,10 +101,24 @@ export class AlocacaoLeitosComponent implements OnInit {
     });
   }
   
-  onValidarPlano(pacientes) {
+  async onValidarPlano(pacientes) {
     console.log(pacientes);
-    
+    let aloc: Array<Allocation> = [];
+    for(var p of pacientes){
+  	  if(p.leito){  
+  		aloc.push({idPaciente: p.idPaciente, leito:p.leito.numero});
+  	  }
+    }
+    let tempAloc: TempAloc = {validated: false, allocation: aloc};
+    this.tempAlocService.add(tempAloc);
+    this.toastr.success('Plano enviado para validação! Por favor aguarde.');
+    await this.delay(3000);// Trocar por um observable no banco que verifica qndo o plano está validado.
+    this.toastr.success('Você já pode solicitar ao chatbot o resultado da validação');
   }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
 
   ngOnInit(): void {
   }

@@ -20,6 +20,10 @@ const appRoutes: Routes = [
   {
     path: '**',
     redirectTo: 'pages/error'
+  },
+  {
+    path: 'optimised',
+    redirectTo: 'pages/optimised',
   }
 ];
 

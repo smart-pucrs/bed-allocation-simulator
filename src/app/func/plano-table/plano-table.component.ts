@@ -5,11 +5,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormEscolhaLeitoComponent } from '../../formularios/form-escolha-leito/form-escolha-leito.component';
 import { FormExcecao } from '../../formularios/form-excecao/form-excecao.component';
 
-import { TempAlocService } from '../../services/tempAloc.service';
 import { PacienteService } from '../../services/paciente.service';
 import { ExcecaoService } from '../../services/excecao.service';
 
-import { Allocation } from '../../models/allocation';
 
 @Component({
   selector: 'app-plano-table',
@@ -23,10 +21,10 @@ export class PlanoTableComponent implements OnInit {
   leitosSelected: Array<any> = [];
 
   @Input()
-  public set optSet(data: Array<any>){
+  public set optSet(data: Array<any>) {
   }
-  
-	
+
+
   @Input()
   public set config(conf: any) {
     if (!conf.className) {
@@ -71,12 +69,11 @@ export class PlanoTableComponent implements OnInit {
   private _config: any = {};
 
   public constructor(
-	private sanitizer: DomSanitizer,
-	private excecaoService: ExcecaoService,
-	private pacienteService: PacienteService,
-	private tempAlocService: TempAlocService,
-	private modalService: NgbModal
-  ) {}
+    private sanitizer: DomSanitizer,
+    private excecaoService: ExcecaoService,
+    private pacienteService: PacienteService,
+    private modalService: NgbModal
+  ) { }
 
   public sanitize(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);
@@ -145,43 +142,37 @@ export class PlanoTableComponent implements OnInit {
     }
     let index = this.rows.findIndex(x => x.id === row.id);
     this.rows[index].leito = event.value;
-    this.leitosSelected.push(event);	 
+    this.leitosSelected.push(event);
     let indexLeitoS = this.leitosSelected.findIndex(x => x.value === event.value);
-	this.excecaoService.getExcecaoByQuarto(event.value.quarto).subscribe(data =>{
-	  if(data){
-		  this.leitosSelected[indexLeitoS].value.except = data.desc
-	  }
-	})
+    this.excecaoService.getExcecaoByQuarto(event.value.quarto).subscribe(data => {
+      if (data) {
+        this.leitosSelected[indexLeitoS].value.except = data.desc
+      }
+    })
     let indexLeito = this.leitosSelect.findIndex(x => x.value === event.value);
     this.leitosSelect.splice(indexLeito, 1);
   }
-  
+
   public validar() {
-	  let aloc: Array<Allocation> = [];
-	  for(var r of this.rows){
-		  if(r.leito){  
-			aloc.push({idPaciente: r.idPaciente, leito:r.leito.numero});
-		  }
-	  }
-	  this.tempAlocService.write(aloc);
+    this.validarPlano.emit(this.rows);
   }
 
   openModal(row, leito) {
-	if(leito){
-		this.leitosSelect = this.leitosSelect.filter(x => x != null)
-		const modalRef = this.modalService.open(FormEscolhaLeitoComponent, { size: 'lg' });
-		modalRef.componentInstance.leitosSelect = this.leitosSelect;
-		modalRef.componentInstance.title = row.nomePaciente;
-		modalRef.componentInstance.id = row.id;
-		modalRef.result.then((result) => {
-		  this.onSelected(result, row);
-		}).catch((error) => {
-		  console.log(error);
-		});
-	}else{
-		const modalRef = this.modalService.open(FormExcecao, { size: 'lg' });
-		modalRef.componentInstance.quarto = row.leito.quarto; 		
-	}
+    if (leito) {
+      this.leitosSelect = this.leitosSelect.filter(x => x != null)
+      const modalRef = this.modalService.open(FormEscolhaLeitoComponent, { size: 'lg' });
+      modalRef.componentInstance.leitosSelect = this.leitosSelect;
+      modalRef.componentInstance.title = row.nomePaciente;
+      modalRef.componentInstance.id = row.id;
+      modalRef.result.then((result) => {
+        this.onSelected(result, row);
+      }).catch((error) => {
+        console.log(error);
+      });
+    } else {
+      const modalRef = this.modalService.open(FormExcecao, { size: 'lg' });
+      modalRef.componentInstance.quarto = row.leito.quarto;
+    }
   }
 
   ngOnInit(): void {
