@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { ChartistModule } from 'ng-chartist';
 
 import { FullPagesRoutingModule } from "./full-pages-routing.module";
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { FormulariosModule } from '../../formularios/formularios.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -19,6 +20,8 @@ import { AgendamentosComponent } from './cadastros/agendamentos/agendamentos.com
 import { ProfissionaisComponent } from './cadastros/profissionais/profissionais.component';
 import { InfraestruturaComponent } from './cadastros/infraestrutura/infraestrutura.component';
 import { ConsultasMedicasComponent } from './cadastros/consultas-medicas/consultas-medicas.component';
+import { OptimisedComponent } from './optimised/optimised.component';
+import { NgTableModule } from 'app/func/ng-table/ng-table.module';
 
 @NgModule({
   imports: [
@@ -29,6 +32,8 @@ import { ConsultasMedicasComponent } from './cadastros/consultas-medicas/consult
 	FormulariosModule,
 	ListagemModule,
 	PlanoDeAlocacaoModule,
+	NgTableModule,
+	PaginationModule.forRoot()
   ],
   declarations: [
 	DashboardComponent,
@@ -40,7 +45,8 @@ import { ConsultasMedicasComponent } from './cadastros/consultas-medicas/consult
 	AgendamentosComponent,
 	ProfissionaisComponent,
 	InfraestruturaComponent,
-	ConsultasMedicasComponent
+	ConsultasMedicasComponent,
+	OptimisedComponent
   ]
 })
 export class FullPagesModule { }

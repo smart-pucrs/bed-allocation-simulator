@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ErrorPageComponent } from "./error/error-page.component";
 import { LoginPageComponent } from "./login/login-page.component";
-import { OptimisedComponent } from './optimised/optimised.component';
 
 const routes: Routes = [
   {
@@ -21,13 +20,6 @@ const routes: Routes = [
         component: LoginPageComponent,
         data: {
           title: 'Login Page'
-        }
-      },
-      {
-        path: 'optimised',
-        component: OptimisedComponent,
-        data: {
-          title: 'Optimised Page'
         }
       }
     ]

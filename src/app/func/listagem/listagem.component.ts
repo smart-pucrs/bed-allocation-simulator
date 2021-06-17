@@ -54,6 +54,10 @@ export class ListagemComponent implements OnInit {
   };
 
   public ngOnInit(): void {
+    console.log(this.colunas);
+    console.log(this.data);
+    
+    
     if(this.data) {
     this.columns = this.colunas;
     this.config = {

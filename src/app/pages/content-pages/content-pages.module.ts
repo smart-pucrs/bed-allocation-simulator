@@ -8,7 +8,6 @@ import { ContentPagesRoutingModule } from "./content-pages-routing.module";
 
 import { ErrorPageComponent } from "./error/error-page.component";
 import { LoginPageComponent } from "./login/login-page.component";
-import { OptimisedComponent } from './optimised/optimised.component';
 
 
 @NgModule({
@@ -23,7 +22,6 @@ import { OptimisedComponent } from './optimised/optimised.component';
     declarations: [
         ErrorPageComponent,
         LoginPageComponent,
-        OptimisedComponent
     ]
 })
 export class ContentPagesModule { }

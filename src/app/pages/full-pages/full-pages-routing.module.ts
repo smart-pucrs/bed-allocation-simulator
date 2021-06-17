@@ -12,6 +12,7 @@ import { ProfissionaisComponent } from './cadastros/profissionais/profissionais.
 import { InfraestruturaComponent } from './cadastros/infraestrutura/infraestrutura.component';
 import { ConsultasMedicasComponent } from './cadastros/consultas-medicas/consultas-medicas.component';
 import { PacientesInternadosComponent } from './pacientes-internados/pacientes-internados.component';
+import { OptimisedComponent } from './optimised/optimised.component';
 
 const routes: Routes = [
 	//pagina inicial
@@ -89,6 +90,13 @@ const routes: Routes = [
 		  title: 'Cadastros Consultas'
 	}
   },
+  {
+	path: 'optimised',
+	component: OptimisedComponent,
+	data: {
+	  title: 'Optimised Page'
+	}
+  }
 ];
 
 @NgModule({
