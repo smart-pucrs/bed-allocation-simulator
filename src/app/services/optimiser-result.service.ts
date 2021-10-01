@@ -43,7 +43,7 @@ export class OptimiserResultService {
     this.optimiserResultDoc = this.afs.doc(`optimiserResult/${id}`);
     this.optimiserResultDoc.update(optimiserResult);
   }
-
+// Para alocar pode ser usada https://us-central1-explainable-agent.cloudfunctions.net/allocPatients
   add(optimiserResult: OptimiserResult) {
     this.optimiserResultCollection.add(optimiserResult);
   }

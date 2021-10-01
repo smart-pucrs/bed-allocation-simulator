@@ -9,11 +9,19 @@
     <form class="form-horizontal" [formGroup]="quartoForm" (ngSubmit)="save()">
       <!-- Número do Quarto -->
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="form-group" [ngClass]="aplicaCssErro('nome', quartoForm)">
             <label for="nome" class="control-label">Número do Quarto</label>
             <input type="text" class="form-control" id="nome" formControlName="nome" placeholder="Identificação do quarto">
             <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome', quartoForm)" [msgErro]="getMsgError('nome', quartoForm)">
+            </app-campo-control-erro>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group" [ngClass]="aplicaCssErro('dist', quartoForm)">
+            <label for="dist" class="control-label">Distância</label>
+            <input type="text" class="form-control" id="dist" formControlName="dist">
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('dist', quartoForm)" [msgErro]="getMsgError('dist', quartoForm)">
             </app-campo-control-erro>
           </div>
         </div>

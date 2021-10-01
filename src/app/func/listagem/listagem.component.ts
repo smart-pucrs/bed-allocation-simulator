@@ -13,7 +13,7 @@ export class ListagemComponent implements OnInit {
   @Input() public add: boolean;
   @Input() public canDelete: boolean;
   @Input() public canEdit: boolean;
-  @Input() public showButton?: boolean;
+  @Input() public showButtons?: boolean;
   @Input() set dados(dados: Array<any>){
     this.data = dados;
     if (this.colunas && this.data) {
@@ -54,9 +54,6 @@ export class ListagemComponent implements OnInit {
   };
 
   public ngOnInit(): void {
-    console.log(this.colunas);
-    console.log(this.data);
-    
     
     if(this.data) {
     this.columns = this.colunas;

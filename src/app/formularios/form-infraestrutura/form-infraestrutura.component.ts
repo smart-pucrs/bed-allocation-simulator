@@ -15,6 +15,7 @@ import { TIPOSDEQUARTOS } from '../../models/tipos-quartos';
 import { TIPOSDECUIDADOS } from '../../models/tipos-cuidados';
 import { TIPOSDEENCAMINHAMENTO} from '../../models/tipos-encaminhamento';
 import { TIPOSDEESPECIALIDADES } from '../../models/tipos-especialidades';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-form-infraestrutura',
@@ -85,6 +86,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
     // Form
     this.quartoForm = this.formBuilder.group({
       nome: [null, [Validators.required, Validators.maxLength(50)]],
+      dist: [null, [Validators.required, Validators.maxLength(5)]],
       especialidade: [null, [Validators.required, Validators.maxLength(50)]],
       age: [null, Validators.required],
       tipoDeLeito: [null, Validators.required],
@@ -102,6 +104,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
         this.leitosDoQuarto = data.leitos;
         this.quartoForm.setValue({
           nome: data.nome,
+          dist:data.dist,
           especialidade: data.especialidade,
           age: data.age ? data.age : '',
           tipoDeLeito: data.tipoDeLeito,
@@ -120,6 +123,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
         });
         if (this.naoEditar) {
           controls.nome.disable();
+          controls.dist.disable();
           controls.especialidade.disable();
           controls.age.disable();
           controls.tipoDeLeito.disable();
@@ -142,7 +146,9 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
       if (this.id !== null) {
           let promises = this.leitosDoQuarto.map(element => {
             let leito: Leito = {
+              id: element.id,
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: element.numero,
               status: element.status,
               paciente: element.paciente ? element.paciente : null,
@@ -156,26 +162,14 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
             }
             return this.leitoService.update(leito, element.id)
               .then(docRef => {
-                this.leitos.push({
-                  id: element.id,
-                  quarto: leito.quarto,
-                  numero: leito.numero,
-                  status: leito.status,
-                  paciente: leito.paciente,
-                  especialidade: leito.especialidade,
-                  age: leito.age,
-                  genero: leito.genero,
-                  tipoDeLeito: leito.tipoDeLeito,
-                  tipoDeEstadia: leito.tipoDeEstadia,
-                  tipoDeEncaminhamento: leito.tipoDeEncaminhamento,
-                  tipoDeCuidado: leito.tipoDeCuidado,
-                })
+                this.leitos.push(leito);
               });
           })
           Promise.all(promises).then(() => {
             this.quartoForm.controls.numLeitos.enable();
             this.quarto = {
               nome: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               especialidade: this.quartoForm.value['especialidade'],
               age: this.quartoForm.value['age'],
               tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
@@ -197,6 +191,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
           case '1':
             this.leitosDoQuarto.push({
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: this.quartoForm.value['nome'] + 'a',
               status: 'Livre',
               especialidade: this.quartoForm.value['especialidade'],
@@ -211,6 +206,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
           case '2':
             this.leitosDoQuarto.push({
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: this.quartoForm.value['nome'] + 'a',
               status: 'Livre',
               especialidade: this.quartoForm.value['especialidade'],
@@ -223,6 +219,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
             });
             this.leitosDoQuarto.push({
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: this.quartoForm.value['nome'] + 'b',
               status: 'Livre',
               especialidade: this.quartoForm.value['especialidade'],
@@ -237,6 +234,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
           case '3':
             this.leitosDoQuarto.push({
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: this.quartoForm.value['nome'] + 'a',
               status: 'Livre',
               especialidade: this.quartoForm.value['especialidade'],
@@ -249,6 +247,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
             });
             this.leitosDoQuarto.push({
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: this.quartoForm.value['nome'] + 'b',
               status: 'Livre',
               especialidade: this.quartoForm.value['especialidade'],
@@ -261,6 +260,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
             });
             this.leitosDoQuarto.push({
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: this.quartoForm.value['nome'] + 'c',
               status: 'Livre',
               especialidade: this.quartoForm.value['especialidade'],
@@ -275,6 +275,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
           case '4':
             this.leitosDoQuarto.push({
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: this.quartoForm.value['nome'] + 'a',
               status: 'Livre',
               especialidade: this.quartoForm.value['especialidade'],
@@ -287,6 +288,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
             });
             this.leitosDoQuarto.push({
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: this.quartoForm.value['nome'] + 'b',
               status: 'Livre',
               especialidade: this.quartoForm.value['especialidade'],
@@ -299,6 +301,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
             });
             this.leitosDoQuarto.push({
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: this.quartoForm.value['nome'] + 'c',
               status: 'Livre',
               especialidade: this.quartoForm.value['especialidade'],
@@ -311,6 +314,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
             });
             this.leitosDoQuarto.push({
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: this.quartoForm.value['nome'] + 'd',
               status: 'Livre',
               especialidade: this.quartoForm.value['especialidade'],
@@ -325,6 +329,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
           case '5':
             this.leitosDoQuarto.push({
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: this.quartoForm.value['nome'] + 'a',
               status: 'Livre',
               especialidade: this.quartoForm.value['especialidade'],
@@ -337,6 +342,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
             });
             this.leitosDoQuarto.push({
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: this.quartoForm.value['nome'] + 'b',
               status: 'Livre',
               especialidade: this.quartoForm.value['especialidade'],
@@ -349,6 +355,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
             });
             this.leitosDoQuarto.push({
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: this.quartoForm.value['nome'] + 'c',
               status: 'Livre',
               especialidade: this.quartoForm.value['especialidade'],
@@ -361,6 +368,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
             });
             this.leitosDoQuarto.push({
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: this.quartoForm.value['nome'] + 'd',
               status: 'Livre',
               especialidade: this.quartoForm.value['especialidade'],
@@ -373,6 +381,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
             });
             this.leitosDoQuarto.push({
               quarto: this.quartoForm.value['nome'],
+              dist: this.quartoForm.value['dist'],
               numero: this.quartoForm.value['nome'] + 'e',
               status: 'Livre',
               especialidade: this.quartoForm.value['especialidade'],
@@ -393,6 +402,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
               this.leitos.push({
                 id: docRef.id,
                 quarto: element.quarto,
+                dist: element.dist,
                 numero: element.numero,
                 status: element.status,
                 especialidade: element.especialidade,
@@ -408,6 +418,7 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
         Promise.all(promises).then(() => {
           this.quarto = {
             nome: this.quartoForm.value['nome'],
+            dist: this.quartoForm.value['dist'],
             especialidade: this.quartoForm.value['especialidade'],
             age: this.quartoForm.value['age'],
             tipoDeLeito: this.quartoForm.value['tipoDeLeito'],
@@ -420,6 +431,9 @@ export class FormInfraestruturaComponent implements OnInit, OnDestroy {
           }
 
           this.infraestruturaService.add(this.quarto);
+          this.leitos.forEach(element => {
+            this.leitoService.update(element, element.id);
+          });
           this.activeModal.close('dados adicionados');
           this.quartoForm.reset();
         }).catch((err) => {

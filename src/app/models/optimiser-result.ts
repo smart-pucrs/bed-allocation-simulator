@@ -10,4 +10,6 @@ export interface OptimiserResult {
     leitoData?: Leito[];
     laudosData?: LaudoInternacao[];
     alreadySuggested?: boolean;
+    alocar?: boolean;
+    concluido?:boolean;
 }

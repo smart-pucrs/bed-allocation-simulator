@@ -19,4 +19,5 @@ export interface LaudoInternacao {
     dataAlta?: number;
     leito?: Leito;
     tipoDeEstadia?: string;
+    birthtype?: string;
 }

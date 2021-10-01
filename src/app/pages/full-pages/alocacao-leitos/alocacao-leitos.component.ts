@@ -109,8 +109,15 @@ export class AlocacaoLeitosComponent implements OnInit {
   		aloc.push({idPaciente: p.idPaciente, leito:p.leito.numero});
   	  }
     }
-    let tempAloc: TempAloc = {validated: false, allocation: aloc};
-    this.tempAlocService.add(tempAloc);
+    let tempAloc: TempAloc = {
+      validated: false, 
+      allocation: aloc,
+      saveAt: (new Date()).getTime()
+    };
+    this.tempAlocService.add(tempAloc).then(docRef => {
+      tempAloc.id = docRef.id;
+      this.tempAlocService.update(tempAloc, tempAloc.id);
+    });
     this.toastr.success('Plano enviado para validação! Por favor aguarde.');
     await this.delay(3000);// Trocar por um observable no banco que verifica qndo o plano está validado.
     this.toastr.success('Você já pode solicitar ao chatbot o resultado da validação');

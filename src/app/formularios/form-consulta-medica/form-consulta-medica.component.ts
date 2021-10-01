@@ -257,6 +257,7 @@ export class FormConsultaMedicaComponent implements OnInit {
             } else {
             this.laudoInternacaoService.add(laudoInternacao).then(result => {
               laudoInternacao.id = result.id
+              this.laudoInternacaoService.update(laudoInternacao, laudoInternacao.id);
               prontuario.internacoes.push(laudoInternacao);
               this.saveDb(prontuario);
             })

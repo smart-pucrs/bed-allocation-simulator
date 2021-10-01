@@ -48,9 +48,17 @@ export class ExcecaoService {
 /*  add(leito: Leito) {
     return this.leitosCollection.add(leito);
   }
-
+*/
   delete(id: string) {
-    this.leitoDoc = this.afs.doc(`leitos/${id}`);
-    this.leitoDoc.delete();
-  }*/
+    this.excecaoDoc = this.afs.doc(`excecoes/${id}`);
+    this.excecaoDoc.delete();
+  }
+
+  deleteExcecaoByQuarto(quarto: string) {
+    this.excecaoDoc = this.afs.doc(`excecoes/${quarto}`);
+    console.log("service");
+    console.log(this.excecaoDoc);
+    
+    return this.excecaoDoc.delete();
+  }
 }

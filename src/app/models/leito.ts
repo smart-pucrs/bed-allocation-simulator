@@ -1,5 +1,3 @@
-import { Prontuario } from "./prontuario";
-
 export interface Leito {
     id?: string;
     quarto?: string;
@@ -20,4 +18,5 @@ export interface Leito {
 	tipoDeEncaminhamento?: string;
     tipoDeCuidado?: string;
     birthtype?: string;
+    dist?: string;
 }

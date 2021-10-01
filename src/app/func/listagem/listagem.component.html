@@ -33,8 +33,9 @@
             </app-ng-table>
           </div>	
 		<!-- button -->
-		<div *ngIf="showButton">
-			<button type="submit" (click)="onValidar()" class="btn-forms btn btn-primary">Enviar para validação</button>
+		<div *ngIf="showButtons">
+			<button type="submit" (click)="onAdd('aloc')" class="btn-forms btn btn-primary">Confirmar</button>
+			<button type="submit" (click)="onDelete('aloc')" class="btn-forms btn btn-action">Descartar</button>
 		</div>
           <!-- Paginação -->
           <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length" [itemsPerPage]="itemsPerPage"

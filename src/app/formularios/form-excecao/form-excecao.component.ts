@@ -14,6 +14,7 @@ export class FormExcecao implements OnInit {
   @Input() title;  
   @Input() public quarto: string;
   excecaoForm: FormGroup; 
+  data: any;
   
   constructor(
 	public activeModal: NgbActiveModal,
@@ -34,6 +35,7 @@ export class FormExcecao implements OnInit {
 	  
 	  if(this.quarto !== null){
 		  this.excecaoService.getExcecaoByQuarto(this.quarto).subscribe(data =>{
+        this.data = data;
 			  if(data){
 				  this.excecaoForm.setValue({
 					  quarto: this.quarto,
@@ -79,5 +81,22 @@ export class FormExcecao implements OnInit {
     } else {
       this.utilitariosService.verificaValidacoesForm(this.excecaoForm);
     }
+  }
+
+  deleteException() {
+    if(this.data) {
+      console.log(this.data);
+      
+      this.excecaoService.deleteExcecaoByQuarto(this.quarto);
+      this.activeModal.close('Excessão excluída');
+      console.log("excluída");
+      
+      // reseta o form
+      this.excecaoForm.reset();
+      } else {
+        this.activeModal.close('empty');
+        // reseta o form
+        this.excecaoForm.reset();
+      }
   }
 }

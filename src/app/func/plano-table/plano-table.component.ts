@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 
 import { FormEscolhaLeitoComponent } from '../../formularios/form-escolha-leito/form-escolha-leito.component';
 import { FormExcecao } from '../../formularios/form-excecao/form-excecao.component';
@@ -71,6 +72,7 @@ export class PlanoTableComponent implements OnInit {
   public constructor(
     private sanitizer: DomSanitizer,
     private excecaoService: ExcecaoService,
+    private toastr: ToastrService,
     private pacienteService: PacienteService,
     private modalService: NgbModal
   ) { }
@@ -158,6 +160,8 @@ export class PlanoTableComponent implements OnInit {
   }
 
   openModal(row, leito) {
+    console.log(row);
+    
     if (leito) {
       this.leitosSelect = this.leitosSelect.filter(x => x != null)
       const modalRef = this.modalService.open(FormEscolhaLeitoComponent, { size: 'lg' });
@@ -172,6 +176,24 @@ export class PlanoTableComponent implements OnInit {
     } else {
       const modalRef = this.modalService.open(FormExcecao, { size: 'lg' });
       modalRef.componentInstance.quarto = row.leito.quarto;
+      modalRef.result.then((result) => {
+        if (result == "dados editados") {
+          this.toastr.success('Excessão criada com sucesso.');
+        } else if (result == 'Excessão excluída') {
+          this.toastr.success('Excessão excluída com sucesso.');
+          let indexLeitoS = this.leitosSelected.findIndex(x => x.value === row.leito);
+          this.leitosSelected[indexLeitoS].value.except = undefined;
+        } else if (result == 'empty') {
+          this.toastr.error('Não há excessão para excluir')
+        }
+      }).catch((error) => {
+        if (error == 'Cross click' || error == 0) {
+          console.log(error);
+        } else {
+        this.toastr.error('Houve um erro ao processar a operação.')
+        console.log(error);
+        }
+      });
     }
   }
 

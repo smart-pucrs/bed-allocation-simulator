@@ -46,7 +46,7 @@ export class TempAlocService {
   }
 
   add(tempAloc: TempAloc) {
-    this.tempAlocCollection.add(tempAloc);
+    return this.tempAlocCollection.add(tempAloc);
   }
 
   delete(id: string) {

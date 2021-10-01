@@ -51,6 +51,7 @@ export class ConsultasMedicasComponent implements OnInit {
           tipoDeLeito: element.tipoDeLeito ? element.tipoDeLeito : '',
           tipoDeEncaminhamento: element.tipoDeEncaminhamento,
           tipoDeCuidado: element.tipoDeCuidado ? element.tipoDeCuidado : '',
+          tipoDeEstadia: element.tipoDeEstadia ? element.tipoDeEstadia : '',
           nomeMedico: element.medicoResponsavel.nome,
           crmMedico: element.medicoResponsavel.CRM,
           medicoResponsavel: element.medicoResponsavel,
