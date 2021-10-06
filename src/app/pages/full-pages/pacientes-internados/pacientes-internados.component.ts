@@ -27,6 +27,7 @@ export class PacientesInternadosComponent implements OnInit {
     { title: 'Prontuário', name: 'prontuario', sort: 'asc' },
     { title: 'Nome', name: 'nomePaciente', sort: '' },
     { title: 'Especialidade', name: 'especialidade', sort: '' },
+    { title: 'Idade', name: 'age', sort: '' },
     { title: 'Leito', name: 'numLeito', sort: '' },
     { title: 'Data de Internação', name: 'dataInternacao', sort: '' }
   ];
@@ -73,7 +74,6 @@ export class PacientesInternadosComponent implements OnInit {
       { label: 'Tipo de Leito', value: evento.tipoDeLeito ? evento.tipoDeLeito : '', tipo: 'string'},
       { label: 'Tipo de Estadia', value: evento.tipoDeEstadia ? evento.tipoDeEstadia : '', tipo: 'string'},
       { label: 'Tipo de Cuidado', value: evento.tipoDeCuidado ? evento.tipoDeCuidado : '', tipo: 'string'},
-      { label: 'Tipo de Estadia', value: evento.tipoDeEstadia ? evento.tipoDeEstadia : '', tipo: 'string'},
       { label: 'Ativo', value: evento.ativo ? 'Sim' : 'Não', tipo: 'string'},
       { label: 'Data da Internação', value: evento.dataInternacao ? evento.dataInternacao : '', tipo: 'string'},
       { label: 'Data da Alta', value: evento.dataAlta ? new Date(evento.dataAlta) : '', tipo: 'date'},

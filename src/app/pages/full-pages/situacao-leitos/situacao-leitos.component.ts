@@ -26,6 +26,8 @@ export class SituacaoLeitosComponent implements OnInit {
     { title: 'Leito', name: 'numero', sort: 'asc' },
     { title: 'Status', name: 'status', sort: '' }, 
     { title: 'Especialidade', name: 'especialidade', sort: '' },
+    { title: 'Gênero', name: 'genero', sort: ''},
+    { title: 'Idade', name: 'age', sort: ''},
     { title: 'Tipo de Encaminhamento', name: 'tipoDeEncaminhamento', sort: '' }
   ];
 
