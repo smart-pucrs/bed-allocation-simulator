@@ -5,11 +5,12 @@ export interface Agendamento {
     id?: string;
     nomePaciente?: string;
     prontuario?: string;
-    paciente?: Paciente;
+    pacienteId?: string;
     tipo?: string;
     especialidade?: string;
-    nomeMedico?: string
-    medico?: Profissional;
+    nomeMedico?: string;
+    crmMedico?: string;
+    medicoId?: string;
     dataProcedimento?: number;
     descricao?: string;
     cancelado?: boolean;

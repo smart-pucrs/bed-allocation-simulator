@@ -22,6 +22,7 @@ export class PlanoDeAlocacaoComponent implements OnInit {
 
   @Output() mostraDetalhe = new EventEmitter();
   @Output() validarPlano = new EventEmitter();
+  @Output() alocar = new EventEmitter();
 
   public rows: Array<any> = [];
 
@@ -164,4 +165,7 @@ export class PlanoDeAlocacaoComponent implements OnInit {
     this.validarPlano.emit(evento)
   }
 
+  public onAlocar(evento) {
+    this.alocar.emit(evento)
+  }
 }

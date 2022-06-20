@@ -20,7 +20,7 @@ import { Profissional } from '../../models/profissional';
   selector: 'app-form-agendamento',
   templateUrl: './form-agendamento.component.html'
 })
-export class FormAgendamentoComponent implements OnInit, OnDestroy {  
+export class FormAgendamentoComponent implements OnInit, OnDestroy {
   @Input() title;
   @Input() id: string;
   agendamentoForm: FormGroup;
@@ -32,7 +32,7 @@ export class FormAgendamentoComponent implements OnInit, OnDestroy {
   listaProfissionais: Profissional[];
 
   // conf BsDatepicker
-  bsconfig = { 
+  bsconfig = {
     dateInputFormat: 'DD/MM/YYYY',
     containerClass: 'theme-default',
     minDate: new Date
@@ -62,7 +62,7 @@ export class FormAgendamentoComponent implements OnInit, OnDestroy {
     private profissionalService: ProfissionalService,
     private toastr: ToastrService,
     public activeModal: NgbActiveModal,
-	) {
+  ) {
     // popular selects
     this.pacienteService.getPacientesNaoFalecidos().subscribe(data => {
       this.listaProntuarios = data;
@@ -75,7 +75,7 @@ export class FormAgendamentoComponent implements OnInit, OnDestroy {
           value: element.nome,
           label: element.nome
         });
-      })   
+      })
     })
     this.profissionalService.getProfissionais().subscribe(data => {
       this.listaProfissionais = data;
@@ -107,14 +107,12 @@ export class FormAgendamentoComponent implements OnInit, OnDestroy {
     // Edit
     if (this.id !== null) {
       this.agendamentoService.getAgendamentoById(this.id).subscribe(data => {
-        this.paciente = data.paciente;
-        this.medico = data.medico;
         this.agendamentoForm.setValue({
-          numProntuario: data.paciente.prontuario,
-          nomePaciente: data.paciente.nome,
-          crmMedico: data.medico.CRM,
-          nomeMedico: data.medico.nome,
-          especialidade: data.medico.especialidade,
+          numProntuario: data.prontuario,
+          nomePaciente: data.nomePaciente,
+          crmMedico: data.crmMedico,
+          nomeMedico: data.nomeMedico,
+          especialidade: data.especialidade,
           dataProcedimento: new Date(data.dataProcedimento),
           tipo: data.tipo,
           descricao: data.descricao
@@ -130,22 +128,22 @@ export class FormAgendamentoComponent implements OnInit, OnDestroy {
           controls.dataProcedimento.disable();
           controls.tipo.disable();
           controls.descricao.disable();
-          this.toastr.warning('Agendamento cancelado não é possível editar.')
+          this.toastr.warning('Agendamento cancelado, não é possível editar.')
         }
-      })
+      });
     }
 
     // desabilita campo para não ser preenchido manualmente
-    this.agendamentoForm.controls.especialidade.disable();    
+    this.agendamentoForm.controls.especialidade.disable();
   }
 
   onSelected(evento, tipo) {
     let controls = this.agendamentoForm.controls;
     switch (tipo) {
       case 'prontuario':
-        
+
         this.paciente = this.listaProntuarios.find(x => x.prontuario === evento.value);
-        
+
         controls.numProntuario.setValue(this.paciente.prontuario);
         controls.nomePaciente.setValue(this.paciente.nome);
         break;
@@ -166,10 +164,10 @@ export class FormAgendamentoComponent implements OnInit, OnDestroy {
         controls.nomeMedico.setValue(this.medico.nome);
         controls.especialidade.setValue(this.medico.especialidade);
         break;
-    
+
       default:
         break;
-    }    
+    }
   }
 
   closeModal() {
@@ -178,46 +176,50 @@ export class FormAgendamentoComponent implements OnInit, OnDestroy {
 
   save() {
     if (this.agendamentoForm.valid) {
-      
+
       this.agendamento = {
         prontuario: this.paciente.prontuario,
-        paciente: this.paciente,
+        pacienteId: this.paciente.id,
         nomePaciente: this.paciente.nome,
         tipo: this.agendamentoForm.value['tipo'],
         especialidade: this.medico.especialidade,
         nomeMedico: this.medico.nome,
-        medico: this.medico,
+        crmMedico: this.medico.CRM,
+        medicoId: this.medico.id,
         dataProcedimento: (this.agendamentoForm.value['dataProcedimento']).getTime(),
         descricao: this.agendamentoForm.value['descricao'],
         cancelado: false
       }
       let prontuario: Prontuario;
-      new Promise((resolve, reject) => {
-        this.prontuarioService.getProntuarioByNumero(this.paciente.prontuario).subscribe(result => {
-          prontuario = result[0];
-          resolve(prontuario);
-        });
-      }).then(res => {
-        if (this.id !== null) {
-          this.agendamentoService.update(this.agendamento, this.id);
-          this.agendamento.id = this.id;
-          let index = prontuario.agendamentos.findIndex(x => x.id === this.id);
-          prontuario.agendamentos.splice(index,1);
-          prontuario.agendamentos.push(this.agendamento);
-          this.prontuarioService.update(prontuario, prontuario.id);
-          this.activeModal.close('dados editados');
-          // reseta o form
-          this.agendamentoForm.reset();
-        } else {
+
+      if (this.id !== null) {
+        this.agendamentoService.update(this.agendamento, this.id);
+        // this.agendamento.id = this.id;
+        // let index = prontuario.agendamentos.findIndex(x => x === this.id);
+        // prontuario.agendamentos.splice(index,1);
+        // prontuario.agendamentos.push(this.id);
+        // this.prontuarioService.update(prontuario, prontuario.id);
+        this.activeModal.close('dados editados');
+        // reseta o form
+        this.agendamentoForm.reset();
+      } else {
+        new Promise((resolve, reject) => {
+          this.prontuarioService.getProntuarioByNumero(this.paciente.prontuario).subscribe(result => {
+            prontuario = result[0];
+            resolve(prontuario);
+          });
+        }).then(res => {
           this.agendamentoService.add(this.agendamento).then(result => {
             this.agendamento.id = result.id;
-            prontuario.agendamentos.push(this.agendamento);            
+            prontuario.agendamentos.push(this.id);
             this.prontuarioService.update(prontuario, prontuario.id);
+            this.agendamentoService.update(this.agendamento, this.id);
             this.activeModal.close('dados adicionados');
             this.agendamentoForm.reset();
           });
-        }
-      });
+        });
+      }
+
     } else {
       this.utilitariosService.verificaValidacoesForm(this.agendamentoForm);
     }

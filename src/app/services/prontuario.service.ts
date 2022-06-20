@@ -11,13 +11,13 @@ import { Prontuario } from '../models/prontuario';
 export class ProntuarioService {
   prontuariosCollection: AngularFirestoreCollection<Prontuario>;
   prontuariosCollectionNaoFalecidos: AngularFirestoreCollection<Prontuario>;
-  prontuariosCollectionInternados: AngularFirestoreCollection<Prontuario>;
-  prontuariosCollectionAutorizados: AngularFirestoreCollection<Prontuario>;
+  // prontuariosCollectionInternados: AngularFirestoreCollection<Prontuario>;
+  // prontuariosCollectionAutorizados: AngularFirestoreCollection<Prontuario>;
   
   prontuarios: Observable<Prontuario[]>;
   prontuariosNaoFalecidos: Observable<Prontuario[]>;
-  prontuariosInternados: Observable<Prontuario[]>;
-  prontuariosAutorizados: Observable<Prontuario[]>;
+  // prontuariosInternados: Observable<Prontuario[]>;
+  // prontuariosAutorizados: Observable<Prontuario[]>;
   
   prontuarioDoc: AngularFirestoreDocument<Prontuario>;
   proximoProntuarioDoc: AngularFirestoreDocument<any>;
@@ -25,13 +25,13 @@ export class ProntuarioService {
   constructor(public afs: AngularFirestore) {
     this.prontuariosCollection = this.afs.collection('prontuarios');
     this.prontuariosCollectionNaoFalecidos = this.afs.collection('prontuarios', ref => ref.where('falecido', '==' , false));
-    this.prontuariosCollectionInternados = this.afs.collection('prontuarios', ref => ref.where('consultasMedicas.internado', '==' , 'true'));
-    this.prontuariosCollectionAutorizados = this.afs.collection('prontuarios', ref => ref.where('consultasMedicas.internar', '==' , 'true').where('consultasMedicas.internado', '==' , 'false'));
+    // this.prontuariosCollectionInternados = this.afs.collection('prontuarios', ref => ref.where('consultasMedicas.internado', '==' , 'true'));
+    // this.prontuariosCollectionAutorizados = this.afs.collection('prontuarios', ref => ref.where('consultasMedicas.internar', '==' , 'true').where('consultasMedicas.internado', '==' , 'false'));
   
     this.getProntuariosDb();
     this.getProntuariosNaoFalecidosDb();
-    this.getProntuariosInternadosDb();
-    this.getProntuariosAutorizadosDb();
+    // this.getProntuariosInternadosDb();
+    // this.getProntuariosAutorizadosDb();
    }
 
   private getProntuariosDb(){
@@ -54,25 +54,25 @@ export class ProntuarioService {
     }));
   }
 
-  private getProntuariosInternadosDb(){
-    this.prontuariosInternados = this.prontuariosCollectionInternados.snapshotChanges().pipe(map(changes => {
-      return changes.map(a => {
-        const data = a.payload.doc.data() as Prontuario;
-        data.id = a.payload.doc.id;
-        return data;
-      });
-    }));
-  }
+  // private getProntuariosInternadosDb(){
+  //   this.prontuariosInternados = this.prontuariosCollectionInternados.snapshotChanges().pipe(map(changes => {
+  //     return changes.map(a => {
+  //       const data = a.payload.doc.data() as Prontuario;
+  //       data.id = a.payload.doc.id;
+  //       return data;
+  //     });
+  //   }));
+  // }
 
-  private getProntuariosAutorizadosDb(){
-    this.prontuariosAutorizados = this.prontuariosCollectionAutorizados.snapshotChanges().pipe(map(changes => {
-      return changes.map(a => {
-        const data = a.payload.doc.data() as Prontuario;
-        data.id = a.payload.doc.id;
-        return data;
-      });
-    }));
-  }
+  // private getProntuariosAutorizadosDb(){
+  //   this.prontuariosAutorizados = this.prontuariosCollectionAutorizados.snapshotChanges().pipe(map(changes => {
+  //     return changes.map(a => {
+  //       const data = a.payload.doc.data() as Prontuario;
+  //       data.id = a.payload.doc.id;
+  //       return data;
+  //     });
+  //   }));
+  // }
 
   getProntuarios() {
     this.getProntuariosDb();
@@ -84,15 +84,15 @@ export class ProntuarioService {
     return this.prontuariosNaoFalecidos;
   }
 
-  getProntuariosInternados() {
-    this.getProntuariosInternadosDb();
-    return this.prontuariosInternados;
-  }
+  // getProntuariosInternados() {
+  //   this.getProntuariosInternadosDb();
+  //   return this.prontuariosInternados;
+  // }
 
-  getProntuariosAutorizados() {
-    this.getProntuariosAutorizadosDb();
-    return this.prontuariosAutorizados;
-  }
+  // getProntuariosAutorizados() {
+  //   this.getProntuariosAutorizadosDb();
+  //   return this.prontuariosAutorizados;
+  // }
 
   getProntuarioById(id: string) {
     this.prontuarioDoc = this.afs.doc(`prontuarios/${id}`);

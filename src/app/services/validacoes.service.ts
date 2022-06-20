@@ -39,6 +39,10 @@ export class ValidacoesService {
     }));
   }
 
+  awaitValidation(){
+    this.validacoesCollection.auditTrail().subscribe(console.log);//?
+  }
+
   setValidacaoConcluida(){
     let arrValidacoes: Validacao[];
     this.getValidacoesNaoConcluidas();
@@ -55,4 +59,5 @@ export class ValidacoesService {
     this.validacoesDoc = this.afs.doc(`validacoes/${id}`);
     this.validacoesDoc.update(validacoes);
   }
+
 }

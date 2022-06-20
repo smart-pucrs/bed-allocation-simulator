@@ -74,25 +74,31 @@ export class AgendamentosComponent implements OnInit {
     modalRef.componentInstance.mensagem = this.mensagem;
     modalRef.result.then((result) => {
       this.agendamentoService.cancelarAgendamento(this.idToDelete);
-      let prontuario: Prontuario;
+      // let prontuario: Prontuario;
+      let agendamento: Agendamento;
+      this.agendamentoService.getAgendamentoById(this.idToDelete).subscribe(result => {
+        agendamento = result;
+        agendamento.cancelado = true;
+        this.agendamentoService.update(agendamento, this.idToDelete);
       
-      new Promise((resolve, reject) => {
-        this.prontuarioService.getProntuarioByNumero(this.numProntuario).subscribe(result => {
-          prontuario = result[0];
-          resolve(prontuario);
-        });
-      }).then(res => {
-          let agendamento: Agendamento;
-          this.agendamentoService.getAgendamentoById(this.idToDelete).subscribe(result => {
-            agendamento = result;
-            agendamento.id = this.idToDelete;          
-            let index = prontuario.agendamentos.findIndex(x => x.id === this.idToDelete);
-            prontuario.agendamentos.splice(index,1);
-            prontuario.agendamentos.push(agendamento);
-            this.prontuarioService.update(prontuario, prontuario.id);
-            this.idToDelete = null;
-          });
-      })
+      
+      // new Promise((resolve, reject) => {
+      //   this.prontuarioService.getProntuarioByNumero(this.numProntuario).subscribe(result => {
+      //     prontuario = result[0];
+      //     resolve(prontuario);
+      //   });
+      // }).then(res => {
+      //     let agendamento: Agendamento;
+      //     this.agendamentoService.getAgendamentoById(this.idToDelete).subscribe(result => {
+      //       agendamento = result;
+      //       agendamento.id = this.idToDelete;          
+      //       let index = prontuario.agendamentos.findIndex(x => x === this.idToDelete);
+      //       prontuario.agendamentos.splice(index,1);
+      //       prontuario.agendamentos.push(agendamento);
+      //       this.prontuarioService.update(prontuario, prontuario.id);
+      //       this.idToDelete = null;
+      //     });
+      });
       const mensagem = 'Agendamento cancelado com sucesso!';
       this.toastr.success(mensagem);
     }).catch((error) => {

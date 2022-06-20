@@ -12,6 +12,7 @@ export interface LaudoInternacao {
     medicoResponsavel?: string;
     especialidade?: string;
 	tipoDeLeito?: string;
+    tipoDeIsolamento?: string;
 	tipoDeEncaminhamento?: string;
     tipoDeCuidado?: string;
     internado?: boolean;

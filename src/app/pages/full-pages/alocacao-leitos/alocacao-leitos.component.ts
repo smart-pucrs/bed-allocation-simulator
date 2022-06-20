@@ -11,6 +11,7 @@ import { FormAlocacaoLeitosComponent } from '../../../formularios/form-alocacao-
 import { Allocation } from 'app/models/allocation';
 import { TempAlocService } from 'app/services/temp-aloc.service';
 import { TempAloc } from 'app/models/temp-aloc';
+import { ValidacoesService } from 'app/services/validacoes.service';
 
 @Component({
   selector: 'app-alocacao-leitos',
@@ -44,6 +45,7 @@ export class AlocacaoLeitosComponent implements OnInit {
     private modalService: NgbModal,
     private toastr: ToastrService,
     private tempAlocService: TempAlocService,
+    private validationService: ValidacoesService
 	) {
     this.laudoInternacaoService.getLaudosPendentes().subscribe(laudos => {
       this.data = laudos;
@@ -57,6 +59,7 @@ export class AlocacaoLeitosComponent implements OnInit {
         }); 
       });
     });
+    
 	// console.log("DONE")
   }
 
@@ -120,7 +123,22 @@ export class AlocacaoLeitosComponent implements OnInit {
     });
     this.toastr.success('Plano enviado para validação! Por favor aguarde.');
     await this.delay(3000);// Trocar por um observable no banco que verifica qndo o plano está validado.
+    //  //Subscribe
+    //  let subscription = this.validacoesCollection.snapshotChanges().subscribe();
+    //  //Unsubscribe
+    //  subscription.unsubscribe()
     this.toastr.success('Você já pode solicitar ao chatbot o resultado da validação');
+  }
+
+  onAlocar(pacientes) {
+    console.log(pacientes);
+    pacientes.forEach(element => {
+      if (element.leito != null) {
+        console.log("alocar paciente: ");
+        console.log(element);
+                
+      }
+    });
   }
 
   delay(ms: number) {

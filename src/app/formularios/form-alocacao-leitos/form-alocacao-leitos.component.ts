@@ -108,7 +108,7 @@ export class FormAlocacaoLeitosComponent implements OnInit, OnDestroy{
       if (!this.prontuario.internacoes) {
         this.prontuario.internacoes = [];
       }
-      this.prontuario.internacoes.push(this.laudo);
+      this.prontuario.internacoes.push(this.id);
       if (generoInicialLeito === 'Indefinido') {
         this.quarto.genero = this.laudo.genero;
         this.quarto.leitos.forEach(element => {
@@ -123,7 +123,7 @@ export class FormAlocacaoLeitosComponent implements OnInit, OnDestroy{
           element.genero = this.laudo.genero;
         });
       }
-      return resolve();
+      return resolve;
     });
   }
 

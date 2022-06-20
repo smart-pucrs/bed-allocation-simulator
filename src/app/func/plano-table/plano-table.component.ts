@@ -43,6 +43,7 @@ export class PlanoTableComponent implements OnInit {
 
   @Output() mostraDetalhe = new EventEmitter();
   @Output() validarPlano = new EventEmitter();
+  @Output() alocar = new EventEmitter();
 
 
   public showFilterRow: Boolean = false;
@@ -157,6 +158,10 @@ export class PlanoTableComponent implements OnInit {
 
   public validar() {
     this.validarPlano.emit(this.rows);
+  }
+
+  public onAlocar() {
+    this.alocar.emit(this.rows);
   }
 
   openModal(row, leito) {
